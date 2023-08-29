@@ -1,13 +1,13 @@
-import { App } from "antd";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Option1 from "../page/Option1";
 import Option2 from "../page/Option2";
+import App from "../page/App";
 
 const Router: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />}>
+        <Route path="/app" element={<App />}>
           <Route path="option1" element={<Option1 />}></Route>
           <Route path="option2" element={<Option2 />}></Route>
         </Route>

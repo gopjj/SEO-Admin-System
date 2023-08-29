@@ -43,11 +43,6 @@ const items: MenuItem[] = [
   getItem("Files", "9", <FileOutlined />),
 ];
 
-const items1: MenuProps["items"] = ["1", "2", "3"].map((key) => ({
-  key,
-  label: `nav ${key}`,
-}));
-
 const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -76,8 +71,8 @@ const App: React.FC = () => {
         <Layout>
           <Header style={{ padding: 0, background: colorBgContainer }} />
           <Content style={{ margin: "0 16px" }}>
-            <Link to="/option1"></Link>
-            <Link to="/option2"></Link>
+            <Link to="option1"></Link>
+            <Link to="option2"></Link>
             <Outlet />
           </Content>
           <Footer style={{ textAlign: "center" }}>
