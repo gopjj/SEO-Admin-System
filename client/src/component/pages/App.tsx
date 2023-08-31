@@ -31,7 +31,7 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem(<Link to="login">首页</Link>, "1", <PieChartOutlined />),
+  getItem(<Link to="dashboard">首页</Link>, "1", <PieChartOutlined />),
   getItem(<Link to="option2">报表</Link>, "2", <DesktopOutlined />),
   getItem("品牌", "sub1", <UserOutlined />, [
     getItem("OLAY", "3"),
@@ -63,12 +63,12 @@ const App: React.FC = () => {
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
         theme="light"
-        style={{ background: "#FFFFFF" ,width: "200px"}} // 修改为您想要的背景色
+        style={{ background: "#FFFFFF" }} // 修改为您想要的背景色
     >
   <div className="demo-logo-vertical" />
   <Menu
     theme="light"
-    style={{ width: 200}}
+   // style={{ width: 200}}
     defaultSelectedKeys={["1"]}
     mode="inline"
     items={items}
