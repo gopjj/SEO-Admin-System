@@ -4,7 +4,12 @@ import {
   FileOutlined,
   PieChartOutlined,
   TeamOutlined,
+  BoxPlotTwoTone,
+  FundTwoTone,
   UserOutlined,
+  EditTwoTone,
+  PieChartTwoTone,
+  DiffTwoTone,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Layout, Menu, theme } from "antd";
@@ -30,18 +35,19 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem(<Link to="dashboard">首页</Link>, "1", <PieChartOutlined />),
-  getItem(<Link to="option2">报表</Link>, "2", <DesktopOutlined />),
-  getItem("品牌", "sub1", <UserOutlined />, [
-    getItem("OLAY", "3"),
-    getItem("丰添", "4"),
-    getItem("PMPM", "5"),
+  getItem(<Link to="dashboard">首页</Link>, "1", <PieChartTwoTone />),
+  getItem(<Link to="option2">报表</Link>, "2", <FundTwoTone />),
+  
+  getItem("品牌", "sub1", <EditTwoTone />, [
+    getItem(<Link to="/brand/brand">OLAY</Link>,"3",),
+    getItem(<Link to="/brand/brand1">丰添</Link>,"4"),
+    getItem(<Link to="/brand/brand2">PMPM</Link>,"5"),
   ]),
-  getItem("Team", "sub2", <TeamOutlined />, [
-    getItem("Team 1", "6"),
-    getItem("Team 2", "8"),
-  ]),
-  getItem(<Link to="upload">上传文件</Link>, "9", <FileOutlined />),
+  // getItem("Team", "sub2", <TeamOutlined />, [
+  //   getItem("Team 1", "6"),
+  //   getItem("Team 2", "8"),
+  // ]),
+  getItem(<Link to="upload">上传文件</Link>, "9", <DiffTwoTone />),
 ];
 
 const App: React.FC = () => {

@@ -2,11 +2,11 @@ import React from "react";
 import { Card, Divider, Col, Row, Collapse, Table, Tabs } from "antd";
 import type { TabsProps } from "antd";
 
-import Mychart from "./mychart";
-
-import Demo from "./record";
-import Daily from "./daily";
-import DataCard from "./datacard";
+import Mychart from "./chart/mychart";
+import Keyword from "./keyword/keyword"
+import Record from "./record/record";
+import Daily from "./daydata/daily";
+import DataCard from "./card/datacard";
 
 const onChange = (key: string) => console.log(key);
 
@@ -27,14 +27,18 @@ const tabItems: TabsProps["items"] = [
     label: "收录",
     children: (
       <div>
-        <Demo />
+        <Record />
       </div>
     ),
   },
   {
     key: "3",
     label: "关键词",
-    children: "Content of Tab Pane 3",
+    children:(
+      <div>
+        <Keyword />
+      </div>
+    ),
   },
 ];
 

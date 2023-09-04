@@ -4,10 +4,8 @@ import { Divider } from 'antd';
 
 const App: React.FC = () => (
   <>
-
- 
-    <Divider orientation="left" plain>
-      Left Text
+    <Divider orientation="left" plain style={{ fontSize: '18px' ,fontWeight: 'bold' }}>
+      OLAY 表格
     </Divider>
     </>
 );
