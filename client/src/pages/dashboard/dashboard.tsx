@@ -3,12 +3,17 @@ import { Card, Divider, Col, Row, Collapse, Table, Tabs } from "antd";
 import type { TabsProps } from "antd";
 
 import Mychart from "./chart/mychart";
-import Keyword from "./keyword/keyword"
+import Keyword from "./keyword/keyword";
 import Record from "./record/record";
 import Daily from "./daydata/daily";
 import DataCard from "./card/datacard";
+import { getList } from "./api";
 
-const onChange = (key: string) => console.log(key);
+const onChange = async (key: string) => {
+  // get request sample
+  // const data = await getList();
+  console.log(key);
+};
 
 const tabItems: TabsProps["items"] = [
   {
@@ -34,7 +39,7 @@ const tabItems: TabsProps["items"] = [
   {
     key: "3",
     label: "关键词",
-    children:(
+    children: (
       <div>
         <Keyword />
       </div>

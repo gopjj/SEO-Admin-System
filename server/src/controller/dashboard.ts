@@ -1,14 +1,12 @@
 import { Request, RequestHandler, Response } from "express";
-import db from "../db/conn.mjs";
+import startupLogDao from "../dao/startupLog.js";
 
 namespace dashbaordController {
   export const getList: RequestHandler = async (
     req: Request,
     res: Response
   ) => {
-    const collection = await db.collection("startup_log");
-    const results = await collection.find({}).limit(10).toArray();
-
+    const results = await startupLogDao.getList();
     res.send(results).status(200);
   };
 
@@ -16,9 +14,7 @@ namespace dashbaordController {
     req: Request,
     res: Response
   ) => {
-    const collection = await db.collection("startup_log");
-    const results = await collection.deleteMany();
-
+    const results = await startupLogDao.deleteAll();
     res.send(results).status(200);
   };
 }
