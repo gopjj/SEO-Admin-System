@@ -1,5 +1,5 @@
 import { Request, RequestHandler, Response } from "express";
-import startupLogDao from "../dao/startupLog.js";
+import startupLogDao from "../dao/startupLogDao.js";
 
 namespace dashbaordController {
   export const getList: RequestHandler = async (
