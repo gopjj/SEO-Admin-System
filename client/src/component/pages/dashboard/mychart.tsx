@@ -1,6 +1,12 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
-const round = () => {
+import Datacard from './datacard'
+
+interface MyComponentProps {
+  myProp: string;
+}
+
+const round: React.FC= () => {
 
 
   let option = {
@@ -53,10 +59,10 @@ const round = () => {
   };
   return (
     <div>
-      
-      <ReactECharts option={option}   />
+      {<ReactECharts option={option}   />}
     </div>
-  );
+  )
 };
+
 
 export default round;
