@@ -7,7 +7,7 @@ let db: Db;
 
 try {
   const conn = await client.connect();
-  db = conn.db("local");
+  db = conn.db("database");
 } catch (e) {
   throw e;
 }

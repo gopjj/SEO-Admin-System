@@ -12,13 +12,13 @@ import { getList } from "./api";
 const onChange = async (key: string) => {
   // get request sample
   // const data = await getList();
-  console.log(key);
+  ///console.log(key);
 };
 
 const tabItems: TabsProps["items"] = [
   {
     key: "1",
-    label: "日报",
+    label: "日报(次日12:00清空)",
     // children: <Table dataSource={dataSource} columns={columns} />
     children: (
       <div>
