@@ -13,7 +13,6 @@ type DataSource = {
   brand: string;
   status: string;
   number: number;
-  // 其他属性...
 };
 
 const columns: ColumnsType<DataSource> = [
@@ -77,14 +76,13 @@ const columns: ColumnsType<DataSource> = [
 
 const MyTable = () => {
   const [dataSource, setDataSource] = useState<DataSource[]>([]);
-  const [maxId, setMaxId] = useState<number>(0);
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await getList();
         const returnedData = response as unknown as Array<any>;
-        let tempMaxId = 0;
         const newData: DataSource[] = [];
         for (const data of returnedData) {
           newData.push({
@@ -102,7 +100,7 @@ const MyTable = () => {
         }
 
         setDataSource(newData);
-        setMaxId(tempMaxId);
+       
         console.log(returnedData.length)
       } catch (error) {
         console.error(error);
