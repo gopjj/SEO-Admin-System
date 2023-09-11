@@ -18,7 +18,7 @@ const onChange = async (key: string) => {
 const tabItems: TabsProps["items"] = [
   {
     key: "1",
-    label: "日报(次日12:00清空)",
+    label: "日报",
     // children: <Table dataSource={dataSource} columns={columns} />
     children: (
       <div>
@@ -65,7 +65,7 @@ const Option2: React.FC = () => {
           },
         ]}
       ></Collapse>
-      <Divider orientation="left" plain></Divider>
+     <Divider orientation="left" plain style={{ color: 'lightgrey' }}>详细数据(次日09:00清除)</Divider>
       <Tabs defaultActiveKey="1" items={tabItems} onChange={onChange}></Tabs>
     </div>
   );

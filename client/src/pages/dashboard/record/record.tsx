@@ -1,15 +1,11 @@
-import React from "react";
-
+import React, {useEffect,useState} from "react";
 import { Table } from "antd";
 import type { ColumnsType, TableProps } from "antd/es/table";
-import {
-  TablePaginationConfig,
-  SorterResult,
-  TableCurrentDataSource,
-} from "antd/es/table/interface";
+import { getRecord } from "../api";
+// import { getRecord } from "../api/index";
 
-type DataType = {
-  key: string;
+type DataSource = {
+  key: string | number;
   time: string;
   author: string;
 
@@ -19,16 +15,18 @@ type DataType = {
   keyopinio: string;
 };
 
-const columns: ColumnsType<DataType> = [
+const columns: ColumnsType<DataSource> = [
   {
     title: "作者",
     dataIndex: "author",
+    key: "author",
     width: "10%",
+  
   },
   {
     title: "标题",
     dataIndex: "title",
-    width: "24%",
+    width: "30%",
   },
   {
     title: "关键词",
@@ -49,10 +47,15 @@ const columns: ColumnsType<DataType> = [
         value: "未收录",
       },
     ],
-    onFilter: (value: string | number | boolean, { status }) =>
-      status.startsWith(value.toString()),
-    width: "7%",
+    onFilter: (value: string | number | boolean, { status }) => {
+      if (status && typeof status === 'string') {
+        return status.startsWith(value.toString());
+      }
+      return false;
+    },
+    width: "5%",
   },
+
   {
     title: "KOL/KOC",
     dataIndex: "keyopinio",
@@ -66,39 +69,46 @@ const columns: ColumnsType<DataType> = [
         value: "KOC",
       },
     ],
-    onFilter: (value: string | number | boolean, { keyopinio }) =>
-      keyopinio.startsWith(value.toString()),
-    width: "5%",
+    onFilter: (value: string | number | boolean, { keyopinio }) => {
+      if (keyopinio && typeof keyopinio === 'string') {
+        return keyopinio.startsWith(value.toString());
+      }
+      return false;
+    },
+    width: "2%",
   },
   {
     title: "收录时间",
     dataIndex: "time",
-    render: (time) => {
-      const formattedTime = new Intl.DateTimeFormat("zh-CN", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      }).format(new Date(time));
-      return formattedTime;
-    },
+    // render: (time) => {
+    //   const formattedTime = new Intl.DateTimeFormat("zh-CN", {
+    //     year: "numeric",
+    //     month: "long",
+    //     day: "numeric",
+    //   }).format(new Date(time));
+    //   return formattedTime;
+    // },
     filters: [
       {
-        text: "2023.09",
-        value: "2023-09",
+        text: "2023",
+        value: "2023",
       },
       {
-        text: "2023.10",
-        value: "2023-10",
+        text: "2022",
+        value: "2022",
       },
       {
-        text: "2023.11",
-        value: "2023-11",
+        text: "2021",
+        value: "2021",
       },
     ],
-    onFilter: (value: string | number | boolean, { time }) =>
-      time.startsWith(value.toString()),
-    filterSearch: true,
-    width: "10%",
+    onFilter: (value: string | number | boolean, { time }) => {
+      if (time && typeof time === 'string') {
+        return time.startsWith(value.toString());
+      }
+      return false;
+    },
+    width: "8%",
   },
 
   // {
@@ -108,46 +118,8 @@ const columns: ColumnsType<DataType> = [
   // },
 ];
 
-const data: DataType[] = [
-  {
-    key: "1",
-    author: "Beauty",
-    title: "被问了无数次的水乳推荐来啦！",
-    keyword: "水乳推荐",
-    time: "2023-08-28",
-    status: "已收录",
-    keyopinio: "KOL",
-  },
-  {
-    key: "2",
-    author: "千岛",
-    title: "干皮宝藏水乳推 荐，一起来看看吧！",
-    keyword: "水乳推荐",
-    time: "2023-11-28",
-    status: "已收录",
-    keyopinio: "KOC",
-  },
-  {
-    key: "3",
-    author: "不拖延の鱼",
-    title: "不同肤质水乳推荐",
-    keyword: "水乳推荐",
-    time: "2023-09-28",
-    status: "未收录",
-    keyopinio: "KOL",
-  },
-  {
-    key: "4",
-    author: "跳跳糖",
-    title: "实测好用的水乳推荐,干皮很可",
-    keyword: "水乳推荐",
-    time: "2023-10-28",
-    status: "未收录",
-    keyopinio: "KOC",
-  },
-];
 
-const onChange: TableProps<DataType>["onChange"] = (
+const onChange: TableProps<DataSource>["onChange"] = (
   pagination,
   filters,
   sorter,
@@ -156,8 +128,37 @@ const onChange: TableProps<DataType>["onChange"] = (
   console.log("params", pagination, filters, sorter, extra);
 };
 
-const App: React.FC = () => (
-  <Table columns={columns} dataSource={data} onChange={onChange} />
-);
+const  MyRecord = () => {
+  const [dataSource, setDataSource] = useState<DataSource[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try{
+        const response = await getRecord();
+        const returnedData = response as unknown as Array<any>;
+        console.log(returnedData)
+        const newData: DataSource[] = [];
+        for (const data of returnedData){
+          newData.push({
+            key: data.ID,
+            time: data.recordtime,
+            author: data.author,
+            title: data.note_title,
+            status: data.note_status,
+            keyword: data.keyword,
+            keyopinio: data.KOLandKOC
+          });
+        }
+        setDataSource(newData);
+        console.log(returnedData.length)
+      }catch(error){
+        console.error(error);
+      }
+    };
+    fetchData();
+    },[]);
 
-export default App;
+
+    return <Table columns={columns} dataSource={dataSource} onChange={onChange} />
+  };
+
+export default MyRecord;

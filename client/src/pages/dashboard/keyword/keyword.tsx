@@ -1,10 +1,24 @@
-import React from 'react';
+import React, {useEffect,useState} from "react";
 import "./progress.css"
 import { Table,Progress} from 'antd';
 import type { ColumnsType } from 'antd/es/table';
+import { getKeyword } from "../api";
 
-interface DataType {
-  key: React.Key;
+
+// interface DataType {
+//   key: React.Key;
+//   brandName: string;
+//   keyWord: string;
+//   startTime: string;
+//   endTime: string;
+//   costTime: string;
+//   progress: number;
+//   noteNum: number;
+//   realNum: number;
+//   kpiData: string;
+// }
+type DataSource = {
+  key: string | number;
   brandName: string;
   keyWord: string;
   startTime: string;
@@ -14,10 +28,9 @@ interface DataType {
   noteNum: number;
   realNum: number;
   kpiData: string;
-}
+};
 
-
-const columns: ColumnsType<DataType> = [
+const columns: ColumnsType<DataSource> = [
   {
     title: '品牌名称',
     width: 100,
@@ -40,14 +53,14 @@ const columns: ColumnsType<DataType> = [
     key: '1',
     width: 130,
     align: 'center',
-    render: (startTime) => {
-        const formattedTime = new Intl.DateTimeFormat("zh-CN", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        }).format(new Date(startTime));
-        return formattedTime;
-      },
+    // render: (startTime) => {
+    //     const formattedTime = new Intl.DateTimeFormat("zh-CN", {
+    //       year: "numeric",
+    //       month: "long",
+    //       day: "numeric",
+    //     }).format(new Date(startTime));
+    //     return formattedTime;
+    //   },
   },
   {
     title: '结束时间',
@@ -55,14 +68,14 @@ const columns: ColumnsType<DataType> = [
     key: '2',
     width: 130,
     align: 'center',
-    render: (endTime) => {
-        const formattedTime = new Intl.DateTimeFormat("zh-CN", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        }).format(new Date(endTime));
-        return formattedTime;
-      },
+    // render: (endTime) => {
+    //     const formattedTime = new Intl.DateTimeFormat("zh-CN", {
+    //       year: "numeric",
+    //       month: "long",
+    //       day: "numeric",
+    //     }).format(new Date(endTime));
+    //     return formattedTime;
+    //   },
   },
   {
     title: '项目时长',
@@ -130,66 +143,86 @@ const columns: ColumnsType<DataType> = [
 //   });
 // }
 
-const data: DataType[] = [
-    {
-      key : 'brandName',
-      brandName: 'OLAY',
-      keyWord: "美白精华",
-      startTime: '2023-09-20',
-      endTime: '2023-09-28',
-      costTime: '',
-      kpiData: '',
-      noteNum: 200,
-      realNum: 190,
-      progress: -1,
-    },
-    {
-      key: 'keyWord',
-      brandName: '丰添',
-      keyWord: "丰添洗发水",
-      startTime: '2023-08-11',
-      endTime: '2023-08-20',
-      costTime: '',
-      kpiData: '',
-      noteNum: 300,
-      realNum: 200,
-      progress: -1,
-    },
-    {
-      key: 'keyWord',
-      brandName: 'PMPM',
-      keyWord: "水乳推荐",
-      startTime: '2023-09-01',
-      endTime: '2023-09-09',
-      costTime: '',
-      noteNum: 108,
-      kpiData: '',
-      progress: -1,
-      realNum: 4,
-    },
-  ];
-  data.forEach((item) => {
-    const start = new Date(item.startTime);
-    const end = new Date(item.endTime);
-    const diffMilliseconds = end.getTime() - start.getTime();
-    const diffDays = Math.floor(diffMilliseconds / (24 * 60 * 60 * 1000));
-    item.costTime = `${diffDays} 天`;
-  });
+// const data: DataType[] = [
+//     {
+//       key : 'brandName',
+//       brandName: 'OLAY',
+//       keyWord: "美白精华",
+//       startTime: '2023-09-20',
+//       endTime: '2023-09-28',
+//       costTime: '',
+//       kpiData: '',
+//       noteNum: 200,
+//       realNum: 190,
+//       progress: -1,
+//     },
+//     {
+//       key: 'keyWord',
+//       brandName: '丰添',
+//       keyWord: "丰添洗发水",
+//       startTime: '2023-08-11',
+//       endTime: '2023-08-20',
+//       costTime: '',
+//       kpiData: '',
+//       noteNum: 300,
+//       realNum: 200,
+//       progress: -1,
+//     },
+//     {
+//       key: 'keyWord',
+//       brandName: 'PMPM',
+//       keyWord: "水乳推荐",
+//       startTime: '2023-09-01',
+//       endTime: '2023-09-09',
+//       costTime: '',
+//       noteNum: 108,
+//       kpiData: '',
+//       progress: -1,
+//       realNum: 4,
+//     },
+//   ];
 
-  data.forEach((item) => {
-    const real = item.realNum;
-    const note  = item.noteNum;
-    //const diffMilliseconds = r
-    const diffDays = (real / note) * 100; 
-    //item.costTime = `${diffDays} 天`;
-    const roundedDiffDays1 = diffDays.toFixed(2); 
-    const roundedDiffDays =  Number(diffDays.toFixed(2));; 
-    item.kpiData = `${roundedDiffDays1}%`;
-    item.progress = roundedDiffDays;
-  });
+const  MyKeyword = () => {
+  const [dataSource, setDataSource] = useState<DataSource[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try{
+        const response = await getKeyword();
+        const returnedData = response as unknown as Array<any>;
+        console.log(returnedData)
+        const newData: DataSource[] = [];
+        for (const data of returnedData){
+          const start = new Date(data.startTime);
+          const end = new Date(data.endTime);
+          const diffMilliseconds = end.getTime() - start.getTime();
+          const costTime = Math.floor(diffMilliseconds / (24 * 60 * 60 * 1000));
 
-const App: React.FC = () => (
-  <Table columns={columns} dataSource={data} scroll={{ x: 1500, y: 300 }} />
-);
+          const real = data.realNote;
+          const note = data.targetNote;
+          const kpirate = (real / note) * 100;
+          const kpiData = Number(kpirate.toFixed(2));
+          newData.push({
+            key: data.ID,
+            brandName: data.brand,
+            keyWord: data.keyword,
+            startTime: data.startTime,
+            endTime: data.endTime,
+            costTime: `${costTime} 天`,
+            noteNum: data.targetNote,
+            realNum: data.realNote,
+            kpiData: `${ kpiData }%`,
+            progress: kpiData,
+          });
+        }
+        setDataSource(newData);
+        console.log(returnedData.length)
+      }catch(error){
+        console.error(error);
+      }
+    };
+    fetchData();
+    },[]);
+    return <Table columns={columns} dataSource={dataSource} scroll={{ x: 1500, y: 300 }} />
+  };
 
-export default App;
+export default MyKeyword;
