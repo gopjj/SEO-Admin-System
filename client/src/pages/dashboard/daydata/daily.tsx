@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import type { ColumnsType } from "antd/lib/table";
-import { getList } from "../api/index";
+import { getList,getBrand } from "../api/index";
 
 type DataSource = {
   key: string | number;
@@ -13,6 +13,7 @@ type DataSource = {
   brand: string;
   status: string;
   number: number;
+  link: string;
 };
 
 const columns: ColumnsType<DataSource> = [
@@ -34,6 +35,9 @@ const columns: ColumnsType<DataSource> = [
     dataIndex: "title",
     key: "title",
     width: "35%",
+    render: (text, record) => (
+      <a href={`${record.link}`}>{text}</a>
+    ),
     
   },
   {
@@ -74,14 +78,18 @@ const columns: ColumnsType<DataSource> = [
   },
 ];
 
-const MyTable = () => {
+interface MyTableProps {
+  getListFunction: () => Promise<any>;
+}
+
+const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
   const [dataSource, setDataSource] = useState<DataSource[]>([]);
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getList();
+        const response = await  getListFunction();
         const returnedData = response as unknown as Array<any>;
         const newData: DataSource[] = [];
         for (const data of returnedData) {
@@ -90,6 +98,7 @@ const MyTable = () => {
             id: data.ID,
             author: data.author,
             title: data.note_title,
+            link:data.note_link,
             keyword: data.keyword,
             date: data.publish_date,
             brand: data.brand,

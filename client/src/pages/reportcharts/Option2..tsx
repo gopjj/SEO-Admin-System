@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 // import './index.css';
 import { Card } from 'antd';
 import Coll from "./collectionTottal"
+import Record from "./recordchart"
 const tabList = [
   {
     key: 'tab1',
@@ -15,7 +16,7 @@ const tabList = [
 
 const contentList: Record<string, React.ReactNode> = {
   tab1: <div><Coll /></div>,
-  tab2: <p>content2</p>,
+  tab2: <div><Record /></div>
 };
 const App: React.FC = () => {
   const [activeTabKey1, setActiveTabKey1] = useState<string>('tab1');

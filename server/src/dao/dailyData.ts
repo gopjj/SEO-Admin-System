@@ -10,6 +10,27 @@ namespace dailyData {
  
     return results;
   };
+  export const getBrand = async (options?: any) => {
+    const collection = await db.collection(COLLECTION_NAME);
+    //console.log(collection)
+    const results = await collection.find({"brand":"Olay"}).limit(100).toArray();
+    console.log(results)
+    return results;
+  };
+  export const getBrand1 = async (options?: any) => {
+    const collection = await db.collection(COLLECTION_NAME);
+    //console.log(collection)
+    const results = await collection.find({"brand":"hbn水乳"}).limit(100).toArray();
+ 
+    return results;
+  };
+  export const getBrand2 = async (options?: any) => {
+    const collection = await db.collection(COLLECTION_NAME);
+    //console.log(collection)
+    const results = await collection.find({"brand":"PMPM"}).limit(100).toArray();
+ 
+    return results;
+  };
 
   export const deleteAll = async (options?: any) => {
     const collection = await db.collection(COLLECTION_NAME);

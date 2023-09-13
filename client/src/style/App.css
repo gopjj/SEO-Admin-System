@@ -28,6 +28,13 @@
   color: #61dafb;
 }
 
+.search-input-wrapper {
+  display: flex;
+  justify-content: center; /* 居中对齐 */
+  align-items: center; /* 居中对齐 */
+  height: 100%;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

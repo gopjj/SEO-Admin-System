@@ -8,6 +8,9 @@ const router = express.Router();
 
 // dashboard
 router.get("/getList", dashbaordController.getList);
+router.get("/getBrand", dashbaordController.getBrand);
+router.get("/getBrand1", dashbaordController.getBrand1);
+router.get("/getBrand2", dashbaordController.getBrand2);
 router.get("/deleteAll", dashbaordController.deleteAll);
 router.get("/getRecord",dashbaordController.getRecord);
 router.get("/getKeyword",dashbaordController.getKeyword);

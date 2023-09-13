@@ -23,7 +23,7 @@ const tabItems: TabsProps["items"] = [
     children: (
       <div>
         {" "}
-        <Daily />
+        <Daily getListFunction={getList} />
       </div>
     ),
   },
