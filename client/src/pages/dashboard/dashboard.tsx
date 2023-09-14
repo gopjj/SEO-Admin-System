@@ -12,7 +12,7 @@ import { getList } from "./api";
 const onChange = async (key: string) => {
   // get request sample
   // const data = await getList();
-  console.log(key);
+  ///console.log(key);
 };
 
 const tabItems: TabsProps["items"] = [
@@ -23,7 +23,7 @@ const tabItems: TabsProps["items"] = [
     children: (
       <div>
         {" "}
-        <Daily />
+        <Daily getListFunction={getList} />
       </div>
     ),
   },
@@ -65,7 +65,7 @@ const Option2: React.FC = () => {
           },
         ]}
       ></Collapse>
-      <Divider orientation="left" plain></Divider>
+     <Divider orientation="left" plain style={{ color: 'lightgrey' }}>详细数据(次日09:00清除)</Divider>
       <Tabs defaultActiveKey="1" items={tabItems} onChange={onChange}></Tabs>
     </div>
   );

@@ -1,0 +1,9 @@
+.search-input-wrapper {
+    display: flex;
+     /* 居中对齐 */
+     justify-content: center;
+    margin-top: -10px;
+ 
+    align-items: center; /* 居中对齐 */
+    height: 100%;
+  }

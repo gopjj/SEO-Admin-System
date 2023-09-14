@@ -1,8 +1,31 @@
-import React from "react";
+import React , { useState, useEffect }from "react";
 import { Divider, Row, Col, Card } from "antd";
+import { getList } from "../api/index";
+let notesNum : any
+const Datacard = () => {
+  const [notesNum, setNotesNum] = useState<number>(0);
+  const [time, setTime] = useState<number>(0);
+  const fetchData = async () => {
+   
+      const response = await getList();
+      const returnedData = response as unknown as Array<any>;
+      
+      if (returnedData.length > 0) {
+        setTime(returnedData[0].time);
+        setNotesNum(returnedData.length);
+      } else {
+        setTime(0);
+        setNotesNum(0);
+      }
+    
+  }
+  fetchData(); 
+ 
+  let targetNotes = 30;
+ 
 
-const datacard = () => {
   return (
+   
     <div>
       <p style={{ marginTop: "20px", fontSize: "14px" }}>
         <Divider orientation="left" plain>
@@ -31,7 +54,7 @@ const datacard = () => {
             <p
               style={{ fontWeight: "bold", fontSize: "20px", lineHeight: "0" }}
             >
-              &nbsp;&nbsp;2,443
+              &nbsp;&nbsp;{targetNotes}
             </p>
           </Card>
         </Col>
@@ -56,7 +79,7 @@ const datacard = () => {
             <p
               style={{ fontWeight: "bold", fontSize: "20px", lineHeight: "0" }}
             >
-              &nbsp;&nbsp;1,884
+              &nbsp;&nbsp;{notesNum}
             </p>
           </Card>
         </Col>
@@ -81,7 +104,7 @@ const datacard = () => {
             <p
               style={{ fontWeight: "bold", fontSize: "20px", lineHeight: "0" }}
             >
-              &nbsp;&nbsp;50.20%
+              &nbsp;&nbsp;{((notesNum / targetNotes) * 100).toFixed(2) + '%'}
             </p>
           </Card>
         </Col>
@@ -106,7 +129,7 @@ const datacard = () => {
             <p
               style={{ fontWeight: "bold", fontSize: "20px", lineHeight: "0" }}
             >
-              &nbsp;&nbsp;49.80%
+              &nbsp;&nbsp;{(100-((notesNum / targetNotes) * 100)).toFixed(2) + '%'}
             </p>
           </Card>
         </Col>
@@ -131,7 +154,7 @@ const datacard = () => {
             <p
               style={{ fontWeight: "bold", fontSize: "20px", lineHeight: "0" }}
             >
-              &nbsp;&nbsp;10分钟
+              &nbsp;&nbsp;{time}分钟
             </p>
           </Card>
         </Col>
@@ -156,7 +179,7 @@ const datacard = () => {
             <p
               style={{ fontWeight: "bold", fontSize: "20px", lineHeight: "0" }}
             >
-              &nbsp;&nbsp;30秒
+              &nbsp;&nbsp;{((time* 60 )/notesNum).toFixed(0)}秒
             </p>
           </Card>
         </Col>
@@ -165,4 +188,4 @@ const datacard = () => {
   );
 };
 
-export default datacard;
+export default Datacard;

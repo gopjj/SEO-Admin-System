@@ -5,8 +5,7 @@ import { message, Upload, Card, Button, Divider, Col, Row } from "antd";
 import Down from "./download/download1";
 import Down2 from "./download/download2";
 import Down3 from "./download/download3";
-import { UploadRequestOption } from "rc-upload/lib/interface";
-import { DownloadOutlined } from "@ant-design/icons";
+
 import { API_BASE_URL } from "../../config";
 import ApiList from "../../config/apiList";
 const { Dragger } = Upload;
