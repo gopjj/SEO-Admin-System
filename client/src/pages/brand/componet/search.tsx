@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { getList,getBrand } from "D:/CodeRepository/SEO-Admin-System/client/src/pages/dashboard/api/index";
 import { AutoComplete, Input } from 'antd';
 import type { SelectProps } from 'antd/es/select';
 
@@ -43,6 +43,7 @@ const App: React.FC = () => {
     setOptions(value ? searchResult(value) : []);
   };
 
+  
   const onSelect = (value: string) => {
     console.log('onSelect', value);
   };
