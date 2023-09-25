@@ -6,6 +6,7 @@ namespace ApiList {
   export const getBrand2 = "/getBrand2"
   export const getRecord = "/getRecord";
   export const getKeyword = "/getKeyword";
+  export const login = "/login";
 }
 
 export default ApiList;

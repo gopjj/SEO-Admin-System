@@ -3,6 +3,7 @@ import dashbaordController from "../controller/dashboard.js";
 import d1 from "../dao/dailyData.js"
 import uploadController from "../controller/upload.js";
 import multer from "multer";
+import { login } from "../controller/login.js";
 
 const router = express.Router();
 
@@ -14,6 +15,7 @@ router.get("/getBrand2", dashbaordController.getBrand2);
 router.get("/deleteAll", dashbaordController.deleteAll);
 router.get("/getRecord",dashbaordController.getRecord);
 router.get("/getKeyword",dashbaordController.getKeyword);
+router.post('/login',login)
 
 //upload
 router.post(

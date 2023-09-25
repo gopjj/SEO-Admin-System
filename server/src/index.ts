@@ -42,7 +42,7 @@ app.get("/", (req: Request, res: Response) => {
 
 const server = app.listen(process.env.PORT, () => {
   console.log(
-    `[Server]: I am running at https://localhost:${process.env.PORT}`
+    `[Server]: I am running at https://192.168.31.168:${process.env.PORT}`
   );
 });
 
