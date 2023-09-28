@@ -35,17 +35,7 @@ export const login = async (username: string, password: string) => {
 
   return axios.post(ApiList.login, data);
 };
-const username = "admin";
-const password = "JC202";
 
-login(username, password)
-  .then(response => {
-    const data = response.data;
-    console.log(data);
-  })
-  .catch(error => {
-    console.error(error);
-  });
 
 // getList().then(response => {
 //   const data = response.data;

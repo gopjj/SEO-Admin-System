@@ -14,7 +14,6 @@ const App: React.FC = () => {
     const handleResize = () => {
       setPageWidth(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth);
     };
-
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
