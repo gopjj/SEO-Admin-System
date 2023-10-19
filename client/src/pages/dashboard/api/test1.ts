@@ -1,4 +1,4 @@
-import { getList } from "../api/index";
+import { getList, getOpnum } from "../api/index";
 
 
 
@@ -27,18 +27,19 @@ interface DataSource {
 
 export const fetchData = async () => {
     try {
-      const response = await getList();
+      const response = await getOpnum();
       const returnedData = response as unknown as Array<any>;
 
      for (const data of returnedData) {
-      console.log(data.ID);
-      console.log(data.author);
-      console.log(data.note_title);
-      console.log(data.keyword);
-      console.log(data.publish_date);
-      console.log(data.brand);
-      console.log(data.note_status);
-      console.log(data.listed);
+      // console.log(data.ID);
+      // console.log(data.author);
+      // console.log(data.note_title);
+      // console.log(data.keyword);
+      // console.log(data.publish_date);
+      // console.log(data.brand);
+      // console.log(data.note_status);
+      // console.log(data.listed);
+      console.log(data.opsum);
       // 还可以访问其他属性...
     }
     //   console.log(((response as unknown as any) as Array).forEach(element => {

@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const DemoLine =  () => {
   const currentDate = new Date();
-  const [data, setData] = useState<Array<{ year: any; notesum: number; }>>([]);
+  const [data, setData] = useState<Array<{ year: any; listedsum: number; }>>([]);
 
 
   useEffect(() => {
@@ -19,28 +19,28 @@ const DemoLine =  () => {
         const formattedDate = date.toISOString().slice(0, 10);
         console.log(formattedDate);
         try {
-          const response = await axios.get(API_BASE_URL + ApiList.getOpnum, {
+          const response = await axios.get(API_BASE_URL + ApiList.getLnum, {
             params: {
               date: formattedDate,
             },
           });
           const jsondata = response.data[0];
-          if (jsondata && jsondata.opsum) {
+          if (jsondata && jsondata.listedSum) {
             newData.push({
               year: formattedDate,
-              notesum: parseInt(jsondata.opsum),
+              listedsum: parseInt(jsondata.listedSum),
             });
           } else {
             newData.push({
               year: formattedDate,
-              notesum: 0, // 或者添加其他默认值
+              listedsum: 0, // 或者添加其他默认值
             });
           }
         } catch (error) {
           console.error(error);
           newData.push({
             year: formattedDate,
-            notesum: 0, // 或者添加其他默认值
+            listedsum: 0, // 或者添加其他默认值
           });
         }
       }
@@ -58,7 +58,7 @@ console.log(data)
       width: 200, // 设置图像宽度为 600 像素
       height: 300,
       xField: 'year',
-      yField: 'notesum',
+      yField: 'listedsum',
       label: {},
       point: {
         size: 5,

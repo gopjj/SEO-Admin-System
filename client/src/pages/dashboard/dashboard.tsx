@@ -3,6 +3,7 @@ import { Card, Divider, Col, Row, Collapse, Table, Tabs } from "antd";
 import type { TabsProps } from "antd";
 
 import Mychart from "./chart/mychart";
+import Mychart2 from "./chart/mychart2";
 import Keyword from "./keyword/keyword";
 import Record from "./record/record";
 import Daily from "./daydata/daily";
@@ -59,7 +60,14 @@ const Option2: React.FC = () => {
             label: "点击展开图表",
             children: (
               <p>
-                <Mychart />
+             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div style={{ width: '800px', height: '320px' }}>
+                  <Mychart />
+                </div>
+                <div style={{ width: '800px', height: '320px' }}>
+                <Mychart2 />
+              </div>
+</div>
               </p>
             ),
           },
