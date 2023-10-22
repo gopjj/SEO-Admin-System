@@ -1,19 +1,29 @@
+import { todo } from "node:test";
 import db from "../db/conn.mjs";
 import cron from "cron";
-const COLLECTION_NAME = "dailyData";
+
+
+var currentDate = new Date(); // 获取当前日期
+
+var year = currentDate.getFullYear();
+var month = currentDate.getMonth() + 1; // 获取的月份是基于 0 的索引，所以需要加 1
+var day = currentDate.getDate();
+// const COLLECTION_NAME = "daily_reports_"+ year + "_" + month + "_" + day;
+const COLLECTION_NAME = "Daily_Reports";
 
 namespace dailyData {
   export const getList = async (options?: any) => {
     const collection = await db.collection(COLLECTION_NAME);
     //console.log(collection)
-    const results = await collection.find({}).limit(100).toArray();
+    const results = await collection.find({}).limit(100).toArray();   //查询所有数据
  
     return results;
   };
+  //TODO:多品牌请求进行合并到前端页面进行处理
   export const getBrand = async (options?: any) => {
     const collection = await db.collection(COLLECTION_NAME);
     //console.log(collection)
-    const results = await collection.find({"brand":"Olay"}).limit(100).toArray();
+    const results = await collection.find({"brand":"Olay"}).limit(100).toArray(); //查询品牌  
     console.log(results)
     return results;
   };
@@ -31,24 +41,72 @@ namespace dailyData {
  
     return results;
   };
+  //TODO:单笔记查询优化
 
-  export const deleteAll = async (options?: any) => {
+  export const getTitle = async (option?: any) => {   //单笔记查询
+    const collection = await db.collection(COLLECTION_NAME);
+  
+    // 构造查询条件
+    const query = { note_title: option?.title };
+  
+    const results = await collection.find(query).limit(100).toArray();
+  
+    console.log(results);
+    return results;
+  };
+  //TODO:进行笔记列表查询优化
+  export const getNoteList = async(option?:any) => {  //笔记列表页查询
+    const collection = await db.collection(COLLECTION_NAME);
+    const query = { author:option?.author,brand:option?.brand};
+    const results = await collection.find(query).limit(100).toArray();
+  
+    console.log(results);
+    return results;
+  };
+
+  export const getOpnum = async (option?: any) => {
+    const collection = await db.collection(COLLECTION_NAME);
+    const query = {
+      date: option?.date,
+      opsum: { $ne: null } // 排除 opsum 为空的数据
+    };
+    const results = await collection.find(query).limit(100).toArray();
+    console.log(results);
+    return results;
+  }
+
+  export const getLnum = async (option?: any) => {
+    const collection = await db.collection(COLLECTION_NAME);
+    const query = {
+      date: option?.date,
+      listedSum: { $ne: null } // 排除 opsum 为空的数据
+    };
+    const results = await collection.find(query).limit(100).toArray();
+    console.log(results);
+    return results;
+  }
+
+
+  export const deleteAll = async (options?: any) => { //删除任务
     const collection = await db.collection(COLLECTION_NAME);
     const results = await collection.deleteMany();
     console.log(results); 
     return results;
   };
 }
-const task = new cron.CronJob("00  09 * * *", async () => {
-  try {
-    const result = await dailyData.deleteAll();
-    console.log("Deleted documents:", result.deletedCount);
-  } catch (error) {
-    console.error("Error executing deleteAll:", error);
-  }
-});
 
-task.start();
+
+      //不执行删除任务
+// const task = new cron.CronJob("00  09 * * *", async () => {
+//   try {
+//     const result = await dailyData.deleteAll();
+//     console.log("Deleted documents:", result.deletedCount);
+//   } catch (error) {
+//     console.error("Error executing deleteAll:", error);
+//   }
+// });
+
+// task.start();
 
 // const COLLECTION_NAME = "day";
 

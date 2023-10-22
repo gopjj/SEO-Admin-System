@@ -1,0 +1,19 @@
+.customDiv {
+    position: absolute;
+    top: 190px;
+    left: 242px;
+    width: 980px;
+    height: 380px;
+    /* border-radius: 10px;  */
+    background-color: #f0f0f0;
+  }
+
+  .customform {
+    position: absolute;
+    top: 190px;
+    left: 1244px;
+    width: 400px;
+    height: 490px;
+    /* border-radius: 10px;  */
+    background-color: #f0f0f0;
+  }

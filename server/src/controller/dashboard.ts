@@ -42,7 +42,55 @@ namespace dashbaordController {
     const results = await startupLogDao.deleteAll();
     res.send(results).status(200);
   };
+
+//单笔记按标题查询 api 请求
+  export const getTitle: RequestHandler = async (
+    req: Request,
+    res: Response
+  ) => {
+    // const results = await startupLogDao.getTitle();
+
+    const option = {
+      title: '🎁一看就懂！夏天精简护肤搭配❗️快收好！⭐️'
+    };
+    
+    const results = await startupLogDao.getTitle(option);
+    res.send(results).status(200);
+  };
   
+  export const getNoteList : RequestHandler = async (
+    req: Request,
+    res: Response
+  ) => {
+    // const results = await startupLogDao.getTitle();
+
+    const option = {
+      author: 'HBN',
+      brand:"hbn水乳"
+    };
+    
+    const results = await startupLogDao.getNoteList(option);
+    res.send(results).status(200);
+  };
+
+  export const getOpnum: RequestHandler = async (req: Request, res: Response) => {
+    const option = {
+      date: req.query.date, // 从 API 请求的 body 中获取日期值，假设日期值的字段名为 date
+    };
+  
+    const results = await startupLogDao.getOpnum(option);
+    res.send(results).status(200);
+  };
+
+  export const getLnum: RequestHandler = async (req: Request, res: Response) => {
+    const option = {
+      date: req.query.date, // 从 API 请求的 body 中获取日期值，假设日期值的字段名为 date
+    };
+  
+    const results = await startupLogDao.getOpnum(option);
+    res.send(results).status(200);
+  };
+
   export const getRecord:RequestHandler = async (
     req:Request,
     res:Response
