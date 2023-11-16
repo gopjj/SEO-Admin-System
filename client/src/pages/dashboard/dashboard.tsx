@@ -37,15 +37,15 @@ const tabItems: TabsProps["items"] = [
       </div>
     ),
   },
-  {
-    key: "3",
-    label: "关键词",
-    children: (
-      <div>
-        <Keyword />
-      </div>
-    ),
-  },
+  // {
+  //   key: "3",
+  //   label: "关键词",
+  //   children: (
+  //     <div>
+  //       <Keyword />
+  //     </div>
+  //   ),
+  // },
 ];
 
 const Option2: React.FC = () => {
@@ -57,7 +57,7 @@ const Option2: React.FC = () => {
         items={[
           {
             key: "1",
-            label: "点击展开图表",
+            label: "点击展开周报图表",
             children: (
               <p>
              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -73,7 +73,7 @@ const Option2: React.FC = () => {
           },
         ]}
       ></Collapse>
-     <Divider orientation="left" plain style={{ color: 'lightgrey' }}>详细数据(次日09:00清除)</Divider>
+     <Divider orientation="left" plain style={{ color: 'lightgrey' }}>详细数据</Divider>
       <Tabs defaultActiveKey="1" items={tabItems} onChange={onChange}></Tabs>
     </div>
   );

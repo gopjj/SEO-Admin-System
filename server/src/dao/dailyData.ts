@@ -23,7 +23,7 @@ namespace dailyData {
   export const getBrand = async (options?: any) => {
     const collection = await db.collection(COLLECTION_NAME);
     //console.log(collection)
-    const results = await collection.find({"brand":"Olay"}).limit(100).toArray(); //查询品牌  
+    const results = await collection.find({"brand":"OLAY"}).limit(100).toArray(); //查询品牌  
     console.log(results)
     return results;
   };
@@ -63,23 +63,41 @@ namespace dailyData {
     console.log(results);
     return results;
   };
+  export const getKeywordL = async (option?: any) => {
+    const collection = await db.collection(COLLECTION_NAME);
+   
+    const results = await collection.aggregate([
+      { $match: { 'brand': option?.brand , date: option?.date} }, // 匹配品牌为'Olay'的文档
+      {
+        $group: {
+          _id: '$keyword', // 根据关键词分组
+          totalListed: { $sum: '$listed' } // 累加listed字段
+        }
+      }
+    ]).limit(100).toArray();
+  
+    console.log(results);
+    return results;
+  };
 
-  export const getOpnum = async (option?: any) => {
+
+  export const getListed = async (option?: any) => {
     const collection = await db.collection(COLLECTION_NAME);
     const query = {
       date: option?.date,
-      opsum: { $ne: null } // 排除 opsum 为空的数据
+      listedsum: { $ne: null } // 排除 listedsum 为空的数据
     };
     const results = await collection.find(query).limit(100).toArray();
     console.log(results);
     return results;
   }
 
+
   export const getLnum = async (option?: any) => {
     const collection = await db.collection(COLLECTION_NAME);
     const query = {
       date: option?.date,
-      listedSum: { $ne: null } // 排除 opsum 为空的数据
+      // listed: { $ne: null }// 排除 opsum 为空的数据
     };
     const results = await collection.find(query).limit(100).toArray();
     console.log(results);

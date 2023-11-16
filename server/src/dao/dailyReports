@@ -1,26 +1,26 @@
-import db from "../db/conn.mjs";
-import cron from "cron";
+// import db from "../db/conn.mjs";
+// import cron from "cron";
 
-var currentDate = new Date(); // 获取当前日期
+// var currentDate = new Date(); // 获取当前日期
 
-var year = currentDate.getFullYear();
-var month = currentDate.getMonth() + 1; // 获取的月份是基于 0 的索引，所以需要加 1
-var day = currentDate.getDate();
-const COLLECTION_NAME = "daily_reports_"+ year + "_" + month + "_" + day;
+// var year = currentDate.getFullYear();
+// var month = currentDate.getMonth() + 1; // 获取的月份是基于 0 的索引，所以需要加 1
+// var day = currentDate.getDate();
+// const COLLECTION_NAME = "daily_reports_"+ year + "_" + month + "_" + day;
 
-namespace dailyReports {
-    export const getList = async (options?: any) => {
-      const collection = await db.collection(COLLECTION_NAME);
-      //console.log(collection)
-      const results = await collection.find({}).limit(100).toArray();
+// namespace dailyReports {
+//     export const getList = async (options?: any) => {
+//       const collection = await db.collection(COLLECTION_NAME);
+//       //console.log(collection)
+//       const results = await collection.find({}).limit(100).toArray();
    
-      return results;
-    };
-export const deleteAll = async (options?: any) => {
-       const collection = await db.collection(COLLECTION_NAME);
-       const results = await collection.deleteMany();
-       console.log(results); 
-    return results;
-      };
-    }
-export default dailyReports;
+//       return results;
+//     };
+// export const deleteAll = async (options?: any) => {
+//        const collection = await db.collection(COLLECTION_NAME);
+//        const results = await collection.deleteMany();
+//        console.log(results); 
+//     return results;
+//       };
+//     }
+// export default dailyReports;

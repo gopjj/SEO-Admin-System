@@ -16,11 +16,14 @@ router.get("/getBrand2", dashbaordController.getBrand2);
 router.get("/deleteAll", dashbaordController.deleteAll);
 router.get("/getTitle", dashbaordController.getTitle);
 router.get("/getNotelist", dashbaordController.getNoteList);
-router.get("/getOpnum", dashbaordController.getOpnum);
+router.get("/getListed", dashbaordController.getListed);
 router.get("/getLnum", dashbaordController.getLnum);
 router.get("/insert",insertController.insertData);
 router.get("/getRecord",dashbaordController.getRecord);
 router.get("/getKeyword",dashbaordController.getKeyword);
+router.get("/getKeywordL",dashbaordController.getKeywordL);
+router.get("/getopAll",dashbaordController.getopAll);
+router.get("/getnoteaco",dashbaordController.getnoteaco);
 router.post('/login',login)
 
 //upload
