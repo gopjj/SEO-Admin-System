@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import './dashboard/css/loginhead.css'
+import image from '../resource/pictures/FOOHEAD.jpg'
 import {
   DesktopOutlined,
   FileOutlined,
@@ -15,9 +17,15 @@ import type { MenuProps } from "antd";
 import { Layout, Menu, theme } from "antd";
 import { Link, Outlet } from "react-router-dom";
 import logo from "../component/images/logo.png";
+import { Avatar, Badge,Space , Popover} from 'antd';
 
 const { Header, Content, Footer, Sider } = Layout;
-
+const content = (
+  <div>
+    <p>用户:FOO</p>
+    <p>退出登录</p>
+  </div>
+);
 type MenuItem = Required<MenuProps>["items"][number];
 
 function getItem(
@@ -62,7 +70,16 @@ const App: React.FC = () => {
         style={{ display: "flex", alignItems: "center", background: "white" }}
       >
         <img src={logo} alt="Logo" style={{ height: 32, margin: -20 }} />
+        <div className="div-container">
+        <Popover placement="topLeft" title="上海居宸企业管理有限公司" content={content}>
+      <a href="#">
+        <Avatar size={44} src={image} alt="avatar" />
+       
+      </a>
+      </Popover>
+    </div>
       </Header>
+      
       <Layout style={{ minHeight: "100vh" }}>
         <Sider
           collapsible
