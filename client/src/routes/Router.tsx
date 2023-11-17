@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Upload from "../pages/upload/Upload";
-import Option2 from "../pages/reportcharts/Option2.";
+import Option2 from "../pages/NoteTrack/Option2.";
 import App from "../pages/App";
 import Dashboard from "../pages/dashboard/dashboard";
 import Brand from "../pages/brand/brand";

@@ -2,6 +2,8 @@ import { Request, RequestHandler, Response } from "express";
 import startupLogDao from "../dao/dailyData.js";
 import recordData from "../dao/recordData.js";
 import keywordData from "../dao/keywordData.js"; 
+import operData from "../dao/oRdata.js";
+import oRdata from "../dao/oRdata.js";
 
 namespace dashbaordController {
   export const getList: RequestHandler = async (
@@ -73,12 +75,12 @@ namespace dashbaordController {
     res.send(results).status(200);
   };
 
-  export const getOpnum: RequestHandler = async (req: Request, res: Response) => {
+  export const getListed: RequestHandler = async (req: Request, res: Response) => {
     const option = {
       date: req.query.date, // 从 API 请求的 body 中获取日期值，假设日期值的字段名为 date
     };
   
-    const results = await startupLogDao.getOpnum(option);
+    const results = await startupLogDao.getListed(option);
     res.send(results).status(200);
   };
 
@@ -87,7 +89,7 @@ namespace dashbaordController {
       date: req.query.date, // 从 API 请求的 body 中获取日期值，假设日期值的字段名为 date
     };
   
-    const results = await startupLogDao.getOpnum(option);
+    const results = await startupLogDao.getLnum(option);
     res.send(results).status(200);
   };
 
@@ -98,12 +100,51 @@ namespace dashbaordController {
     const results = await recordData.getRecord();
     res.send(results).status(200);
   };
+  
+
+    // 查询关键词 + 上榜次数
+  export const getKeywordL : RequestHandler = async (
+    req: Request,
+    res: Response
+  ) => {
+    // const results = await startupLogDao.getTitle();
+
+    const option = {
+      brand:req.query.brand,
+      date: req.query.date
+    };
+    
+    const results = await startupLogDao.getKeywordL(option);
+    res.send(results).status(200);
+  };
+  
+  export const getnoteaco : RequestHandler = async (
+    req: Request,
+    res: Response
+  ) => {
+    // const results = await startupLogDao.getTitle();
+
+    const options = {
+      date: req.query.date
+    };
+    
+    const results = await oRdata.getnoteaco(options);
+    res.send(results).status(200);
+  };
 
   export const getKeyword:RequestHandler = async (
     req:Request,
     res:Response
   ) =>{
     const results = await keywordData.getKeyword();
+    res.send(results).status(200);
+  };
+
+  export const getopAll:RequestHandler = async (
+    req:Request,
+    res:Response
+  ) =>{
+    const results = await operData.getopAll();
     res.send(results).status(200);
   };
 }

@@ -23,7 +23,7 @@ const App: React.FC = () => {
       <Divider orientation="left" plain style={{ fontSize: '18px', fontWeight: 'bold' }}>
         PMPM 详情页
       </Divider>
-      <Card style={{ width: pageWidth-250, height: 72 }}>
+      <Card style={{ width: pageWidth-250, height: 320 }}>
         <div className="search-input-wrapper">
         <SearchInput /> 
         </div>

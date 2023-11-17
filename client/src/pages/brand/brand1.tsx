@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { fetchData } from "../dashboard/api/test1";
 import { Divider } from 'antd';
 import { Card } from 'antd/lib';
-import  SearchInput  from './componet/search';
+import  SearchInput  from './componet/search1';
 import './style/index.css'
 import Day from  '../dashboard/daydata/daily'
 import { getBrand1 } from "../dashboard/api/index";
@@ -23,7 +23,7 @@ const App: React.FC = () => {
       <Divider orientation="left" plain style={{ fontSize: '18px', fontWeight: 'bold' }}>
         丰添 详情页
       </Divider>
-      <Card style={{ width: pageWidth-250, height: 72 }}>
+      <Card style={{ width: pageWidth-250, height: 320 }}>
         <div className="search-input-wrapper">
         <SearchInput /> 
         </div>

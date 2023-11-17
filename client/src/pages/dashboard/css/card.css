@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container > div {
+  margin-bottom: 20px;
+}
+
+.custom-card {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.custom-card2 {
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.custom-card3 {
+  padding: 20px;
+  background-color: #ffffff;
+  margin-top: 20px;
+  
+}
+
+.note-list {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  /* 添加其他样式规则 */
+}

@@ -1,85 +1,114 @@
 import React, {useEffect,useState} from "react";
-import { Table } from "antd";
+import { Table ,Progress} from "antd";
 import type { ColumnsType, TableProps } from "antd/es/table";
 import { getRecord } from "../api";
+import "../keyword/progress.css"
 // import { getRecord } from "../api/index";
 
 type DataSource = {
-  key: string | number;
+
   time: string;
   author: string;
-
+  KolReNum:number;
+  SoNum : number;
+  progress: number;
   title: string;
+  KolEmNum:string;
+  KolRate:string;
   status: string;
   keyword: string;
   keyopinio: string;
+  datetime: Date;
 };
 
 const columns: ColumnsType<DataSource> = [
   {
-    title: "作者",
-    dataIndex: "author",
-    key: "author",
-    width: "10%",
-  
-  },
-  {
-    title: "标题",
-    dataIndex: "title",
-    width: "30%",
-  },
-  {
     title: "关键词",
     dataIndex: "keyword",
+    key: "keyword",
+    width: "10%",
+    align: "center",  
+  },
+  {
+    title: "SO需求收录KOL数量",
+    dataIndex: "SoNum",
     width: "8%",
+    align: "center",
   },
 
   {
-    title: "收录状态",
-    dataIndex: "status",
-    filters: [
-      {
-        text: "已收录",
-        value: "已收录",
-      },
-      {
-        text: "未收录",
-        value: "未收录",
-      },
-    ],
-    onFilter: (value: string | number | boolean, { status }) => {
-      if (status && typeof status === 'string') {
-        return status.startsWith(value.toString());
-      }
-      return false;
-    },
-    width: "5%",
+    title: "KOL发布",
+    dataIndex: "KolReNum",
+    width: "6%",
+    align: "center",
   },
 
   {
-    title: "KOL/KOC",
-    dataIndex: "keyopinio",
-    filters: [
-      {
-        text: "KOL",
-        value: "KOL",
-      },
-      {
-        text: "KOC",
-        value: "KOC",
-      },
-    ],
-    onFilter: (value: string | number | boolean, { keyopinio }) => {
-      if (keyopinio && typeof keyopinio === 'string') {
-        return keyopinio.startsWith(value.toString());
-      }
-      return false;
-    },
-    width: "2%",
+    title: "KOL收录",
+    dataIndex: "KolEmNum",
+    width: "8%",
+    align: "center",
   },
+
+  {
+    title: "收录率",
+    dataIndex: "KolRate",
+    width: "8%",
+    align: "center",
+    render: (text, record) => (
+    
+      <Progress percent={record.progress} status="active" strokeColor={{ "0%":"#108ee9", "70": "#87d068" }} className="progress-custom" />
+    
+      ),
+  },
+
+  // {
+  //   title: "收录状态",
+  //   dataIndex: "status",
+  //   filters: [
+  //     {
+  //       text: "已收录",
+  //       value: "已收录",
+  //     },
+  //     {
+  //       text: "未收录",
+  //       value: "未收录",
+  //     },
+  //   ],
+  //   onFilter: (value: string | number | boolean, { status }) => {
+  //     if (status && typeof status === 'string') {
+  //       return status.startsWith(value.toString());
+  //     }
+  //     return false;
+  //   },
+  //   width: "5%",
+  // },
+
+  // {
+  //   title: "KOL/KOC",
+  //   dataIndex: "keyopinio",
+  //   filters: [
+  //     {
+  //       text: "KOL",
+  //       value: "KOL",
+  //     },
+  //     {
+  //       text: "KOC",
+  //       value: "KOC",
+  //     },
+  //   ],
+  //   onFilter: (value: string | number | boolean, { keyopinio }) => {
+  //     if (keyopinio && typeof keyopinio === 'string') {
+  //       return keyopinio.startsWith(value.toString());
+  //     }
+  //     return false;
+  //   },
+  //   width: "2%",
+  // },
   {
     title: "收录时间",
-    dataIndex: "time",
+    dataIndex: "datetime",
+    align: "center",
     // render: (time) => {
     //   const formattedTime = new Intl.DateTimeFormat("zh-CN", {
     //     year: "numeric",
@@ -138,14 +167,20 @@ const  MyRecord = () => {
         console.log(returnedData)
         const newData: DataSource[] = [];
         for (const data of returnedData){
+          const kpirate = Number(((data.KolEmNum / data.KolReNum) * 100).toFixed(2))
           newData.push({
-            key: data.ID,
             time: data.recordtime,
+            SoNum:data.SoNum,
+            KolReNum:data.KolReNum,
             author: data.author,
+            KolEmNum:data.KolEmNum,
+            KolRate:data.KolRate,
             title: data.note_title,
             status: data.note_status,
             keyword: data.keyword,
-            keyopinio: data.KOLandKOC
+            keyopinio: data.KOLandKOC,
+            datetime: data.datetime,
+            progress: kpirate
           });
         }
         setDataSource(newData);
