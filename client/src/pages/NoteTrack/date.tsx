@@ -1,33 +1,38 @@
-import React from 'react';
+import React from "react";
 
-import {  Space, theme } from 'antd';
+import { Space, theme } from "antd";
 const { RangePicker } = DatePicker;
-import { DatePicker } from 'antd';
+import { DatePicker } from "antd";
 
-import type { Dayjs } from 'dayjs';
-import type { CellRenderInfo } from 'rc-picker/es/interface';
+import type { Dayjs } from "dayjs";
+import type { CellRenderInfo } from "rc-picker/es/interface";
 
-
-const App: React.FC = () => {
+const Date: React.FC = () => {
   const { token } = theme.useToken();
   const style: React.CSSProperties = {
     border: `1px solid ${token.colorPrimary}`,
-    borderRadius: '50%',
+    borderRadius: "50%",
   };
 
-  const cellRender = React.useCallback((current: number | Dayjs, info: CellRenderInfo<Dayjs>) => {
-    if (info.type !== 'date') {
-      return info.originNode;
-    }
-    if (typeof current === 'number') {
-      return <div className="ant-picker-cell-inner">{current}</div>;
-    }
-    return (
-      <div className="ant-picker-cell-inner" style={current.date() === 1 ? style : {}}>
-        {current.date()}
-      </div>
-    );
-  }, []);
+  const cellRender = React.useCallback(
+    (current: number | Dayjs, info: CellRenderInfo<Dayjs>) => {
+      if (info.type !== "date") {
+        return info.originNode;
+      }
+      if (typeof current === "number") {
+        return <div className="ant-picker-cell-inner">{current}</div>;
+      }
+      return (
+        <div
+          className="ant-picker-cell-inner"
+          style={current.date() === 1 ? style : {}}
+        >
+          {current.date()}
+        </div>
+      );
+    },
+    []
+  );
   return (
     <Space size={12} direction="vertical">
       {/* <DatePicker cellRender={cellRender} />
@@ -36,4 +41,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default Date;

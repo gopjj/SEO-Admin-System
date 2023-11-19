@@ -11,21 +11,17 @@ import Login from "../pages/Login/component/login";
 const Router: React.FC = () => {
   return (
     <BrowserRouter>
-    
       <Routes>
-      <Route path="" element={<Login />}></Route> <Route />0
+        <Route path="" element={<Login />}></Route> <Route />
         <Route path="" element={<App />}>
-         
           <Route path="upload" element={<Upload />}></Route>
           <Route path="option2" element={<Option2 />}></Route>
           <Route path="dashboard" element={<Dashboard />}></Route>
           <Route path="brand/brand" element={<Brand />}></Route>
           <Route path="brand/brand1" element={<Brand1 />}></Route>
           <Route path="brand/brand2" element={<Brand2 />}></Route>
-         
         </Route>
         <Route path="/404" element={<div>404 Not Found</div>}></Route>
-       
       </Routes>
     </BrowserRouter>
   );

@@ -1,16 +1,13 @@
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Table } from "antd";
 import type { ColumnsType } from "antd/lib/table";
 
-
-
-import { SearchOutlined } from '@ant-design/icons';
-import Highlighter from 'react-highlight-words';
-import type { InputRef } from 'antd';
-import { Button, Input, Space } from 'antd';
-import type { ColumnType, } from 'antd/es/table';
-import type { FilterConfirmProps } from 'antd/es/table/interface';
-import { log } from "console";
+import { SearchOutlined } from "@ant-design/icons";
+import Highlighter from "react-highlight-words";
+import type { InputRef } from "antd";
+import { Button, Input, Space } from "antd";
+import type { ColumnType } from "antd/es/table";
+import type { FilterConfirmProps } from "antd/es/table/interface";
 
 type DataSource = {
   key: string | number;
@@ -23,30 +20,27 @@ type DataSource = {
   status: string;
   number: number;
   link: string;
-  TopKpi:number;
-  date:Date;
-  expectlist:number;
+  TopKpi: number;
+  date: Date;
+  expectlist: number;
 };
 
 type DataIndex = keyof DataSource;
-
-
 
 interface MyTableProps {
   getListFunction: () => Promise<any>;
 }
 
 const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
-
-  const [searchText, setSearchText] = useState('');
-  const [searchedColumn, setSearchedColumn] = useState('');
+  const [searchText, setSearchText] = useState("");
+  const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
   const [dataSource, setDataSource] = useState<DataSource[]>([]);
 
   const handleSearch = (
     selectedKeys: string[],
     confirm: (param?: FilterConfirmProps) => void,
-    dataIndex: DataIndex,
+    dataIndex: DataIndex
   ) => {
     confirm();
     setSearchText(selectedKeys[0]);
@@ -66,7 +60,7 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
       selectedKeys,
       confirm,
       clearFilters,
-      close
+      close,
     }) => (
       <div style={{ padding: 8 }} onKeyDown={(e) => e.stopPropagation()}>
         <Input
@@ -81,7 +75,7 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
           }
           style={{ marginBottom: 8, display: "block" }}
         />
-<Space>
+        <Space>
           <Button
             type="primary"
             onClick={() =>
@@ -146,7 +140,7 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
         />
       ) : (
         text
-      )
+      ),
   });
 
   const columns: ColumnsType<DataSource> = [
@@ -163,7 +157,7 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
       dataIndex: "keyword",
       key: "keyword",
       width: "5%",
-      ...getColumnSearchProps("keyword")
+      ...getColumnSearchProps("keyword"),
     },
     {
       title: "Top12         SOV KPI",
@@ -171,7 +165,6 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
       key: "TopKpi",
       width: "4%",
       align: "center",
-
     },
     {
       title: "品牌",
@@ -179,91 +172,78 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
       key: "brand",
       width: "4%",
       align: "center",
-      ...getColumnSearchProps("brand")
+      ...getColumnSearchProps("brand"),
     },
     {
       title: "达人昵称",
       dataIndex: "author",
       key: "author",
       width: "8%",
-      ...getColumnSearchProps("author")
+      ...getColumnSearchProps("author"),
     },
     {
       title: "笔记标题",
       dataIndex: "title",
       key: "title",
       width: "16%", //6
-      render: (text, record) => (
-        
-        <a href={`${record.link}`}>{text}</a>
-      ),
-      ...getColumnSearchProps("title")
-      
+      render: (text, record) => <a href={`${record.link}`}>{text}</a>,
+      ...getColumnSearchProps("title"),
     },
     {
       title: "笔记链接",
       dataIndex: "title",
       key: "title",
-      width: "14%",//6
-      render: (text, record) => (
-        
-        <a href={`${record.link}`}>{text}</a>
-      ),
-      
-      
+      width: "14%", //6
+      render: (text, record) => <a href={`${record.link}`}>{text}</a>,
     },
-  
-  
+
     {
       title: "发布日期",
       dataIndex: "Pdate",
       key: "Pdate",
       width: "5%",
       align: "center",
-      ...getColumnSearchProps("Pdate")
-
+      ...getColumnSearchProps("Pdate"),
     },
     {
-      title: "预期上榜次数（当日）",//TODO:做筛选日期每天笔记的上榜次数 
+      title: "预期上榜次数（当日）", //TODO:做筛选日期每天笔记的上榜次数
       dataIndex: "expectlist",
       key: "expectlist",
       width: "7%",
       align: "center",
 
-      sorter: (a, b) => a.number- b.number,
-      sortDirections: ["descend", "ascend"]
+      sorter: (a, b) => a.number - b.number,
+      sortDirections: ["descend", "ascend"],
     },
 
     {
-      title: "实际上榜次数（当日）",//TODO:做筛选日期每天笔记的上榜次数 
+      title: "实际上榜次数（当日）", //TODO:做筛选日期每天笔记的上榜次数
       dataIndex: "number",
       key: "number",
       width: "7%",
       align: "center",
 
-      sorter: (a, b) => a.number- b.number,
-      sortDirections: ["descend", "ascend"]
+      sorter: (a, b) => a.number - b.number,
+      sortDirections: ["descend", "ascend"],
     },
-      
+
     {
       title: "上传日期",
       dataIndex: "date",
       key: "date",
       width: "6%",
       align: "center",
-      ...getColumnSearchProps("date")
+      ...getColumnSearchProps("date"),
     },
   ];
-
-
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await  getListFunction();
-        
-        const returnedData = response as unknown as Array<any>;
-        console.log(returnedData)
+        const response = await getListFunction();
+
+        const returnedData = (response as unknown) as Array<any>;
+        console.log(returnedData);
         const newData: DataSource[] = [];
         for (const data of returnedData) {
           const expectedlistDivided = data.expectedlist / 20;
@@ -272,27 +252,25 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
             id: data.ID,
             author: data.author,
             title: data.note_title,
-            link:data.note_link,
+            link: data.note_link,
             keyword: data.keyword,
             Pdate: data.publish_date,
             brand: data.brand,
             status: data.note_status,
             number: data.listed,
-            expectlist:expectedlistDivided,
-            TopKpi:data.Top12_KPI,
-            date:data.date
+            expectlist: expectedlistDivided,
+            TopKpi: data.Top12_KPI,
+            date: data.date,
           });
-          
         }
 
         setDataSource(newData);
-       
-        console.log(returnedData.length)
+
+        console.log(returnedData.length);
       } catch (error) {
         console.error(error);
       }
     };
-    
 
     fetchData();
   }, []);

@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  BoxPlotTwoTone,
   FundTwoTone,
-  UserOutlined,
   EditTwoTone,
   PieChartTwoTone,
   DiffTwoTone,
@@ -37,16 +31,13 @@ function getItem(
 const items: MenuItem[] = [
   getItem(<Link to="dashboard">首页</Link>, "1", <PieChartTwoTone />),
   getItem(<Link to="option2">笔记优化</Link>, "2", <FundTwoTone />),
-  
+
   getItem("品牌", "sub1", <EditTwoTone />, [
-    getItem(<Link to="/brand/brand">OLAY</Link>,"3",),
-    getItem(<Link to="/brand/brand1">丰添</Link>,"4"),
-    getItem(<Link to="/brand/brand2">PMPM</Link>,"5"),
+    getItem(<Link to="/brand/brand">OLAY</Link>, "3"),
+    getItem(<Link to="/brand/brand1">丰添</Link>, "4"),
+    getItem(<Link to="/brand/brand2">PMPM</Link>, "5"),
   ]),
-  // getItem("Team", "sub2", <TeamOutlined />, [
-  //   getItem("Team 1", "6"),
-  //   getItem("Team 2", "8"),
-  // ]),
+
   getItem(<Link to="upload">上传文件</Link>, "9", <DiffTwoTone />),
 ];
 

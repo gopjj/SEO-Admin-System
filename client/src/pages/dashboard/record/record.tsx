@@ -1,20 +1,19 @@
-import React, {useEffect,useState} from "react";
-import { Table ,Progress} from "antd";
+import React, { useEffect, useState } from "react";
+import { Table, Progress } from "antd";
 import type { ColumnsType, TableProps } from "antd/es/table";
 import { getRecord } from "../api";
-import "../keyword/progress.css"
+import "../keyword/progress.css";
 // import { getRecord } from "../api/index";
 
 type DataSource = {
-
   time: string;
   author: string;
-  KolReNum:number;
-  SoNum : number;
+  KolReNum: number;
+  SoNum: number;
   progress: number;
   title: string;
-  KolEmNum:string;
-  KolRate:string;
+  KolEmNum: string;
+  KolRate: string;
   status: string;
   keyword: string;
   keyopinio: string;
@@ -27,7 +26,7 @@ const columns: ColumnsType<DataSource> = [
     dataIndex: "keyword",
     key: "keyword",
     width: "10%",
-    align: "center",  
+    align: "center",
   },
   {
     title: "SO需求收录KOL数量",
@@ -56,10 +55,13 @@ const columns: ColumnsType<DataSource> = [
     width: "8%",
     align: "center",
     render: (text, record) => (
-    
-      <Progress percent={record.progress} status="active" strokeColor={{ "0%":"#108ee9", "70": "#87d068" }} className="progress-custom" />
-    
-      ),
+      <Progress
+        percent={record.progress}
+        status="active"
+        strokeColor={{ "0%": "#108ee9", "70": "#87d068" }}
+        className="progress-custom"
+      />
+    ),
   },
 
   // {
@@ -132,7 +134,7 @@ const columns: ColumnsType<DataSource> = [
       },
     ],
     onFilter: (value: string | number | boolean, { time }) => {
-      if (time && typeof time === 'string') {
+      if (time && typeof time === "string") {
         return time.startsWith(value.toString());
       }
       return false;
@@ -147,7 +149,6 @@ const columns: ColumnsType<DataSource> = [
   // },
 ];
 
-
 const onChange: TableProps<DataSource>["onChange"] = (
   pagination,
   filters,
@@ -157,43 +158,46 @@ const onChange: TableProps<DataSource>["onChange"] = (
   console.log("params", pagination, filters, sorter, extra);
 };
 
-const  MyRecord = () => {
+const MyRecord = () => {
   const [dataSource, setDataSource] = useState<DataSource[]>([]);
   useEffect(() => {
     const fetchData = async () => {
-      try{
+      try {
         const response = await getRecord();
-        const returnedData = response as unknown as Array<any>;
-        console.log(returnedData)
+        const returnedData = (response as unknown) as Array<any>;
+        console.log(returnedData);
         const newData: DataSource[] = [];
-        for (const data of returnedData){
-          const kpirate = Number(((data.KolEmNum / data.KolReNum) * 100).toFixed(2))
+        for (const data of returnedData) {
+          const kpirate = Number(
+            ((data.KolEmNum / data.KolReNum) * 100).toFixed(2)
+          );
           newData.push({
             time: data.recordtime,
-            SoNum:data.SoNum,
-            KolReNum:data.KolReNum,
+            SoNum: data.SoNum,
+            KolReNum: data.KolReNum,
             author: data.author,
-            KolEmNum:data.KolEmNum,
-            KolRate:data.KolRate,
+            KolEmNum: data.KolEmNum,
+            KolRate: data.KolRate,
             title: data.note_title,
             status: data.note_status,
             keyword: data.keyword,
             keyopinio: data.KOLandKOC,
             datetime: data.datetime,
-            progress: kpirate
+            progress: kpirate,
           });
         }
         setDataSource(newData);
-        console.log(returnedData.length)
-      }catch(error){
+        console.log(returnedData.length);
+      } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-    },[]);
+  }, []);
 
-
-    return <Table columns={columns} dataSource={dataSource} onChange={onChange} />
-  };
+  return (
+    <Table columns={columns} dataSource={dataSource} onChange={onChange} />
+  );
+};
 
 export default MyRecord;
