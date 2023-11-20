@@ -7,7 +7,7 @@ import ApiList from "../../../config/apiList";
 import jpg1 from "../../../resource/pictures/Foo.jpg";
 import "../css/font-style.css";
 import "../css/login.css";
-import "../css/card-style.css";
+import cardStyles from "../css/card-style.module.css";
 
 import HeaderF from "./header";
 
@@ -109,7 +109,7 @@ const Login: React.FC = () => (
 
     <Content style={contentStyle}>
       <div>
-        <div className="customDiv">
+        <div className={cardStyles.customDiv}>
           <Card
             hoverable
             style={{
@@ -121,7 +121,7 @@ const Login: React.FC = () => (
           ></Card>
         </div>
 
-        <div className="customform">
+        <div className={cardStyles.customform}>
           <Card style={{ width: 400, height: 490 }}>
             <div>
               <CustomCardTitle

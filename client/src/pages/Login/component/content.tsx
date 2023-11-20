@@ -1,7 +1,7 @@
 import { Card } from "antd";
 import React, { ReactNode } from "react";
 import jpg1 from "./Foo.jpg";
-import "./css/card-style.css";
+import cardStyles from "./css/card-style.module.css";
 import "./login.css";
 
 type MyComponentProps = {
@@ -11,7 +11,7 @@ type MyComponentProps = {
 
 const App: React.FC<MyComponentProps> = ({ children }) => (
   <div>
-    <div className="customDiv">
+    <div className={cardStyles.customDiv}>
       <Card
         hoverable
         style={{
@@ -23,7 +23,7 @@ const App: React.FC<MyComponentProps> = ({ children }) => (
       ></Card>
     </div>
 
-    <div className="customform">
+    <div className={cardStyles.customform}>
       <Card style={{ width: 400, height: 490 }}></Card>
     </div>
   </div>
