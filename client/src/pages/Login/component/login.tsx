@@ -1,139 +1,67 @@
 import { SafetyCertificateOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Card, Checkbox, Form, Input, Layout } from "antd";
 import axios from "axios";
-import React, { CSSProperties } from "react";
+import React from "react";
 import { API_BASE_URL } from "../../../config";
 import ApiList from "../../../config/apiList";
-import jpg1 from "../../../resource/pictures/Foo.jpg";
-import "../css/font-style.css";
-import "../css/login.css";
-import "../css/card-style.css";
-
+import homePicture from "../../../resource/pictures/Foo.jpg";
+import "../css/module/login.css";
 import HeaderF from "./header";
 
 const { Header, Footer, Content } = Layout;
 
-const onFinish = (values: any) => {
-  console.log("Success:", values);
-  const params = JSON.stringify({
-    username: values.Username,
-    password: values.password,
-  });
+const onFinish = async (values: any) => {
+  try {
+    console.log("Success:", values);
+    const params = {
+      username: values.Username,
+      password: values.password,
+    };
 
-  console.log(params);
-  axios
-    .post(API_BASE_URL + ApiList.login, params, {
+
+    const response = await axios.post(API_BASE_URL + ApiList.login, params, {
       headers: {
         Authorization: "TestFooDigital",
         "Content-Type": "application/json",
       },
-    })
-    .then((response) => {
-      console.log("Login response:", response.data);
-
-      window.location.href = "/dashboard";
-    })
-    .catch((error) => {
-      console.log("Login error:", error);
     });
+    console.log("Login response:", response.data);
+    window.location.href = "/dashboard";
+  } catch (error) {
+    console.log("Login error:", error);
+  }
 };
 
 const onFinishFailed = (errorInfo: any) => {
   console.log("Failed:", errorInfo);
 };
 
-type FieldType = {
-  username?: string;
-  password?: string;
-  remember?: string;
-};
-
-interface CustomCardTitleProps {
-  title: string;
-  titleStyle?: CSSProperties;
-}
-
-const CustomCardTitle: React.FC<CustomCardTitleProps> = ({
-  title,
-  titleStyle,
-}) => (
-  <div style={{ fontWeight: "bold", fontSize: "20px", ...titleStyle }}>
-    {title}
-  </div>
+const CustomCardTitle: React.FC<{ title: string }> = ({ title }) => (
+  <div style={{ fontWeight: "bold", fontSize: "20px" }}>{title}</div>
 );
-
-const headerStyle: React.CSSProperties = {
-  textAlign: "center",
-  color: "#fff",
-  height: 60,
-  paddingInline: 50,
-  lineHeight: "50px",
-  backgroundColor: "#FFFFFF",
-};
-
-const contentStyle: React.CSSProperties = {
-  textAlign: "center",
-  minHeight: 800,
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  color: "#fff",
-  backgroundColor: "#feebef",
-};
-
-const footerStyle: React.CSSProperties = {
-  textAlign: "center",
-  color: "#fff",
-  height: 64,
-  paddingInline: 50,
-  backgroundColor: "#eff1f8",
-};
-
-const CardWrapperStyle: React.CSSProperties = {
-  position: "absolute",
-  height: "100%",
-
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-};
 
 const Login: React.FC = () => (
   <Layout>
-    <Header style={headerStyle}>
-      <div style={{ position: "relative", left: "-840px", top: "12px" }}>
+    <Header className="header">
+      <div className="header-style">
         <HeaderF />
-        {/* <h1 className="pageTitle" style = {h1Style}>下单平台</h1> */}
       </div>
     </Header>
-
-    <Content style={contentStyle}>
+    <Content className="content">
       <div>
-        <div className="customDiv">
+        <div className="custom-div">
           <Card
             hoverable
-            style={{
-              width: 980,
-              height: 380,
-              borderRadius: "100px 100px 100px 100px",
-            }}
-            cover={<img alt="example" src={jpg1} />}
-          ></Card>
+            className="hoverable"
+            cover={<img alt="example" src={homePicture} />}
+          />
         </div>
-
-        <div className="customform">
-          <Card style={{ width: 400, height: 490 }}>
-            <div>
-              <CustomCardTitle
-                title="账号登录"
-                titleStyle={{
-                  marginTop: "24px",
-                  marginLeft: "0px",
-                  letterSpacing: "4px",
-                }}
-              />
+        <div className="custom-form">
+          <Card hoverable style={{ width: 400, height: 490 }}>
+            <div className="title-style">
+              <CustomCardTitle title="账号登录" />
             </div>
-            <div style={CardWrapperStyle}>
+            <div className="card-wrapper">
               <Form
                 name="basic"
                 labelCol={{ span: 9 }}
@@ -144,13 +72,7 @@ const Login: React.FC = () => (
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
               >
-                <div
-                  style={{
-                    position: "relative",
-                    top: "-60px",
-                    left: "38px",
-                  }}
-                >
+                <div className="username-style">
                   <Form.Item
                     name="Username"
                     rules={[
@@ -169,15 +91,8 @@ const Login: React.FC = () => (
                     />
                   </Form.Item>
                 </div>
-                <div
-                  style={{
-                    position: "relative",
-                    top: "-54px",
-                    left: "38px",
-                  }}
-                >
-                  <Form.Item<FieldType>
-                    // label="密码  "
+                <div className="password-style">
+                  <Form.Item
                     name="password"
                     labelCol={{ span: 8 }}
                     wrapperCol={{ span: 18 }}
@@ -195,14 +110,8 @@ const Login: React.FC = () => (
                     />
                   </Form.Item>
                 </div>
-                <div
-                  style={{
-                    position: "relative",
-                    top: "-54px",
-                    left: "28px",
-                  }}
-                >
-                  <Form.Item<FieldType>
+                <div className="remember-pwd">
+                  <Form.Item
                     name="remember"
                     valuePropName="checked"
                     wrapperCol={{ offset: 7, span: 12 }}
@@ -211,13 +120,7 @@ const Login: React.FC = () => (
                     <Checkbox>记住密码</Checkbox>
                   </Form.Item>
                 </div>
-                <div
-                  style={{
-                    position: "relative",
-                    top: "-54px",
-                    left: "-40px",
-                  }}
-                >
+                <div className="login-button">
                   <Form.Item
                     className="move-up-checkbox"
                     wrapperCol={{ offset: 7, span: 12 }}
@@ -233,38 +136,20 @@ const Login: React.FC = () => (
                 </div>
               </Form>
             </div>
-            <div
-              style={{
-                position: "relative",
-                top: "338px",
-                left: "-80px",
-              }}
-            >
+            <div className="register-style">
               <a href="/register">立刻注册&nbsp;&nbsp;&nbsp;|</a>
             </div>
-            <div
-              style={{
-                position: "relative",
-                top: "316px",
-                left: "0px",
-              }}
-            >
+            <div className="for-pwd">
               <a href="/register">&nbsp;&nbsp;忘记密码&nbsp; | </a>
             </div>
-            <div
-              style={{
-                position: "relative",
-                top: "295px",
-                left: "84px",
-              }}
-            >
+            <div className="replace-pwd">
               <a href="/register">修改密码&nbsp;&nbsp; </a>
             </div>
           </Card>
         </div>
       </div>
     </Content>
-    <Footer style={footerStyle}>
+    <Footer className="footer">
       <p style={{ margin: "0", color: "gray" }}>
         &copy; 2014-2023 Foo Digital 上海宸居有限公司.
       </p>

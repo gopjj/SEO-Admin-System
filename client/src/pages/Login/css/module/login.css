@@ -1,0 +1,151 @@
+/* 移动复选框样式 */
+.move-up-checkbox .ant-checkbox-wrapper {
+  margin-top: -80px;
+}
+
+/* 容器样式 */
+.container {
+  position: relative;
+}
+
+/* 页面标题样式 */
+.page-title {
+  font-size: 22px;
+  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica", sans-serif;
+  font-weight: normal;
+  color: #333;
+  /* 其他样式属性 */
+  transition: left 0.3s ease-in-out;
+}
+
+.page-title.shifted {
+  left: 1000px;
+}
+
+/* 自定义 Div 样式 */
+.custom-div {
+  position: absolute;
+  top: 190px;
+  left: 242px;
+  width: 980px;
+  height: 380px;
+  background-color: #f0f0f0;
+}
+
+/* 自定义表单样式 */
+.custom-form {
+  position: absolute;
+  top: 190px;
+  left: 1244px;
+  width: 400px;
+  height: 490px;
+  background-color: #f0f0f0;
+}
+
+/* 可悬停元素样式 */
+.hoverable {
+  width: 980px;
+  height: 380px;
+  border-radius: 100px;
+}
+
+/* 头部样式 */
+.header {
+  text-align: center;
+  color: #fff;
+  height: 60px;
+  padding-inline: 50px;
+  line-height: 50px;
+  background-color: #ffffff;
+}
+
+/* 内容样式 */
+.content {
+  text-align: center;
+  min-height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-color: #feebef;
+}
+
+/* 底部样式 */
+.footer {
+  text-align: center;
+  color: #fff;
+  height: 64px;
+  padding-inline: 50px;
+  background-color: #eff1f8;
+}
+
+/* 卡片包装器样式 */
+.card-wrapper {
+  position: absolute;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 头部样式调整 */
+.header-style {
+  position: relative;
+  left: -800px;
+  top: 12px ;
+}
+
+/* 用户名样式 */
+.username-style {
+  position: relative;
+  top: -60px;
+  left: 38px;
+}
+
+/* 密码样式 */
+.password-style {
+  position: relative;
+  top: -54px;
+  left: 38px;
+}
+
+/* 重置密码样式 */
+.replace-pwd {
+  position: relative;
+  top: 295px;
+  left: 84px;
+}
+
+/* 忘记密码样式 */
+.for-pwd {
+  position: relative;
+  top: 316px;
+  left: 0px;
+}
+
+/* 注册样式 */
+.register-style {
+  position: relative;
+  top: 338px;
+  left: -80px;
+}
+
+/* 登录按钮样式 */
+.login-button {
+  position: relative;
+  top: -54px;
+  left: -40px;
+}
+
+/* 记住密码样式 */
+.remember-pwd {
+  position: relative;
+  top: -54px;
+  left: 28px;
+}
+.title-style{
+  margin-Top: 24px;
+  margin-Left: 0px;
+  letter-Spacing: 4px;
+
+}
