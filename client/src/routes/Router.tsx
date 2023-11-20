@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Upload from "../pages/upload/Upload";
+import Upload from "../pages/upload/component/Upload";
 import Option2 from "../pages/NoteTrack/Option2.";
 import App from "../pages/App";
 import Dashboard from "../pages/dashboard/dashboard";
