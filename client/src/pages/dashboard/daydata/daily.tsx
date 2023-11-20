@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Table } from "antd";
 import type { ColumnsType } from "antd/lib/table";
-
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 import type { InputRef } from "antd";

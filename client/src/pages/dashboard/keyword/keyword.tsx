@@ -1,21 +1,10 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import "./progress.css";
 import { Table, Progress } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { getKeyword } from "../api";
 
-// interface DataType {
-//   key: React.Key;
-//   brandName: string;
-//   keyWord: string;
-//   startTime: string;
-//   endTime: string;
-//   costTime: string;
-//   progress: number;
-//   noteNum: number;
-//   realNum: number;
-//   kpiData: string;
-// }
+
 type DataSource = {
   key: string | number;
   brandName: string;
@@ -52,14 +41,7 @@ const columns: ColumnsType<DataSource> = [
     key: "1",
     width: 130,
     align: "center",
-    // render: (startTime) => {
-    //     const formattedTime = new Intl.DateTimeFormat("zh-CN", {
-    //       year: "numeric",
-    //       month: "long",
-    //       day: "numeric",
-    //     }).format(new Date(startTime));
-    //     return formattedTime;
-    //   },
+
   },
   {
     title: "结束时间",
@@ -67,14 +49,7 @@ const columns: ColumnsType<DataSource> = [
     key: "2",
     width: 130,
     align: "center",
-    // render: (endTime) => {
-    //     const formattedTime = new Intl.DateTimeFormat("zh-CN", {
-    //       year: "numeric",
-    //       month: "long",
-    //       day: "numeric",
-    //     }).format(new Date(endTime));
-    //     return formattedTime;
-    //   },
+
   },
   {
     title: "项目时长",
@@ -121,68 +96,10 @@ const columns: ColumnsType<DataSource> = [
       />
     ),
   },
-  //   {
-  //     title: 'Action',
-  //     key: 'operation',
-  //     fixed: 'right',
-  //     width: 100,
-  //     render: () => (
-  //       <>
-  //         <a>Add Action</a> {/* 添加自定义链接或按钮 */}
-  //         {/* 其他 action */}
-  //       </>
-  //     ),
-  //   },
+
 ];
 
-// const data: DataType[] = [];
-// for (let i = 0; i < 100; i++) {
-//   data.push({
-//     key: i,
-//     name: `Edward ${i}`,
-//     age: 32,
-//     address: `London Park no. ${i}`,
-//   });
-// }
 
-// const data: DataType[] = [
-//     {
-//       key : 'brandName',
-//       brandName: 'OLAY',
-//       keyWord: "美白精华",
-//       startTime: '2023-09-20',
-//       endTime: '2023-09-28',
-//       costTime: '',
-//       kpiData: '',
-//       noteNum: 200,
-//       realNum: 190,
-//       progress: -1,
-//     },
-//     {
-//       key: 'keyWord',
-//       brandName: '丰添',
-//       keyWord: "丰添洗发水",
-//       startTime: '2023-08-11',
-//       endTime: '2023-08-20',
-//       costTime: '',
-//       kpiData: '',
-//       noteNum: 300,
-//       realNum: 200,
-//       progress: -1,
-//     },
-//     {
-//       key: 'keyWord',
-//       brandName: 'PMPM',
-//       keyWord: "水乳推荐",
-//       startTime: '2023-09-01',
-//       endTime: '2023-09-09',
-//       costTime: '',
-//       noteNum: 108,
-//       kpiData: '',
-//       progress: -1,
-//       realNum: 4,
-//     },
-//   ];
 
 const MyKeyword = () => {
   const [dataSource, setDataSource] = useState<DataSource[]>([]);

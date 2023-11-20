@@ -1,0 +1,8 @@
+.expand1 {
+  display: flex;
+  justify-content: space-between;
+}
+.chart {
+  width: 800px;
+  height: 320px;
+}

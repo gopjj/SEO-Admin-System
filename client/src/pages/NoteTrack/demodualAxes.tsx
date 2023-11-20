@@ -5,19 +5,19 @@ import { Card, Typography } from "antd";
 import axios from "axios";
 import { API_BASE_URL } from "../../config";
 import ApiList from "../../config/apiList";
-import "../dashboard/css/card.css";
+import "../dashboard/css/module.css";
 
 const DemoDualAxes = () => {
-  const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]; // 一周的日期
+  // const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]; // 一周的日期
   const [data, setData] = useState<
     Array<{ year: any; 实际优化: number; 预期优化: number }>
   >([]);
   const currentDate = new Date(); // 当前日期
-  const dates = []; // 存储最近一周的日期
+  // const dates = []; // 存储最近一周的日期
   useEffect(() => {
     const fetchData = async () => {
       const newData = [];
-      let expectedListSum = 0;
+      // let expectedListSum = 0;
       for (let i = 0; i < 8; i++) {
         const date = new Date(
           currentDate.getFullYear(),

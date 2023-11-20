@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import './dashboard/css/loginhead.css'
-import image from '../resource/pictures/FOOHEAD.jpg'
+import "./dashboard/css/module.css";
+import image from "../resource/pictures/FOOHEAD.jpg";
 import {
   FundTwoTone,
   EditTwoTone,
@@ -11,7 +11,7 @@ import type { MenuProps } from "antd";
 import { Layout, Menu, theme } from "antd";
 import { Link, Outlet } from "react-router-dom";
 import logo from "../component/images/logo.png";
-import { Avatar, Badge,Space , Popover} from 'antd';
+import { Avatar, Badge, Space, Popover } from "antd";
 
 const { Header, Content, Footer, Sider } = Layout;
 const content = (
@@ -62,15 +62,18 @@ const App: React.FC = () => {
       >
         <img src={logo} alt="Logo" style={{ height: 32, margin: -20 }} />
         <div className="div-container">
-        <Popover placement="topLeft" title="上海居宸企业管理有限公司" content={content}>
-      <a href="#">
-        <Avatar size={44} src={image} alt="avatar" />
-       
-      </a>
-      </Popover>
-    </div>
+          <Popover
+            placement="topLeft"
+            title="上海居宸企业管理有限公司"
+            content={content}
+          >
+            <a href="#">
+              <Avatar size={44} src={image} alt="avatar" />
+            </a>
+          </Popover>
+        </div>
       </Header>
-      
+
       <Layout style={{ minHeight: "100vh" }}>
         <Sider
           collapsible

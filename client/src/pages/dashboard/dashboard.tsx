@@ -1,25 +1,21 @@
 import type { TabsProps } from "antd";
 import { Collapse, Divider, Tabs } from "antd";
 import React from "react";
-
 import { getList } from "./api";
 import DataCard from "./card/datacard";
 import Mychart from "./chart/mychart";
 import Mychart2 from "./chart/mychart2";
 import Daily from "./daydata/daily";
 import Record from "./record/record";
+import styles from "./css/dashboard.module.css";
 
-const onChange = async (key: string) => {
-  // get request sample
-  // const data = await getList();
-  ///console.log(key);
-};
+const onChange = async (key: string) => {};
 
 const tabItems: TabsProps["items"] = [
   {
     key: "1",
     label: "日报",
-    // children: <Table dataSource={dataSource} columns={columns} />
+
     children: (
       <div>
         {" "}
@@ -36,15 +32,6 @@ const tabItems: TabsProps["items"] = [
       </div>
     ),
   },
-  // {
-  //   key: "3",
-  //   label: "关键词",
-  //   children: (
-  //     <div>
-  //       <Keyword />
-  //     </div>
-  //   ),
-  // },
 ];
 
 const Option2: React.FC = () => {
@@ -59,13 +46,11 @@ const Option2: React.FC = () => {
             label: "点击展开周报图表",
             children: (
               <p>
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
-                  <div style={{ width: "800px", height: "320px" }}>
+                <div className={styles.expand1}>
+                  <div className={styles.chart}>
                     <Mychart />
                   </div>
-                  <div style={{ width: "800px", height: "320px" }}>
+                  <div className={styles.chart}>
                     <Mychart2 />
                   </div>
                 </div>

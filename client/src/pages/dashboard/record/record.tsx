@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { Table, Progress } from "antd";
 import type { ColumnsType, TableProps } from "antd/es/table";
 import { getRecord } from "../api";
 import "../keyword/progress.css";
-// import { getRecord } from "../api/index";
+
 
 type DataSource = {
   time: string;
@@ -64,61 +64,11 @@ const columns: ColumnsType<DataSource> = [
     ),
   },
 
-  // {
-  //   title: "收录状态",
-  //   dataIndex: "status",
-  //   filters: [
-  //     {
-  //       text: "已收录",
-  //       value: "已收录",
-  //     },
-  //     {
-  //       text: "未收录",
-  //       value: "未收录",
-  //     },
-  //   ],
-  //   onFilter: (value: string | number | boolean, { status }) => {
-  //     if (status && typeof status === 'string') {
-  //       return status.startsWith(value.toString());
-  //     }
-  //     return false;
-  //   },
-  //   width: "5%",
-  // },
-
-  // {
-  //   title: "KOL/KOC",
-  //   dataIndex: "keyopinio",
-  //   filters: [
-  //     {
-  //       text: "KOL",
-  //       value: "KOL",
-  //     },
-  //     {
-  //       text: "KOC",
-  //       value: "KOC",
-  //     },
-  //   ],
-  //   onFilter: (value: string | number | boolean, { keyopinio }) => {
-  //     if (keyopinio && typeof keyopinio === 'string') {
-  //       return keyopinio.startsWith(value.toString());
-  //     }
-  //     return false;
-  //   },
-  //   width: "2%",
-  // },
+  
   {
     title: "收录时间",
     dataIndex: "datetime",
     align: "center",
-    // render: (time) => {
-    //   const formattedTime = new Intl.DateTimeFormat("zh-CN", {
-    //     year: "numeric",
-    //     month: "long",
-    //     day: "numeric",
-    //   }).format(new Date(time));
-    //   return formattedTime;
-    // },
     filters: [
       {
         text: "2023",
@@ -141,12 +91,6 @@ const columns: ColumnsType<DataSource> = [
     },
     width: "8%",
   },
-
-  // {
-  //   title: 'Age',
-  //   dataIndex: 'age',
-  //   sorter: (a, b) => a.age - b.age,
-  // },
 ];
 
 const onChange: TableProps<DataSource>["onChange"] = (
