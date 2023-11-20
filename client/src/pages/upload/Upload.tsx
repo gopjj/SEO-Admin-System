@@ -1,7 +1,7 @@
-import React from "react";
 import { InboxOutlined } from "@ant-design/icons";
 import type { UploadProps } from "antd";
-import { message, Upload, Card, Button, Divider, Col, Row } from "antd";
+import { Card, Divider, Upload, message } from "antd";
+import React from "react";
 import Down from "./download/download1";
 import Down2 from "./download/download2";
 import Down3 from "./download/download3";
@@ -30,13 +30,7 @@ const props: UploadProps = {
     console.log("Dropped files", e.dataTransfer.files);
   },
 };
-const handleDownload = () => {
-  const fileUrl = "./index.css"; // 文件的下载链接
-  const link = document.createElement("a");
-  link.href = fileUrl;
-  link.download = "index.css"; // 下载后保存的文件名
-  link.click();
-};
+
 const UploadComp: React.FC = () => (
   <div style={{ alignItems: "center", marginTop: "20px" }}>
     <Card>

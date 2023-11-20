@@ -1,9 +1,8 @@
-import React, {useEffect,useState} from "react";
-import "./progress.css"
-import { Table,Progress} from 'antd';
-import type { ColumnsType } from 'antd/es/table';
+import React, { useEffect, useState } from "react";
+import "./progress.css";
+import { Table, Progress } from "antd";
+import type { ColumnsType } from "antd/es/table";
 import { getKeyword } from "../api";
-
 
 // interface DataType {
 //   key: React.Key;
@@ -32,27 +31,27 @@ type DataSource = {
 
 const columns: ColumnsType<DataSource> = [
   {
-    title: '品牌名称',
+    title: "品牌名称",
     width: 100,
-    dataIndex: 'brandName',
-    key: 'brandName',
-    fixed: 'left',
-    align: 'center',
+    dataIndex: "brandName",
+    key: "brandName",
+    fixed: "left",
+    align: "center",
   },
   {
     title: "关键词",
     width: 120,
-    dataIndex: 'keyWord',
-    key: 'keyWord',
-    fixed: 'left',
-    align: 'center',
+    dataIndex: "keyWord",
+    key: "keyWord",
+    fixed: "left",
+    align: "center",
   },
   {
-    title: '开始时间',
-    dataIndex: 'startTime',
-    key: '1',
+    title: "开始时间",
+    dataIndex: "startTime",
+    key: "1",
     width: 130,
-    align: 'center',
+    align: "center",
     // render: (startTime) => {
     //     const formattedTime = new Intl.DateTimeFormat("zh-CN", {
     //       year: "numeric",
@@ -63,11 +62,11 @@ const columns: ColumnsType<DataSource> = [
     //   },
   },
   {
-    title: '结束时间',
-    dataIndex: 'endTime',
-    key: '2',
+    title: "结束时间",
+    dataIndex: "endTime",
+    key: "2",
     width: 130,
-    align: 'center',
+    align: "center",
     // render: (endTime) => {
     //     const formattedTime = new Intl.DateTimeFormat("zh-CN", {
     //       year: "numeric",
@@ -78,59 +77,62 @@ const columns: ColumnsType<DataSource> = [
     //   },
   },
   {
-    title: '项目时长',
-    dataIndex: 'costTime',
-    key: '3',
+    title: "项目时长",
+    dataIndex: "costTime",
+    key: "3",
     width: 90,
-    align: 'center',
+    align: "center",
   },
   {
-    title: '需求篇数',
-    dataIndex: 'noteNum',
-    key: '9',
+    title: "需求篇数",
+    dataIndex: "noteNum",
+    key: "9",
     width: 100,
-    align: 'center',
-  },
-  
-  {
-    title: '实时优化',
-    dataIndex: 'realNum',
-    key: '10',
-    width: 100,
-    align: 'center',
-  },
-  {
-    title: 'KPI达成率',
-    dataIndex: 'kpiData',
-    key: '8',
-    width: 100,
-    align: 'center',
+    align: "center",
   },
 
   {
-    title: '当前进度',
-    dataIndex: 'progress',
-    key: '11',
-    align: 'center',
+    title: "实时优化",
+    dataIndex: "realNum",
+    key: "10",
+    width: 100,
+    align: "center",
+  },
+  {
+    title: "KPI达成率",
+    dataIndex: "kpiData",
+    key: "8",
+    width: 100,
+    align: "center",
+  },
+
+  {
+    title: "当前进度",
+    dataIndex: "progress",
+    key: "11",
+    align: "center",
     width: 300,
     render: (text, record) => (
-    
-      <Progress percent={record.progress} status="active" strokeColor={{ "0%":"#108ee9", "70": "#87d068" }} className="progress-custom" />
-    
-      ),
+      <Progress
+        percent={record.progress}
+        status="active"
+        strokeColor={{ "0%": "#108ee9", "70": "#87d068" }}
+        className="progress-custom"
+      />
+    ),
   },
-//   {
-//     title: 'Action',
-//     key: 'operation',
-//     fixed: 'right',
-//     width: 100,
-//     render: () => (
-//       <>
-//         <a>Add Action</a> {/* 添加自定义链接或按钮 */}
-//         {/* 其他 action */}
-//       </>
-//     ),
-//   },
+  //   {
+  //     title: 'Action',
+  //     key: 'operation',
+  //     fixed: 'right',
+  //     width: 100,
+  //     render: () => (
+  //       <>
+  //         <a>Add Action</a> {/* 添加自定义链接或按钮 */}
+  //         {/* 其他 action */}
+  //       </>
+  //     ),
+  //   },
 ];
 
 // const data: DataType[] = [];
@@ -182,16 +184,16 @@ const columns: ColumnsType<DataSource> = [
 //     },
 //   ];
 
-const  MyKeyword = () => {
+const MyKeyword = () => {
   const [dataSource, setDataSource] = useState<DataSource[]>([]);
   useEffect(() => {
     const fetchData = async () => {
-      try{
+      try {
         const response = await getKeyword();
-        const returnedData = response as unknown as Array<any>;
-        console.log(returnedData)
+        const returnedData = (response as unknown) as Array<any>;
+        console.log(returnedData);
         const newData: DataSource[] = [];
-        for (const data of returnedData){
+        for (const data of returnedData) {
           const start = new Date(data.startTime);
           const end = new Date(data.endTime);
           const diffMilliseconds = end.getTime() - start.getTime();
@@ -210,19 +212,25 @@ const  MyKeyword = () => {
             costTime: `${costTime} 天`,
             noteNum: data.targetNote,
             realNum: data.realNote,
-            kpiData: `${ kpiData }%`,
+            kpiData: `${kpiData}%`,
             progress: kpiData,
           });
         }
         setDataSource(newData);
-        console.log(returnedData.length)
-      }catch(error){
+        console.log(returnedData.length);
+      } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-    },[]);
-    return <Table columns={columns} dataSource={dataSource} scroll={{ x: 1500, y: 300 }} />
-  };
+  }, []);
+  return (
+    <Table
+      columns={columns}
+      dataSource={dataSource}
+      scroll={{ x: 1500, y: 300 }}
+    />
+  );
+};
 
 export default MyKeyword;
