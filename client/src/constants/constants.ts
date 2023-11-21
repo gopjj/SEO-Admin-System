@@ -1,0 +1,1 @@
+export const copyRightString = " 2014-2023 Foo Digital 上海宸居有限公司.";

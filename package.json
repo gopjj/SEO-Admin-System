@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "react-highlight-words": "^0.20.0",
+    "react-router-dom": "^6.19.0"
+  },
+  "devDependencies": {
+    "@types/moment": "^2.13.0",
+    "@types/react-highlight-words": "^0.16.7"
+  }
+}
