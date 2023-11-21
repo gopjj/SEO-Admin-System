@@ -7,13 +7,14 @@ import {
   PieChartTwoTone,
   DiffTwoTone,
 } from "@ant-design/icons";
-import type { MenuProps } from "antd";
 import { Layout, Menu, theme } from "antd";
 import { Link, Outlet } from "react-router-dom";
 import logo from "../component/images/logo.png";
-import { Avatar, Badge, Space, Popover } from "antd";
+import { Avatar, Popover, MenuProps } from "antd";
+import style from "./app.module.css";
 
 const { Header, Content, Footer, Sider } = Layout;
+
 const content = (
   <div>
     <p>用户:FOO</p>
@@ -51,16 +52,12 @@ const items: MenuItem[] = [
 
 const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
+  const {} = theme.useToken();
 
   return (
     <Layout>
-      <Header
-        style={{ display: "flex", alignItems: "center", background: "white" }}
-      >
-        <img src={logo} alt="Logo" style={{ height: 32, margin: -20 }} />
+      <Header className={style.headerStyle}>
+        <img src={logo} alt="Logo" className={style.logoStyle} />
         <div className="div-container">
           <Popover
             placement="topLeft"

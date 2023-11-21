@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Table } from "antd";
 import type { ColumnsType } from "antd/lib/table";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
-import type { InputRef } from "antd";
-import { Button, Input, Space } from "antd";
+import { Button, Input, Space, InputRef, Table } from "antd";
 import type { ColumnType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
+import style from "./daily.module.css";
 
 type DataSource = {
   key: string | number;
@@ -61,7 +60,10 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
       clearFilters,
       close,
     }) => (
-      <div style={{ padding: 8 }} onKeyDown={(e) => e.stopPropagation()}>
+      <div
+        className={style.selectPadding}
+        onKeyDown={(e) => e.stopPropagation()}
+      >
         <Input
           ref={searchInput}
           placeholder={`Search ${dataIndex}`}
@@ -72,7 +74,7 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
           onPressEnter={() =>
             handleSearch(selectedKeys as string[], confirm, dataIndex)
           }
-          style={{ marginBottom: 8, display: "block" }}
+          className={style.selectInput}
         />
         <Space>
           <Button
@@ -82,14 +84,14 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
             }
             icon={<SearchOutlined />}
             size="small"
-            style={{ width: 90 }}
+            className={style.selectButton}
           >
             Search
           </Button>
           <Button
             onClick={() => clearFilters && handleReset(clearFilters)}
             size="small"
-            style={{ width: 90 }}
+            className={style.selectButton}
           >
             Reset
           </Button>
@@ -241,7 +243,7 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
       try {
         const response = await getListFunction();
 
-        const returnedData = (response as unknown) as Array<any>;
+        const returnedData = response as unknown as Array<any>;
         console.log(returnedData);
         const newData: DataSource[] = [];
         for (const data of returnedData) {

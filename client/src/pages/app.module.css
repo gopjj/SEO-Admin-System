@@ -1,0 +1,9 @@
+.headerStyle {
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+.logoStyle {
+  height: 32px;
+  margin: -20px;
+}

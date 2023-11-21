@@ -53,7 +53,7 @@
 .header {
   text-align: center;
   color: #fff;
-  height: 60px;
+  height: 72px;
   padding-inline: 50px;
   line-height: 50px;
   background-color: #ffffff;
@@ -62,7 +62,7 @@
 /* 内容样式 */
 .content {
   text-align: center;
-  min-height: 800px;
+  min-height: 1000px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -74,7 +74,7 @@
 .footer {
   text-align: center;
   color: #fff;
-  height: 64px;
+  height: 80px;
   padding-inline: 50px;
   background-color: #eff1f8;
 }
