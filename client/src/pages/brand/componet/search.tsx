@@ -26,7 +26,7 @@ const DemoColumn = () => {
         try {
           const response = await axios.get(API_BASE_URL + ApiList.getKeywordL, {
             params: {
-              brand: "Olay",
+              brand: "hbn水乳",
               date: formattedDate,
             },
           });
