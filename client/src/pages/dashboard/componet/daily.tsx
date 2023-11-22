@@ -6,7 +6,7 @@ import { Button, Input, Space, InputRef, Table } from "antd";
 import type { ColumnType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
 import style from "./styles/daily.module.css";
-import { detailDataString } from "../../../constants/constants";
+
 
 
 type DataSource = {

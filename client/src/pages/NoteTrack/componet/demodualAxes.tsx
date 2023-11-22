@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 
 import { Card, Typography } from "antd";
 import axios from "axios";
-import { API_BASE_URL } from "../../config";
-import ApiList from "../../config/apiList";
-import "../dashboard/componet/styles/module.css";
+import { API_BASE_URL } from "../../../config";
+import ApiList from "../../../config/apiList";
+import {optmString} from "../../../constants/constants"
 
 const DemoDualAxes = () => {
   // const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]; // 一周的日期
@@ -99,7 +99,7 @@ const DemoDualAxes = () => {
   return (
     <Card className="custom-card">
       <Typography.Title level={5} className="text-center">
-        最近一周的优化数据
+        {optmString}
       </Typography.Title>
       <DualAxes {...config} />
     </Card>

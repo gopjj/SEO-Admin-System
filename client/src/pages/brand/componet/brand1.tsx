@@ -4,8 +4,7 @@ import React, { useEffect, useState } from "react";
 import { getBrand1 } from "../../dashboard/api/index";
 import Day from "../../dashboard/componet/daily";
 import SearchInput from "./search";
-import "../style/index.css";
-import style from "./brand.module.css";
+import style from "./styles/brand.module.css";
 
 const App: React.FC = () => {
   const [pageWidth, setPageWidth] = useState(

@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import "./dashboard/componet/styles/module.css";
-import image from "../resource/pictures/FOOHEAD.jpg";
+import "../dashboard/componet/styles/module.css";
+import  FooHeadImg from "../../resource/pictures/FOOHEAD.jpg";
 import {
   FundTwoTone,
   EditTwoTone,
   PieChartTwoTone,
   DiffTwoTone,
 } from "@ant-design/icons";
-import { Layout, Menu, theme } from "antd";
+import { Layout, Menu } from "antd";
 import { Link, Outlet } from "react-router-dom";
-import logo from "../component/images/logo.png";
+import logo from "../../component/images/logo.png";
 import { Avatar, Popover, MenuProps } from "antd";
-import style from "./app.module.css";
+import style from "../home/styles/app.module.css";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -52,7 +52,7 @@ const items: MenuItem[] = [
 
 const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const {} = theme.useToken();
+
 
   return (
     <Layout>
@@ -65,7 +65,7 @@ const App: React.FC = () => {
             content={content}
           >
             <a href="#">
-              <Avatar size={44} src={image} alt="avatar" />
+              <Avatar size={44} src={ FooHeadImg} alt="avatar" />
             </a>
           </Popover>
         </div>
@@ -82,7 +82,6 @@ const App: React.FC = () => {
           <div className="demo-logo-vertical" />
           <Menu
             theme="light"
-            // style={{ width: 200}}
             defaultSelectedKeys={["1"]}
             mode="inline"
             items={items}

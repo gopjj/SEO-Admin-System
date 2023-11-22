@@ -80,7 +80,7 @@
 }
 
 /* 卡片包装器样式 */
-.cardWrapper {
+.formWrapper {
   position: absolute;
   height: 100%;
   display: flex;
@@ -104,14 +104,14 @@
 
 
 /* 用户名样式 */
-.usernameStyle {
+.username{
   position: relative;
   top: -60px;
   left: 38px;
 }
 
 /* 密码样式 */
-.passwordStyle {
+.password {
   position: relative;
   top: -54px;
   left: 38px;
@@ -132,7 +132,7 @@
 }
 
 /* 注册样式 */
-.registerStyle {
+.register {
   position: relative;
   top: 338px;
   left: -80px;

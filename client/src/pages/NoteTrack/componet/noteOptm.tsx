@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Tabs, Card } from "antd";
-import { getopAll } from "../dashboard/api";
+import { getopAll } from "../../dashboard/api";
 import DemoDualAxes from "./demodualAxes";
 import NoteList from "./noteList";
-import "../dashboard/componet/styles/module.css";
-import "../NoteTrack/css/module.css";
+
+import styles from "./styles/track.module.css"
 
 
 const App: React.FC = () => {
@@ -45,11 +45,11 @@ const App: React.FC = () => {
 
       {activeTab === "tab1" && (
         <div>
-          <div className="tab-style">
+          <div className={styles.tabStyle}>
             <DemoDualAxes />
           </div>
 
-          <div className="note-style">
+          <div className={styles.noteStyle}>
             <NoteList getListFunction={getopAll} />
           </div>
         </div>

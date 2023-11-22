@@ -11,6 +11,8 @@ import logo from "../../../resource/pictures/logo.jpg";
 import { redirect } from "react-router-dom";
 
 
+
+
 const { Header, Footer, Content } = Layout;
 interface loginUserParams {
   username: string;
@@ -98,9 +100,9 @@ export const Login: React.FC = () => {
           <div className={style.customForm}>
             <Card hoverable className={style.loginCard}>
               <div className={style.titleStyle}>
-                <CustomCardTitle title="账号登录" />
+                <p>账号登录 </p>
               </div>
-              <div className={style.cardWrapper}>
+              <div className={style.formWrapper}>
                 <Form
                   name="basic"
                   labelCol={{ span: 9 }}
@@ -111,7 +113,7 @@ export const Login: React.FC = () => {
                   onFinishFailed={onFinishFailed}
                   autoComplete="off"
                 >
-                  <div className={style.usernameStyle}>
+                  <div className={style.username}>
                     <Form.Item
                       name="Username"
                       rules={[
@@ -130,7 +132,7 @@ export const Login: React.FC = () => {
                       />
                     </Form.Item>
                   </div>
-                  <div className={style.passwordStyle}>
+                  <div className={style.password}>
                     <Form.Item
                       name="password"
                       labelCol={{ span: 8 }}
@@ -175,7 +177,7 @@ export const Login: React.FC = () => {
                   </div>
                 </Form>
               </div>
-              <div className={style.registerStyle}>
+              <div className={style.register}>
                 <a href="/register">立刻注册&nbsp;&nbsp;&nbsp;|</a>
               </div>
               <div className={style.forPwd}>

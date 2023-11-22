@@ -7,3 +7,4 @@ export const achDataString = "总达成:";
 export const recordString = "总收录率:";
 export const kocString = "总KOC发布:";
 export const noteSumString = "总笔记数量:";
+export const optmString = "最近一周的优化数据";
