@@ -3,7 +3,7 @@ import { Tabs, Card } from "antd";
 import { getopAll } from "../dashboard/api";
 import DemoDualAxes from "./demodualAxes";
 import NoteList from "./noteList";
-import "../dashboard/css/module.css";
+import "../dashboard/componet/styles/module.css";
 import "../NoteTrack/css/module.css";
 
 

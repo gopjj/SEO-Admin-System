@@ -1,5 +1,5 @@
 import  { useEffect, useState } from "react";
-import "./progress.css";
+import "./styles/progress.css";
 import { Table, Progress } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { getKeyword } from "../api";

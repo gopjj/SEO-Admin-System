@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./dashboard/css/module.css";
+import "./dashboard/componet/styles/module.css";
 import image from "../resource/pictures/FOOHEAD.jpg";
 import {
   FundTwoTone,

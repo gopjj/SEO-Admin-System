@@ -5,7 +5,9 @@ import Highlighter from "react-highlight-words";
 import { Button, Input, Space, InputRef, Table } from "antd";
 import type { ColumnType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
-import style from "./daily.module.css";
+import style from "./styles/daily.module.css";
+import { detailDataString } from "../../../constants/constants";
+
 
 type DataSource = {
   key: string | number;
@@ -29,7 +31,7 @@ interface MyTableProps {
   getListFunction: () => Promise<any>;
 }
 
-const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
+export const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
@@ -145,14 +147,6 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
   });
 
   const columns: ColumnsType<DataSource> = [
-    // {
-    //   title: "序号",
-    //   dataIndex: "id",
-    //   key: "id",
-    //   width: "5%",
-    //   align: "center",
-    //   ...getColumnSearchProps("id")
-    // },
     {
       title: "关键词",
       dataIndex: "keyword",

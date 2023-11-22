@@ -5,7 +5,7 @@ import { Card, Typography } from "antd";
 import axios from "axios";
 import { API_BASE_URL } from "../../config";
 import ApiList from "../../config/apiList";
-import "../dashboard/css/module.css";
+import "../dashboard/componet/styles/module.css";
 
 const DemoDualAxes = () => {
   // const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]; // 一周的日期

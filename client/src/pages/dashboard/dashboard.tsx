@@ -2,12 +2,13 @@ import type { TabsProps } from "antd";
 import { Collapse, Divider, Tabs } from "antd";
 import React from "react";
 import { getList } from "./api";
-import DataCard from "./card/datacard";
-import Mychart from "./chart/mychart";
-import Mychart2 from "./chart/mychart2";
-import Daily from "./daydata/daily";
-import Record from "./record/record";
-import styles from "./css/dashboard.module.css";
+import DataCard from "./componet/datacard";
+import Mychart from "./componet/dashboardChart1";
+import Mychart2 from "./componet/databoardChart2";
+import Daily from "./componet/daily";
+import Record from "./componet/record";
+import styles from "./componet/styles/dashboard.module.css"
+import { detailDataString } from "../../constants/constants";
 
 const onChange = async (key: string) => {};
 
@@ -60,7 +61,7 @@ const Option2: React.FC = () => {
         ]}
       ></Collapse>
       <Divider orientation="left" plain style={{ color: "lightgrey" }}>
-        详细数据
+        {detailDataString}
       </Divider>
       <Tabs defaultActiveKey="1" items={tabItems} onChange={onChange}></Tabs>
     </div>

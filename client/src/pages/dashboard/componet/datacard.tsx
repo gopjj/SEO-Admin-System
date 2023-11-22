@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { Card, Col, Divider, Row } from "antd";
-import { getList } from "../api/index";
-import styles from "./datacard.module.css";
+import { getList } from "../api";
+import styles from "./styles/datacard.module.css"
+import {allDataString,sumDataString,kolDataString,achDataString,recordString,kocString,noteSumString} from "../../../constants/constants"
+
 
 const Datacard = () => {
   const [notesNum, setNotesNum] = useState<number>(0);
@@ -32,55 +34,55 @@ const Datacard = () => {
     <div>
       <p className={styles.cardText}>
         <Divider orientation="left" plain>
-          全部采集笔记汇总
+          {allDataString}
         </Divider>
       </p>
       <Row gutter={30}>
         <Col span={4}>
           <Card className={styles.dataCard} hoverable>
-            <p className={styles.cardTitle}>总关键词数量:</p>
+            <p className={styles.cardTitle}>{sumDataString}</p>
             <p className={styles.fontStyle}>
-              &nbsp;&nbsp;{((time * 60) / notesNum).toFixed(0)}分钟
+              &nbsp;&nbsp;{((time * 60) / notesNum).toFixed(0)}
             </p>
           </Card>
         </Col>
         <Col span={4}>
           <Card className={styles.dataCard} hoverable>
-            <p className={styles.cardTitle}>总KOL发布:</p>
+            <p className={styles.cardTitle}>{kolDataString}</p>
             <p className={styles.fontStyle}>
-              &nbsp;&nbsp;{((time * 60) / notesNum).toFixed(0)}分钟
+              &nbsp;&nbsp;{((time * 60) / notesNum).toFixed(0)}
             </p>
           </Card>
         </Col>
         <Col span={4}>
           <Card className={styles.dataCard} hoverable>
-            <p className={styles.cardTitle}>总达成:</p>
+            <p className={styles.cardTitle}>{achDataString}</p>
             <p className={styles.fontStyle}>
-              &nbsp;&nbsp;{((time * 60) / notesNum).toFixed(0)}分钟
+              &nbsp;&nbsp;{((time * 60) / notesNum).toFixed(0)}
             </p>
           </Card>
         </Col>
         <Col span={4}>
           <Card className={styles.dataCard} hoverable>
-            <p className={styles.cardTitle}>总收录率:</p>
+            <p className={styles.cardTitle}>{recordString}</p>
             <p className={styles.fontStyle}>
-              &nbsp;&nbsp;{((time * 60) / notesNum).toFixed(0)}分钟
+              &nbsp;&nbsp;{((time * 60) / notesNum).toFixed(0)}
             </p>
           </Card>
         </Col>
         <Col span={4}>
           <Card className={styles.dataCard} hoverable>
-            <p className={styles.cardTitle}>总KOC发布:</p>
+            <p className={styles.cardTitle}>{kocString}</p>
             <p className={styles.fontStyle}>
-              &nbsp;&nbsp;{((time * 60) / notesNum).toFixed(0)}分钟
+              &nbsp;&nbsp;{((time * 60) / notesNum).toFixed(0)}
             </p>
           </Card>
         </Col>
         <Col span={4}>
           <Card className={styles.dataCard} hoverable>
-            <p className={styles.cardTitle}>总笔记数量:</p>
+            <p className={styles.cardTitle}>{noteSumString}</p>
             <p className={styles.fontStyle}>
-              &nbsp;&nbsp;{((time * 60) / notesNum).toFixed(0)}秒
+              &nbsp;&nbsp;{((time * 60) / notesNum).toFixed(0)}
             </p>
           </Card>
         </Col>

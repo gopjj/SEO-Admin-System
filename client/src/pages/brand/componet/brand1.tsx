@@ -2,7 +2,7 @@ import { Divider } from "antd";
 import { Card } from "antd/lib";
 import React, { useEffect, useState } from "react";
 import { getBrand1 } from "../../dashboard/api/index";
-import Day from "../../dashboard/daydata/daily";
+import Day from "../../dashboard/componet/daily";
 import SearchInput from "./search";
 import "../style/index.css";
 import style from "./brand.module.css";
