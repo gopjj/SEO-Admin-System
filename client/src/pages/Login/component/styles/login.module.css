@@ -90,9 +90,11 @@
 
 /* 头部样式调整 */
 .headerStyle {
-  position: relative;
-  left: -800px;
-  top: 12px ;
+  position: absolute;
+  left: 80px;
+  top: 20px ;
+  height: 46px;
+  margin: -10px;
 }
 /* 卡片包装样式 */
 .loginCard{

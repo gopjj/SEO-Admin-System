@@ -5,53 +5,86 @@ import React from "react";
 import { API_BASE_URL } from "../../../config";
 import ApiList from "../../../config/apiList";
 import homePicture from "../../../resource/pictures/Foo.jpg";
-import HeaderF from "./header";
 import style from "./styles/login.module.css";
-import { copyRightString } from '../../../constants/constants';
-import {redirect} from "react-router-dom"
-console.log(copyRightString);
+import { copyRightString } from "../../../constants/constants";
+import logo from "../../../resource/pictures/logo.jpg";
+import { redirect } from "react-router-dom";
+
+
 const { Header, Footer, Content } = Layout;
 interface loginUserParams {
-  username: string,
-  password: string,
-  }
-const onFinish = async (values: any) => {
-  try {
-    console.log("Success:", values);
-    const params: loginUserParams = {
-      username: values.Username,
-      password: values.password,
-    };
+  username: string;
+  password: string;
+}
 
-    const response = await axios.post(API_BASE_URL + ApiList.login, params, {
-      headers: {
-        Authorization: "TestFooDigital",
-        "Content-Type": "application/json",
-      },
-    });
-    console.log("Login response:", response.data);
-    window.location.href = "/dashboard";
-  } catch (error) {
-    console.log("Login error:", error);
-  }
-};
+// const onFinish = async (values: any) => {
+//   try {
+//     console.log("Success:", values);
+//     const params: loginUserParams = {
+//       username: values.Username,
+//       password: values.password,
+//     };
 
-const onFinishFailed = (errorInfo: any) => {
-  console.log("Failed:", errorInfo);
-};
+//     const response = await axios.post(API_BASE_URL + ApiList.login, params, {
+//       headers: {
+//         Authorization: "TestFooDigital",
+//         "Content-Type": "application/json",
+//       },
+//     });
+//     console.log("Login response:", response.data);
+//     window.location.href = "/dashboard";
+//   } catch (error) {
+//     console.log("Login error:", error);
+//   }
+// };
 
-const CustomCardTitle: React.FC<{ title: string }> = ({ title }) => (
-  <div className={style.fontTitle}>{title}</div>
-);
+// const onFinishFailed = (errorInfo: any) => {
+//   console.log("Failed:", errorInfo);
+// };
+
+// const CustomCardTitle: React.FC<{ title: string }> = ({ title }) => (
+//   <div className={style.fontTitle}>{title}</div>
+// );
 
 export const Login: React.FC = () => {
+  const onFinish = async (values: any) => {
+    try {
+      console.log("Success:", values);
+      const params: loginUserParams = {
+        username: values.Username,
+        password: values.password,
+      };
   
+      const response = await axios.post(API_BASE_URL + ApiList.login, params, {
+        headers: {
+          Authorization: "TestFooDigital",
+          "Content-Type": "application/json",
+        },
+      });
+      console.log("Login response:", response.data);
+      if(response){
+        return redirect("/dashboard");
+      }
+      
+      
+    } catch (error) {
+      console.log("Login error:", error);
+    }
+  };
+  
+  const onFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo);
+  };
+  
+  const CustomCardTitle: React.FC<{ title: string }> = ({ title }) => (
+    <div className={style.fontTitle}>{title}</div>
+  )
   return (
     <Layout>
       <Header className={style.header}>
-        <div className={style.headerStyle}>
-          <HeaderF />
-        </div>
+        {/* <div className={style.headerStyle}> */}
+        <img src={logo} alt="Logo" className={style.headerStyle} />;
+        {/* </div> */}
       </Header>
       <Content className={style.content}>
         <div>
@@ -156,9 +189,7 @@ export const Login: React.FC = () => {
         </div>
       </Content>
       <Footer className={style.footer}>
-        <p style={{ margin: "0", color: "gray" }}>
-        &copy;{copyRightString}
-        </p>
+        <p style={{ margin: "0", color: "gray" }}>&copy;{copyRightString}</p>
       </Footer>
     </Layout>
   );
