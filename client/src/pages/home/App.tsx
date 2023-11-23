@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import  FooHeadImg from "../../resource/pictures/FOOHEAD.jpg";
+import FooHeadImg from "../../resource/pictures/FOOHEAD.jpg";
 import {
   FundTwoTone,
   EditTwoTone,
@@ -39,11 +39,6 @@ function getItem(
 const items: MenuItem[] = [
   getItem(<Link to="dashboard">首页</Link>, "1", <PieChartTwoTone />),
   getItem(<Link to="option2">笔记优化</Link>, "2", <FundTwoTone />),
-<<<<<<< HEAD:client/src/pages/App.tsx
-  
-=======
-
->>>>>>> 065a0ae6b5c888c780618cc02bf2866affa34d23:client/src/pages/home/App.tsx
   getItem("品牌", "sub1", <EditTwoTone />, [
     getItem(<Link to="/brand/brand">OLAY</Link>, "3"),
     getItem(<Link to="/brand/brand1">丰添</Link>, "4"),
@@ -56,7 +51,6 @@ const items: MenuItem[] = [
 const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
 
-
   return (
     <Layout>
       <Header className={style.headerStyle}>
@@ -68,7 +62,7 @@ const App: React.FC = () => {
             content={content}
           >
             <a href="#">
-              <Avatar size={44} src={ FooHeadImg} alt="avatar" />
+              <Avatar size={44} src={FooHeadImg} alt="avatar" />
             </a>
           </Popover>
         </div>
@@ -97,9 +91,7 @@ const App: React.FC = () => {
             <Link to="option2"></Link>
             <Outlet />
           </Content>
-          <Footer style={{ textAlign: "center" }}>
-   
-          </Footer>
+          <Footer style={{ textAlign: "center" }}></Footer>
         </Layout>
       </Layout>
     </Layout>
