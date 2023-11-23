@@ -26,6 +26,7 @@ yarn start
 
 
 代码目录
+```js
 +-- src/                               ---核心代码目录
 |   +-- pages                          ---所有页面存放目录
 |   |	+-- brand                      ---品牌页面存放组件目录
@@ -56,3 +57,17 @@ yarn start
 | 	| 	| 	|	---login.module.css    ---登录样式模块文件
 |	|	|	---login.tsx			   ---登录组件
 |   |    +-- charts  
+```
+
+## Server
+
+### Setup
+
+prerequisite：
+
+1. Install NodeJS : https://nodejs.org/en
+2. Install mongoDb on local enviroment: https://www.mongodb.com/try/download/community
+
+yarn
+
+yarn start
