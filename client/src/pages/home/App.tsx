@@ -39,7 +39,11 @@ function getItem(
 const items: MenuItem[] = [
   getItem(<Link to="dashboard">首页</Link>, "1", <PieChartTwoTone />),
   getItem(<Link to="option2">笔记优化</Link>, "2", <FundTwoTone />),
+<<<<<<< HEAD:client/src/pages/App.tsx
+  
+=======
 
+>>>>>>> 065a0ae6b5c888c780618cc02bf2866affa34d23:client/src/pages/home/App.tsx
   getItem("品牌", "sub1", <EditTwoTone />, [
     getItem(<Link to="/brand/brand">OLAY</Link>, "3"),
     getItem(<Link to="/brand/brand1">丰添</Link>, "4"),

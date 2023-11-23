@@ -60,9 +60,13 @@ const Option2: React.FC = () => {
           },
         ]}
       ></Collapse>
+<<<<<<< HEAD
+     <Divider orientation="left" plain style={{ color: 'lightgrey' }}>详细数据</Divider>
+=======
       <Divider orientation="left" plain style={{ color: "lightgrey" }}>
         {detailDataString}
       </Divider>
+>>>>>>> 065a0ae6b5c888c780618cc02bf2866affa34d23
       <Tabs defaultActiveKey="1" items={tabItems} onChange={onChange}></Tabs>
     </div>
   );

@@ -1,7 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Upload from "../pages/upload/Upload";
+<<<<<<< HEAD
+import Option2 from "../pages/NoteTrack/Option2.";
+import App from "../pages/App";
+=======
 import Option2 from "../pages/NoteTrack/componet/noteOptm";
 import App from "../pages/home/App";
+>>>>>>> 065a0ae6b5c888c780618cc02bf2866affa34d23
 import Dashboard from "../pages/dashboard/dashboard";
 import Brand from "../pages/brand/componet/brand";
 import Brand1 from "../pages/brand/componet/brand1";
