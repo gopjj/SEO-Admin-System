@@ -1,0 +1,17 @@
+.tabStyle{
+    margin-Top: -12px;
+} 
+.noteStyle{
+    margin-Top: 20px;
+    background-Color: #ffffff
+
+}
+.customCard {
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+  

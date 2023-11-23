@@ -2,6 +2,8 @@ import { Request, RequestHandler, Response } from "express";
 import startupLogDao from "../dao/dailyData.js";
 import recordData from "../dao/recordData.js";
 import keywordData from "../dao/keywordData.js"; 
+import operData from "../dao/oRdata.js";
+import oRdata from "../dao/oRdata.js";
 
 namespace dashbaordController {
   export const getList: RequestHandler = async (
@@ -99,6 +101,39 @@ namespace dashbaordController {
     res.send(results).status(200);
   };
   
+<<<<<<< HEAD
+=======
+
+    // 查询关键词 + 上榜次数
+  export const getKeywordL : RequestHandler = async (
+    req: Request,
+    res: Response
+  ) => {
+    // const results = await startupLogDao.getTitle();
+
+    const option = {
+      brand:req.query.brand,
+      date: req.query.date
+    };
+    
+    const results = await startupLogDao.getKeywordL(option);
+    res.send(results).status(200);
+  };
+  
+  export const getnoteaco : RequestHandler = async (
+    req: Request,
+    res: Response
+  ) => {
+    // const results = await startupLogDao.getTitle();
+
+    const options = {
+      date: req.query.date
+    };
+    
+    const results = await oRdata.getnoteaco(options);
+    res.send(results).status(200);
+  };
+>>>>>>> 065a0ae6b5c888c780618cc02bf2866affa34d23
 
     // 查询关键词 + 上榜次数
   export const getKeywordL : RequestHandler = async (
@@ -121,6 +156,14 @@ namespace dashbaordController {
     res:Response
   ) =>{
     const results = await keywordData.getKeyword();
+    res.send(results).status(200);
+  };
+
+  export const getopAll:RequestHandler = async (
+    req:Request,
+    res:Response
+  ) =>{
+    const results = await operData.getopAll();
     res.send(results).status(200);
   };
 }

@@ -1,0 +1,14 @@
+.headerStyle {
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+.logoStyle {
+  height: 32px;
+  margin: -20px;
+}
+.divContainer {
+  position: absolute;
+  top: 0px;
+  left: 1800px;
+}

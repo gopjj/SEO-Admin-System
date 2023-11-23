@@ -1,0 +1,14 @@
+.divder {
+  font-size: 18px;
+  font-weight: bold;
+}
+.cardChart {
+  width: calc(100% - 20px);
+  height: 320px;
+}
+.cardSearch {
+  width: calc(100% - 200) px;
+  height: 920px;
+  margin: 17px;
+  margin-left: 0px;
+}

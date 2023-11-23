@@ -1,244 +1,197 @@
-import React,{  CSSProperties}from "react";
-import { Layout,Space } from "antd";
-import { Card } from 'antd';
-import { Button, Checkbox, Form, Input ,Carousel} from 'antd';
-import { UserOutlined ,SafetyOutlined,SafetyCertificateOutlined } from '@ant-design/icons';
-import  '../css/login.css';
-import '../css/font-style.css'
-import axios from 'axios';
+import { SafetyCertificateOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Card, Checkbox, Form, Input, Layout } from "antd";
+import axios from "axios";
+import React from "react";
 import { API_BASE_URL } from "../../../config";
 import ApiList from "../../../config/apiList";
-import jpg1 from "D:/CodeRepository/SEO-Admin-System/client/src/resource/pictures/Foo.jpg";
-
-import HeaderF from './header'
-import ContentF from '../component/content'
-import '../css/card-style.css'
+import homePicture from "../../../resource/pictures/Foo.jpg";
+import style from "./styles/login.module.css";
+import { copyRightString } from "../../../constants/constants";
+import logo from "../../../resource/pictures/logo.jpg";
+import { redirect } from "react-router-dom";
 
 const { Header, Footer, Content } = Layout;
+interface loginUserParams {
+  username: string;
+  password: string;
+}
 
+// const onFinish = async (values: any) => {
+//   try {
+//     console.log("Success:", values);
+//     const params: loginUserParams = {
+//       username: values.Username,
+//       password: values.password,
+//     };
 
-const onFinish = (values: any) => {
+//     const response = await axios.post(API_BASE_URL + ApiList.login, params, {
+//       headers: {
+//         Authorization: "TestFooDigital",
+//         "Content-Type": "application/json",
+//       },
+//     });
+//     console.log("Login response:", response.data);
+//     window.location.href = "/dashboard";
+//   } catch (error) {
+//     console.log("Login error:", error);
+//   }
+// };
 
-  console.log('Success:', values);
-  const params = JSON.stringify({
-    username: values.Username,
-    password: values.password
+// const onFinishFailed = (errorInfo: any) => {
+//   console.log("Failed:", errorInfo);
+// };
 
-  });
+// const CustomCardTitle: React.FC<{ title: string }> = ({ title }) => (
+//   <div className={style.fontTitle}>{title}</div>
+// );
 
-  console.log(params)
-  axios.post(API_BASE_URL + ApiList.login, params,{
-    headers: {
-      Authorization: "TestFooDigital",
-      "Content-Type": "application/json" 
-    },
-  })
-  .then(response => {
-    console.log('Login response:', response.data);
-   
-    window.location.href = '/dashboard';
- 
-  })
-  .catch(error => {
-    console.log('Login error:', error);
-
-  });
-};
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log('Failed:', errorInfo);
-};
-
-type FieldType = {
-  username?: string;
-  password?: string;
-  remember?: string;
-};
-
-
-interface CustomCardTitleProps {
-    title: string;
-    titleStyle?: CSSProperties;
-  }
-
-const CustomCardTitle: React.FC<CustomCardTitleProps> = ({ title, titleStyle }) => (
-    <div style={{ fontWeight: 'bold', fontSize: '20px', ...titleStyle }}>{title}</div>
-  );
-
-const headerStyle: React.CSSProperties = {
-  textAlign: "center",
-  color: "#fff",
-  height: 60,
-  paddingInline: 50,
-  lineHeight: "50px",
-  backgroundColor: "#FFFFFF"
-};
-
-const contentStyle: React.CSSProperties = {
-  textAlign: "center",
-  minHeight: 800,
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  color: "#fff",
-  backgroundColor: "#feebef"
-};
-const h1Style: CSSProperties = {
-  position: "absolute",
-  left: "1000px",
-  top: "-21px"
+export const Login: React.FC = () => {
+  const onFinish = async (values: any) => {
+    try {
+      console.log("Success:", values);
+      const params: loginUserParams = {
+        username: values.Username,
+        password: values.password,
+      };
   
-};
-
-
-
-const footerStyle: React.CSSProperties = {
-  textAlign: 'center',
-  color: '#fff',
-  height: 64,
-  paddingInline: 50,
-  backgroundColor: '#eff1f8',
-};
-
-
-const CardWrapperStyle: React.CSSProperties = {
-  position: "absolute",
-  height: "100%",
- 
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center"
-};
-
-const App: React.FC = () => (
-      <Layout>
-        
-        <Header style={headerStyle}>
-          <div style={{ position: "relative", left: "-840px", top: "12px"  }}>
-              <HeaderF />
-              {/* <h1 className="pageTitle" style = {h1Style}>下单平台</h1> */}
+      const response = await axios.post(API_BASE_URL + ApiList.login, params, {
+        headers: {
+          Authorization: "TestFooDigital",
+          "Content-Type": "application/json",
+        },
+      });
+      console.log("Login response:", response.data);
+      if(response){
+        return redirect("/dashboard");
+      }
+      
+      
+    } catch (error) {
+      console.log("Login error:", error);
+    }
+  };
+  
+  const onFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo);
+  };
+  
+  const CustomCardTitle: React.FC<{ title: string }> = ({ title }) => (
+    <div className={style.fontTitle}>{title}</div>
+  )
+  return (
+    <Layout>
+      <Header className={style.header}>
+        {/* <div className={style.headerStyle}> */}
+        <img src={logo} alt="Logo" className={style.headerStyle} />;
+        {/* </div> */}
+      </Header>
+      <Content className={style.content}>
+        <div>
+          <div className={style.customDiv}>
+            <Card
+              hoverable
+              className={style.hoverable}
+              cover={<img alt="example" src={homePicture} />}
+            />
           </div>
-        </Header>
-        
-        <Content style={contentStyle}>
-          <div>
-            <div className="customDiv">
-              <Card
-                hoverable
-                style={{ width: 980,height: 380 ,borderRadius: '100px 100px 100px 100px'}}
-                cover={<img alt="example" src={jpg1} />}
-              >
-              </Card>
-            </div>
-            
-          <div className="customform">
-              <Card style={{ width: 400 ,height:490}}>
-                  <div>
-                    <CustomCardTitle title="账号登录" titleStyle={{ marginTop: "24px", marginLeft: "0px",letterSpacing: "4px"}} />
-                  </div>
-                  <div style={CardWrapperStyle}>
+          <div className={style.customForm}>
+            <Card hoverable className={style.loginCard}>
+              <div className={style.titleStyle}>
+                <p>账号登录 </p>
+              </div>
+              <div className={style.formWrapper}>
                 <Form
-                    name="basic"
-                    labelCol={{ span: 9 }}
-                    wrapperCol={{ span: 16 }}
-                    style={{ maxWidth: 600 }}
-                    initialValues={{ remember: true }}
-                    onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
-                    autoComplete="off"
+                  name="basic"
+                  labelCol={{ span: 9 }}
+                  wrapperCol={{ span: 16 }}
+                  style={{ maxWidth: 600 }}
+                  initialValues={{ remember: true }}
+                  onFinish={onFinish}
+                  onFinishFailed={onFinishFailed}
+                  autoComplete="off"
                 >
-              <div
-              style={{
-                position: 'relative', 
-                top: '-60px', 
-                left: '38px' 
-              }}>
-                  <Form.Item
-                    name="Username"
-                    rules={[{ required: true, message: 'Please input your username!' }]}
-                    labelCol={{ span: 8}}
-                    wrapperCol={{ span: 18 }}
-                  >
-                   <Input prefix={<UserOutlined />} placeholder="请输入用户名" style={{ width: '272px', height: '52px' }} />
-                  </Form.Item>
-                    </div>
-                    <div
-              style={{
-                position: 'relative', 
-                top: '-54px', 
-                left: '38px' 
-              }}>
-                    <Form.Item<FieldType>
-                    // label="密码  "
-                    name="password"
-                    labelCol={{ span: 8}}
-                    wrapperCol={{ span: 18 }}
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                  <div className={style.username}>
+                    <Form.Item
+                      name="Username"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your username!",
+                        },
+                      ]}
+                      labelCol={{ span: 8 }}
+                      wrapperCol={{ span: 18 }}
                     >
-                    <Input.Password prefix={<SafetyCertificateOutlined />} placeholder="请输入密码" style={{ width: '272px', height: '52px' }} />
+                      <Input
+                        prefix={<UserOutlined />}
+                        placeholder="请输入用户名"
+                        style={{ width: "272px", height: "52px" }}
+                      />
                     </Form.Item>
-                    </ div>
-                    <div style={{
-                       position: 'relative', 
-                       top: '-54px', 
-                       left: '28px' 
-                    }}>
-                    <Form.Item<FieldType>
-                    name="remember"
-                    valuePropName="checked"
-                    wrapperCol={{ offset: 7, span: 12 }}
-                    className="move-up-checkbox"
+                  </div>
+                  <div className={style.password}>
+                    <Form.Item
+                      name="password"
+                      labelCol={{ span: 8 }}
+                      wrapperCol={{ span: 18 }}
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your password!",
+                        },
+                      ]}
                     >
-                    <Checkbox>记住密码</Checkbox>
+                      <Input.Password
+                        prefix={<SafetyCertificateOutlined />}
+                        placeholder="请输入密码"
+                        style={{ width: "272px", height: "52px" }}
+                      />
                     </Form.Item>
-                    </div>
-                    <div style={{
-                      position: 'relative', 
-                      top: '-54px', 
-                      left: '-40px' 
-                      }}>
-                    <Form.Item  className="move-up-checkbox" wrapperCol={{ offset: 7 ,span: 12 }}>
-                    <Button type="primary" htmlType="submit" style={{width:272,height:48}}>
+                  </div>
+                  <div className={style.rememberPwd}>
+                    <Form.Item
+                      name="remember"
+                      valuePropName="checked"
+                      wrapperCol={{ offset: 7, span: 12 }}
+                      className={style.moveUpCheckbox}
+                    >
+                      <Checkbox>记住密码</Checkbox>
+                    </Form.Item>
+                  </div>
+                  <div className={style.loginButton}>
+                    <Form.Item
+                      className={style.moveUpCheckbox}
+                      wrapperCol={{ offset: 7, span: 12 }}
+                    >
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        style={{ width: 272, height: 48 }}
+                      >
                         登录
-                    </Button>
-    </Form.Item>
-    </div>
-  </Form>
-            </div>
-            <div style={{
-              position: 'relative', 
-              top: '338px', 
-              left: '-80px' 
-            }}>
-            <a href="/register">立刻注册&nbsp;&nbsp;&nbsp;|</a>
-            </div>
-            <div style={{
-              position: 'relative', 
-              top: '316px', 
-              left: '0px' 
-            }}>
-            <a href="/register">&nbsp;&nbsp;忘记密码&nbsp; | </a>
-            </div>
-            <div style={{
-              position: 'relative', 
-              top: '295px', 
-              left: '84px' 
-            }}>
-            <a href="/register">修改密码&nbsp;&nbsp;    </a>
-            </div>
-            
+                      </Button>
+                    </Form.Item>
+                  </div>
+                </Form>
+              </div>
+              <div className={style.register}>
+                <a href="/register">立刻注册&nbsp;&nbsp;&nbsp;|</a>
+              </div>
+              <div className={style.forPwd}>
+                <a href="/register">&nbsp;&nbsp;忘记密码&nbsp; | </a>
+              </div>
+              <div className={style.replacePwd}>
+                <a href="/register">修改密码&nbsp;&nbsp; </a>
+              </div>
             </Card>
           </div>
+        </div>
+      </Content>
+      <Footer className={style.footer}>
+        <p style={{ margin: "0", color: "gray" }}>&copy;{copyRightString}</p>
+      </Footer>
+    </Layout>
+  );
+};
 
-          </div>
-
-        </Content>
-        <Footer style={footerStyle}>
-        <p style={{ margin: '0', color: 'gray' }}>&copy; 2014-2023 Foo Digital 上海宸居有限公司.</p>
-        </Footer>
-      </Layout>
-
-
-);
-
-export default App;
+export default Login;

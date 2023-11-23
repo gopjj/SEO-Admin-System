@@ -1,5 +1,6 @@
 {
   "dependencies": {
+<<<<<<< HEAD
     "antd": "^5.10.2",
     "dayjs": "^1.11.10",
     "moment": "^2.29.4",
@@ -7,5 +8,13 @@
   },
   "devDependencies": {
     "@types/react-highlight-words": "^0.16.6"
+=======
+    "react-highlight-words": "^0.20.0",
+    "react-router-dom": "^6.19.0"
+  },
+  "devDependencies": {
+    "@types/moment": "^2.13.0",
+    "@types/react-highlight-words": "^0.16.7"
+>>>>>>> 065a0ae6b5c888c780618cc02bf2866affa34d23
   }
 }

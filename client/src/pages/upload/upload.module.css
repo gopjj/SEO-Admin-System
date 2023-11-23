@@ -1,0 +1,15 @@
+.upload {
+  align-items: center;
+  margin-top: 20px;
+}
+.download {
+  margin-top: 20px;
+}
+.card {
+  margin-top: 16px;
+}
+.cardStyle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,10 @@
+.selectPadding {
+  padding: 12px;
+}
+.selectInput {
+  margin-bottom: 8px;
+  display: block;
+}
+.selectButton {
+  width: 88px;
+}

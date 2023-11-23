@@ -32,6 +32,8 @@ namespace uploadController {
       COLLECTION_NAME = 'recordData'
     }else if(fileName === '关键词表.xlsx'){
       COLLECTION_NAME = 'keywordData'
+    }else if(fileName === '笔记优化.xlsx'){
+      COLLECTION_NAME = 'OperationsRecord'
     }else {
       COLLECTION_NAME = 'otherData'
     }

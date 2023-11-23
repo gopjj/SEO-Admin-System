@@ -1,26 +1,22 @@
-import React from "react";
-import { Card, Divider, Col, Row, Collapse, Table, Tabs } from "antd";
 import type { TabsProps } from "antd";
-
-import Mychart from "./chart/mychart";
-import Mychart2 from "./chart/mychart2";
-import Keyword from "./keyword/keyword";
-import Record from "./record/record";
-import Daily from "./daydata/daily";
-import DataCard from "./card/datacard";
+import { Collapse, Divider, Tabs } from "antd";
+import React from "react";
 import { getList } from "./api";
+import DataCard from "./componet/datacard";
+import Mychart from "./componet/dashboardChart1";
+import Mychart2 from "./componet/databoardChart2";
+import Daily from "./componet/daily";
+import Record from "./componet/record";
+import styles from "./componet/styles/dashboard.module.css"
+import { detailDataString } from "../../constants/constants";
 
-const onChange = async (key: string) => {
-  // get request sample
-  // const data = await getList();
-  ///console.log(key);
-};
+const onChange = async (key: string) => {};
 
 const tabItems: TabsProps["items"] = [
   {
     key: "1",
     label: "日报",
-    // children: <Table dataSource={dataSource} columns={columns} />
+
     children: (
       <div>
         {" "}
@@ -34,15 +30,6 @@ const tabItems: TabsProps["items"] = [
     children: (
       <div>
         <Record />
-      </div>
-    ),
-  },
-  {
-    key: "3",
-    label: "关键词",
-    children: (
-      <div>
-        <Keyword />
       </div>
     ),
   },
@@ -60,20 +47,26 @@ const Option2: React.FC = () => {
             label: "点击展开周报图表",
             children: (
               <p>
-             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <div style={{ width: '800px', height: '320px' }}>
-                  <Mychart />
+                <div className={styles.expand1}>
+                  <div className={styles.chart}>
+                    <Mychart />
+                  </div>
+                  <div className={styles.chart}>
+                    <Mychart2 />
+                  </div>
                 </div>
-                <div style={{ width: '800px', height: '320px' }}>
-                <Mychart2 />
-              </div>
-</div>
               </p>
             ),
           },
         ]}
       ></Collapse>
+<<<<<<< HEAD
      <Divider orientation="left" plain style={{ color: 'lightgrey' }}>详细数据</Divider>
+=======
+      <Divider orientation="left" plain style={{ color: "lightgrey" }}>
+        {detailDataString}
+      </Divider>
+>>>>>>> 065a0ae6b5c888c780618cc02bf2866affa34d23
       <Tabs defaultActiveKey="1" items={tabItems} onChange={onChange}></Tabs>
     </div>
   );
