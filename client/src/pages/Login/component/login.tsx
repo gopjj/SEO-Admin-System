@@ -10,9 +10,6 @@ import { copyRightString } from "../../../constants/constants";
 import logo from "../../../resource/pictures/logo.jpg";
 import { redirect } from "react-router-dom";
 
-
-
-
 const { Header, Footer, Content } = Layout;
 interface loginUserParams {
   username: string;

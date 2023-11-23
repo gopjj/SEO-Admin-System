@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../dashboard/componet/styles/module.css";
 import  FooHeadImg from "../../resource/pictures/FOOHEAD.jpg";
 import {
   FundTwoTone,
@@ -58,7 +57,7 @@ const App: React.FC = () => {
     <Layout>
       <Header className={style.headerStyle}>
         <img src={logo} alt="Logo" className={style.logoStyle} />
-        <div className="div-container">
+        <div className={style.divContainer}>
           <Popover
             placement="topLeft"
             title="上海居宸企业管理有限公司"
@@ -79,7 +78,7 @@ const App: React.FC = () => {
           theme="light"
           style={{ background: "#FFFFFF" }} // 修改为您想要的背景色
         >
-          <div className="demo-logo-vertical" />
+          {/* <div className="demo-logo-vertical" /> */}
           <Menu
             theme="light"
             defaultSelectedKeys={["1"]}
@@ -95,7 +94,7 @@ const App: React.FC = () => {
             <Outlet />
           </Content>
           <Footer style={{ textAlign: "center" }}>
-            Ant Design ©2023 Created by Ant UED
+   
           </Footer>
         </Layout>
       </Layout>

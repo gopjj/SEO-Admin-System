@@ -1,6 +1,6 @@
 import { DualAxes } from "@ant-design/plots";
 import { useEffect, useState } from "react";
-
+import style from "./styles/track.module.css"
 import { Card, Typography } from "antd";
 import axios from "axios";
 import { API_BASE_URL } from "../../../config";
@@ -97,7 +97,7 @@ const DemoDualAxes = () => {
   };
 
   return (
-    <Card className="custom-card">
+    <Card className={style.customCard}>
       <Typography.Title level={5} className="text-center">
         {optmString}
       </Typography.Title>

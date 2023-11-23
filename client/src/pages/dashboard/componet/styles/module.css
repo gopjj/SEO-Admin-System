@@ -7,15 +7,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.code {
+ .code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-.div-container {
-  position: absolute;
-  top: 0px;
-  left: 1800px;
-}
+} *
+
+/* 111 */
+
 .container {
   display: flex;
   flex-direction: column;
@@ -23,9 +21,9 @@
 
 .container > div {
   margin-bottom: 20px;
-}
+} 
 
-.custom-card {
+ .custom-card {
   margin-bottom: 20px;
   margin-top: 20px;
 }

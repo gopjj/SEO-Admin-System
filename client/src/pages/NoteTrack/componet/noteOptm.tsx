@@ -29,8 +29,8 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="container">
-      <Card className="custom-card">
+    <div className={styles.container}>
+      <Card className={styles.customCard}>
         <Tabs
           onChange={handleTabChange}
           activeKey={activeTab}
