@@ -10,6 +10,7 @@ import { copyRightString } from "../../../constants/constants";
 import logo from "../../../resource/pictures/logo.jpg";
 import { redirect } from "react-router-dom";
 
+
 const { Header, Footer, Content } = Layout;
 interface loginUserParams {
   username: string;
@@ -59,12 +60,13 @@ export const Login: React.FC = () => {
           Authorization: "TestFooDigital",
           "Content-Type": "application/json",
         },
+        
       });
-      console.log("Login response:", response.data);
+      console.log("Login response:", response.data.message);
       if(response){
-        return redirect("/dashboard");
+        console.log("重定向")
+        return redirect('/dashboard');
       }
-      
       
     } catch (error) {
       console.log("Login error:", error);
@@ -75,9 +77,6 @@ export const Login: React.FC = () => {
     console.log("Failed:", errorInfo);
   };
   
-  const CustomCardTitle: React.FC<{ title: string }> = ({ title }) => (
-    <div className={style.fontTitle}>{title}</div>
-  )
   return (
     <Layout>
       <Header className={style.header}>
