@@ -36,7 +36,7 @@ function getItem(
 
 const items: MenuItem[] = [
   getItem(<Link to="dashboard">首页</Link>, "1", <PieChartTwoTone />),
-  getItem(<Link to="option2">报表</Link>, "2", <FundTwoTone />),
+  getItem(<Link to="option2">笔记优化</Link>, "2", <FundTwoTone />),
   
   getItem("品牌", "sub1", <EditTwoTone />, [
     getItem(<Link to="/brand/brand">OLAY</Link>,"3",),

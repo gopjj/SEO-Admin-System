@@ -1,4 +1,4 @@
-import { getList, getOpnum } from "../api/index";
+import { getList, getListed } from "../api/index";
 
 
 
@@ -27,7 +27,7 @@ interface DataSource {
 
 export const fetchData = async () => {
     try {
-      const response = await getOpnum();
+      const response = await getListed();
       const returnedData = response as unknown as Array<any>;
 
      for (const data of returnedData) {

@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const DemoLine =  () => {
   const currentDate = new Date();
-  const [data, setData] = useState<Array<{ year: any; notesum: number; }>>([]);
+  const [data, setData] = useState<Array<{ year: any; notelisted: number; }>>([]);
 
 
   useEffect(() => {
@@ -19,32 +19,33 @@ const DemoLine =  () => {
         const formattedDate = date.toISOString().slice(0, 10);
         console.log(formattedDate);
         try {
-          const response = await axios.get(API_BASE_URL + ApiList.getOpnum, {
+          const response = await axios.get(API_BASE_URL + ApiList.getListed, {
             params: {
               date: formattedDate,
             },
           });
           const jsondata = response.data[0];
-          if (jsondata && jsondata.opsum) {
+          if (jsondata && jsondata.listedsum) {
             newData.push({
               year: formattedDate,
-              notesum: parseInt(jsondata.opsum),
+              notelisted: parseInt(jsondata.listedsum),
             });
           } else {
             newData.push({
               year: formattedDate,
-              notesum: 0, // 或者添加其他默认值
+              notelisted: 0, // 或者添加其他默认值
             });
           }
         } catch (error) {
           console.error(error);
           newData.push({
             year: formattedDate,
-            notesum: 0, // 或者添加其他默认值
+            notelisted: 0, // 或者添加其他默认值
           });
         }
       }
       setData(newData);
+      
       newData.sort((a, b) => a.year.localeCompare(b.year));
     };
 
@@ -58,7 +59,7 @@ console.log(data)
       width: 200, // 设置图像宽度为 600 像素
       height: 300,
       xField: 'year',
-      yField: 'notesum',
+      yField: 'notelisted',
       label: {},
       point: {
         size: 5,
@@ -71,11 +72,12 @@ console.log(data)
       },
       tooltip: {
         showMarkers: false,
-        title: '采集笔记总操作次数', 
+        title: '实际笔记上榜次数', 
         formatter: (datum:any) => {
           return {
             name: `日期: ${datum.year}`,
-            value: `总操作次数: ${datum.notesum}`,
+            value: `总笔记上榜次数: ${datum.notelisted}`,
+            
           };
         },
       },

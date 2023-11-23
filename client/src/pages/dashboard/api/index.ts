@@ -26,11 +26,11 @@ export const getRecord = async (options?: any) => {
 export const getKeyword= async (options?: any) => {
   return axios.get(ApiList.getKeyword, options);
 };
-export const getOpnum= async (options?: any) => {
-  return axios.get(ApiList.getOpnum, options);
+export const getListed= async (options?: any) => {
+  return axios.get(ApiList.getListed, options);
 };
 export const getLnum= async (options?: any) => {
-  return axios.get(ApiList.getOpnum, options);
+  return axios.get(ApiList.getListed, options);
 };
 export const login = async (username: string, password: string) => {
   const data = {

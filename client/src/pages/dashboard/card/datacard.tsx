@@ -1,8 +1,12 @@
 import React , { useState, useEffect }from "react";
 import { Divider, Row, Col, Card } from "antd";
 import { getList } from "../api/index";
+import { InputNumber, Space } from 'antd';
 let notesNum : any
+let targetNotes = 11;
+
 const Datacard = () => {
+
   const [notesNum, setNotesNum] = useState<number>(0);
   const [time, setTime] = useState<number>(0);
   const fetchData = async () => {
@@ -21,7 +25,7 @@ const Datacard = () => {
   }
   fetchData(); 
  
-  let targetNotes = 30;
+
  
 
   return (
@@ -29,7 +33,7 @@ const Datacard = () => {
     <div>
       <p style={{ marginTop: "20px", fontSize: "14px" }}>
         <Divider orientation="left" plain>
-          全部采集笔记数据
+          全部采集笔记汇总
         </Divider>
       </p>
       <Row gutter={30}>
@@ -49,7 +53,7 @@ const Datacard = () => {
                 marginBottom: "28px",
               }}
             >
-              目标采集笔记数:
+              总关键词数量:
             </p>
             <p
               style={{ fontWeight: "bold", fontSize: "20px", lineHeight: "0" }}
@@ -74,7 +78,7 @@ const Datacard = () => {
                 marginBottom: "28px",
               }}
             >
-              实际采集笔记数:
+              总KOL发布:
             </p>
             <p
               style={{ fontWeight: "bold", fontSize: "20px", lineHeight: "0" }}
@@ -99,7 +103,7 @@ const Datacard = () => {
                 marginBottom: "28px",
               }}
             >
-              当前总达成:
+              总达成:
             </p>
             <p
               style={{ fontWeight: "bold", fontSize: "20px", lineHeight: "0" }}
@@ -124,7 +128,7 @@ const Datacard = () => {
                 marginBottom: "28px",
               }}
             >
-              当前与目标差值:
+              总收录率:
             </p>
             <p
               style={{ fontWeight: "bold", fontSize: "20px", lineHeight: "0" }}
@@ -149,7 +153,7 @@ const Datacard = () => {
                 marginBottom: "28px",
               }}
             >
-              总采集时间:
+              总KOC发布:
             </p>
             <p
               style={{ fontWeight: "bold", fontSize: "20px", lineHeight: "0" }}
@@ -174,7 +178,7 @@ const Datacard = () => {
                 marginBottom: "28px",
               }}
             >
-              平均采集时间:
+              总笔记数量:
             </p>
             <p
               style={{ fontWeight: "bold", fontSize: "20px", lineHeight: "0" }}
