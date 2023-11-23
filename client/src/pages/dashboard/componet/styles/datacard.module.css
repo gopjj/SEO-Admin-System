@@ -1,0 +1,19 @@
+.cardText {
+  margin-top: 20px;
+  font-size: 14px;
+}
+.dataCard {
+  width: 250;
+  border: 1px solid #dddddd;
+  border-color: #dddddd;
+}
+.cardTitle {
+  font-size: 14px;
+  line-height: 0;
+  margin-bottom: 28px;
+}
+.fontStyle {
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 0;
+}

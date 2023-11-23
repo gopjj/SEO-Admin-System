@@ -1,13 +1,13 @@
 import { InboxOutlined } from "@ant-design/icons";
-import type { UploadProps } from "antd";
-import { Card, Divider, Upload, message } from "antd";
+import { Card, Divider, Upload, message, UploadProps } from "antd";
 import React from "react";
-import Down from "./Download1";
-import Down2 from "./Download2";
-import Down3 from "./Download3";
+import Down from "./download/download1";
+import Down2 from "./download/download2";
+import Down3 from "./download/download3";
+import { API_BASE_URL } from "../../config";
+import ApiList from "../../config/apiList";
+import style from "./upload.module.css";
 
-import { API_BASE_URL } from "../../../config";
-import ApiList from "../../../config/apiList";
 const { Dragger } = Upload;
 
 const props: UploadProps = {
@@ -32,15 +32,13 @@ const props: UploadProps = {
 };
 
 const UploadComp: React.FC = () => (
-  <div style={{ alignItems: "center", marginTop: "20px" }}>
+  <div className={style.upload}>
     <Card>
       <Dragger {...props}>
         <p className="ant-upload-drag-icon">
           <InboxOutlined />
         </p>
-        <p className="ant-upload-text">
-          Click or drag file to this area to upload
-        </p>
+        <p className="ant-upload-text">点击或拖动文件到此区域进行上传</p>
         <p className="ant-upload-hint">
           Support for a single or bulk upload. Strictly prohibited from
           uploading company data or other banned files.
@@ -48,42 +46,24 @@ const UploadComp: React.FC = () => (
       </Dragger>
       <Divider />
     </Card>
-    <div style={{ marginTop: "20px" }}>
+    <div className={style.download}>
       <Card title="模板文件">
-        <Card type="inner" title="日报表(模板)">
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
+        <Card className={style.card} type="inner" title="日报表(模板)">
+          <div className={style.cardStyle}>
             <div>
               <Down />
             </div>
           </div>
         </Card>
-        <Card style={{ marginTop: 16 }} type="inner" title="收录表(模板)">
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
+        <Card className={style.card} type="inner" title="收录表(模板)">
+          <div className={style.cardStyle}>
             <div>
               <Down2 />
             </div>
           </div>
         </Card>
-        <Card style={{ marginTop: 16 }} type="inner" title="关键词表(模板)">
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
+        <Card className={style.card} type="inner" title="关键词表(模板)">
+          <div className={style.cardStyle}>
             <div>
               <Down3 />
             </div>

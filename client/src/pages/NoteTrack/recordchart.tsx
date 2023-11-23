@@ -1,30 +1,32 @@
-import { Bar } from "@ant-design/plots";
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import { Bar } from '@ant-design/plots';
 
 const DemoBar = () => {
   const data = [
     {
-      type: "OALY",
+      type: 'OALY',
       sales: 6,
     },
     {
-      type: "hbn水乳",
+      type: 'hbn水乳',
       sales: 3,
     },
     {
-      type: "PMPM",
+      type: 'PMPM',
       sales: 10,
     },
   ];
   const config = {
     data,
-    xField: "sales",
-    yField: "type",
+    xField: 'sales',
+    yField: 'type',
     meta: {
       type: {
-        alias: "类别",
+        alias: '类别',
       },
       sales: {
-        alias: "收入笔记数",
+        alias: '收入笔记数',
       },
     },
     minColumnWidth: 20,

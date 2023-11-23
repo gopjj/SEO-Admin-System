@@ -1,5 +1,7 @@
 import { getList, getListed } from "../api/index";
 
+
+
 interface DataSource {
   ID: number;
   author: string;
@@ -24,11 +26,11 @@ interface DataSource {
 //   },
 
 export const fetchData = async () => {
-  try {
-    const response = await getListed();
-    const returnedData = (response as unknown) as Array<any>;
+    try {
+      const response = await getListed();
+      const returnedData = response as unknown as Array<any>;
 
-    for (const data of returnedData) {
+     for (const data of returnedData) {
       // console.log(data.ID);
       // console.log(data.author);
       // console.log(data.note_title);
@@ -41,10 +43,11 @@ export const fetchData = async () => {
       // 还可以访问其他属性...
     }
     //   console.log(((response as unknown as any) as Array).forEach(element => {
-
+        
     //   }););
     console.log(response);
-  } catch (error) {
-    console.error(error);
-  }
-};
+    } catch (error) {
+      console.error(error);
+    }
+  };
+

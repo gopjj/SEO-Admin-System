@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Upload from "../pages/upload/component/Upload";
+import Upload from "../pages/upload/Upload";
 import Option2 from "../pages/NoteTrack/Option2.";
 import App from "../pages/App";
 import Dashboard from "../pages/dashboard/dashboard";
-import Brand from "../pages/brand/brand";
-import Brand1 from "../pages/brand/brand1";
-import Brand2 from "../pages/brand/brand2";
-import Login from "../pages/Login/component/login";
+import Brand from "../pages/brand/componet/brand";
+import Brand1 from "../pages/brand/componet/brand1";
+import Brand2 from "../pages/brand/componet/brand2";
+import Login from "../pages/login/component/login";
 
 const Router: React.FC = () => {
   return (
