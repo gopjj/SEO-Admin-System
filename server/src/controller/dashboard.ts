@@ -4,6 +4,8 @@ import recordData from "../dao/recordData.js";
 import keywordData from "../dao/keywordData.js"; 
 import operData from "../dao/oRdata.js";
 import oRdata from "../dao/oRdata.js";
+import GoodmanFamily from "../dao/gmfamilyData.js";
+
 
 namespace dashbaordController {
   export const getList: RequestHandler = async (
@@ -19,6 +21,14 @@ namespace dashbaordController {
     res: Response
   ) => {
     const results = await startupLogDao.getBrand();
+    res.send(results).status(200);
+  };
+
+  export const getgmfData: RequestHandler = async (
+    req: Request,
+    res: Response
+  ) => {
+    const results = await GoodmanFamily.getgmfData();
     res.send(results).status(200);
   };
 
@@ -101,24 +111,22 @@ namespace dashbaordController {
     res.send(results).status(200);
   };
   
-<<<<<<< HEAD
-=======
 
-    // 查询关键词 + 上榜次数
-  export const getKeywordL : RequestHandler = async (
-    req: Request,
-    res: Response
-  ) => {
-    // const results = await startupLogDao.getTitle();
+  //   // 查询关键词 + 上榜次数
+  // export const getKeywordL : RequestHandler = async (
+  //   req: Request,
+  //   res: Response
+  // ) => {
+  //   // const results = await startupLogDao.getTitle();
 
-    const option = {
-      brand:req.query.brand,
-      date: req.query.date
-    };
+  //   const option = {
+  //     brand:req.query.brand,
+  //     date: req.query.date
+  //   };
     
-    const results = await startupLogDao.getKeywordL(option);
-    res.send(results).status(200);
-  };
+  //   const results = await startupLogDao.getKeywordL(option);
+  //   res.send(results).status(200);
+  // };
   
   export const getnoteaco : RequestHandler = async (
     req: Request,
@@ -133,9 +141,8 @@ namespace dashbaordController {
     const results = await oRdata.getnoteaco(options);
     res.send(results).status(200);
   };
->>>>>>> 065a0ae6b5c888c780618cc02bf2866affa34d23
 
-    // 查询关键词 + 上榜次数
+    //查询关键词 + 上榜次数
   export const getKeywordL : RequestHandler = async (
     req: Request,
     res: Response
@@ -166,6 +173,19 @@ namespace dashbaordController {
     const results = await operData.getopAll();
     res.send(results).status(200);
   };
+  export const postData: RequestHandler = async (req: Request, res: Response) => {
+        // 从请求中获取数据
+        const data = req.body;
+        
+        // 在这里处理POST请求的数据，并进行数据库操作或其他逻辑处理
+        // ...
+        
+        // 假设你已经将数据存储到数据库中，现在返回一个成功的响应
+        res.send("Data received and stored successfully.").status(200);
+    };
 }
+
+
+
 
 export default dashbaordController;

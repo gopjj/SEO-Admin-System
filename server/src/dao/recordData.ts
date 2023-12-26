@@ -28,9 +28,6 @@ const task = new cron.CronJob("00  09 * * *", async () => {
 });
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 065a0ae6b5c888c780618cc02bf2866affa34d23
 
 export default recordData;

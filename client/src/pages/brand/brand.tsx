@@ -20,6 +20,7 @@ const App: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // 判断品牌身份 
   return (
     <>
       <Divider orientation="left" plain style={{ fontSize: '18px', fontWeight: 'bold' }}>

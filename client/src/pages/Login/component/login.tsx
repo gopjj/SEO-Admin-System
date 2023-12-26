@@ -1,72 +1,65 @@
 import { SafetyCertificateOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Card, Checkbox, Form, Input, Layout } from "antd";
 import axios from "axios";
-import React from "react";
 import { API_BASE_URL } from "../../../config";
 import ApiList from "../../../config/apiList";
 import homePicture from "../../../resource/pictures/Foo.jpg";
 import style from "./styles/login.module.css";
 import { copyRightString } from "../../../constants/constants";
 import logo from "../../../resource/pictures/logo.jpg";
-import { redirect } from "react-router-dom";
-
+import { Navigate } from 'react-router-dom';
+import React, {  useContext, useState,useEffect,createContext} from 'react';
+import { AppContext } from "./appContext";
+// import {LoginContext} from './LoginContext'
+// import {appContext} from '../component/appContext'
 
 const { Header, Footer, Content } = Layout;
 interface loginUserParams {
   username: string;
   password: string;
-}
+}            
 
-// const onFinish = async (values: any) => {
-//   try {
-//     console.log("Success:", values);
-//     const params: loginUserParams = {
-//       username: values.Username,
-//       password: values.password,
-//     };
+export const Login: React.FC = () => { 
 
-//     const response = await axios.post(API_BASE_URL + ApiList.login, params, {
-//       headers: {
-//         Authorization: "TestFooDigital",
-//         "Content-Type": "application/json",
-//       },
-//     });
-//     console.log("Login response:", response.data);
-//     window.location.href = "/dashboard";
-//   } catch (error) {
-//     console.log("Login error:", error);
-//   }
-// };
+  useEffect(() => {
+    console.log("更新");
+  }, );
 
-// const onFinishFailed = (errorInfo: any) => {
-//   console.log("Failed:", errorInfo);
-// };
+  const appContext = useContext(AppContext);
 
-// const CustomCardTitle: React.FC<{ title: string }> = ({ title }) => (
-//   <div className={style.fontTitle}>{title}</div>
-// );
+  const [redirectToDashboard, setRedirectToDashboard] = React.useState(false);
+  // const [username, setUsername] = useState("");
 
-export const Login: React.FC = () => {
+
   const onFinish = async (values: any) => {
     try {
-      console.log("Success:", values);
+      console.log("Success:", values
+      );
+
       const params: loginUserParams = {
         username: values.Username,
-        password: values.password,
+        password: values.password
+        
       };
-  
+      console.log("Login response:",params.username);
       const response = await axios.post(API_BASE_URL + ApiList.login, params, {
         headers: {
           Authorization: "TestFooDigital",
           "Content-Type": "application/json",
         },
-        
       });
-      console.log("Login response:", response.data.message);
+      
       if(response){
-        console.log("重定向")
-        return redirect('/dashboard');
+
+        console.log("重定向");
+        
+        setRedirectToDashboard(true);
+        
+        const appState = appContext.state;
+        appState.userName = params.username;
+        appContext.setState(appState);
       }
+       
       
     } catch (error) {
       console.log("Login error:", error);
@@ -76,9 +69,12 @@ export const Login: React.FC = () => {
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
-  
+
   return (
+
     <Layout>
+     
+      {redirectToDashboard && <Navigate to="/dashboard" />}
       <Header className={style.header}>
         {/* <div className={style.headerStyle}> */}
         <img src={logo} alt="Logo" className={style.headerStyle} />;
@@ -170,6 +166,7 @@ export const Login: React.FC = () => {
                         登录
                       </Button>
                     </Form.Item>
+
                   </div>
                 </Form>
               </div>
@@ -185,11 +182,15 @@ export const Login: React.FC = () => {
             </Card>
           </div>
         </div>
+        {/* <div>{username1}</div> */}
       </Content>
       <Footer className={style.footer}>
         <p style={{ margin: "0", color: "gray" }}>&copy;{copyRightString}</p>
       </Footer>
+
     </Layout>
+
+
   );
 };
 

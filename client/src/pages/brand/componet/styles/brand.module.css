@@ -12,3 +12,9 @@
   margin: 17px;
   margin-left: 0px;
 }
+.cardSearch1 {
+  width: calc(100% - 200) px;
+  height: calc(100% - 200) px;
+  margin: 17px;
+  margin-left: 0px;
+}
