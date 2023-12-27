@@ -7,18 +7,31 @@ import type { ColumnType ,TableProps} from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
 // import "../../../dashboard/componet/styles/progress";
 import style from "../../../dashboard/componet/styles/daily.module.css"
+import dayjs from "dayjs";
+
 
 type DataSource = {
-  keyld: number;
+  keyId: number;
   keyword: string;
   tarnotes: any;
-  noted: number;
-  // kpi_ps:any;
+ 
+  kpi_ps:any;
   // sov: any;
-  // progress: number;
-  // compliance:string;
-  date: number;
+  progress: number;
+  compliance:string;
+  date: any;
+  averagesov: String;
+
 };
+
+interface KeywordData{
+  keyword: string;
+  notedvalues: number[];
+}
+
+
+
+
 
 type DataIndex = keyof DataSource;
 
@@ -144,8 +157,8 @@ export const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
   const columns: ColumnsType<DataSource> = [
     {
       title: "序号",
-      dataIndex: "keyld",
-      key: "keyld",
+      dataIndex: "keyId",
+      key: "keyId",
       align: "center",
       width: "2%",
     },
@@ -175,8 +188,8 @@ export const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
     },
     {
       title: "累计SOV",
-      dataIndex: "sov",
-      key: "sov",
+      dataIndex: "averagesov",
+      key: "averagesov",
       width: "1%", //6
       align: "center",
 
@@ -228,19 +241,43 @@ const onChange: TableProps<DataSource>["onChange"] = (
         const returnedData = response as unknown as Array<any>;
         console.log(returnedData);
         const newData: DataSource[] = [];
+        const notedValues: number[] = [];
+        const KeywordData: string[] = [];
+
+       
         for (const data of returnedData) {
+          KeywordData.push(data.keyword);
           const expectedlistDivided = data.expectedlist / 20;
-          const kpidata = Math.round((data.kpi / 12) * 100);
-          const rate =Number(Math.round((data.sov * 100)) .toFixed(2));
+          const kpidata = Math.round((data.tarnotes / 12) * 100);
+         
+          const KeywordDataMap: Map<string, string[]> = new Map();
+
+          let averageNoted = 0; // 在条件语句块之前声明并初始化 averageNoted 变量
+          for (const keyword of KeywordData) {
+            KeywordDataMap.set(keyword, []);
+          }
+          
+          if (KeywordDataMap.has(data.keyword)) {
+            const notedValues = []; // 确保在每次循环开始时清空数组
+            for (const report of data.reports) {
+              const notedPercentage = (report.noted / 60) * 100;
+              console.log("notedPercentage: ", notedPercentage);
+              notedValues.push(notedPercentage);
+            }
+            console.log(notedValues); // 输出每次满足条件时的 notedValues
+            averageNoted = notedValues.reduce((sum, value) => sum + value, 0) / notedValues.length; // 给 averageNoted 赋值
+          }
+          const formattedDate = dayjs(data.date).format('YYYY-MM-DD');
+          const rate = Number(averageNoted.toFixed(0));
           newData.push({
-            keyld: data.key_id,
-            keyword: data.keyword,
+            keyId: data.keyId,
+            keyword: data.keyword ,
             tarnotes: data.tarnotes,
             kpi_ps:  kpidata + '%',
-            sov: Math.round((data.sov * 100)) +"%",
-            compliance:Math.round((data.compliance * 100)) +"%",
-            date:data.date,
+            compliance: (averageNoted/kpidata * 100) .toFixed(2)+ "%",
+            date: formattedDate,
             progress:rate,
+            averagesov: averageNoted.toFixed(0) + '%',
           });
         }
 
@@ -254,7 +291,7 @@ const onChange: TableProps<DataSource>["onChange"] = (
 
     fetchData();
   }, []);
-
+  
   return (
     <Table dataSource={dataSource} columns={columns} onChange={onChange} />
   );

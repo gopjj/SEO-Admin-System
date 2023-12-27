@@ -5,8 +5,16 @@ import { getgmfData } from "../../dashboard/api/index";
 import DataTable from "./data/datacard";
 import SearchInput from "./search";
 import style from "./styles/brand.module.css";
-import { FloatButton, DatePicker, Select, Form, Modal, Input,InputNumber } from "antd";
-import dayjs, { Dayjs } from 'dayjs';
+import {
+  FloatButton,
+  DatePicker,
+  Select,
+  Form,
+  Modal,
+  Input,
+  InputNumber,
+} from "antd";
+import dayjs, { Dayjs } from "dayjs";
 import { dateFormatterMap } from "@ant-design/pro-components";
 import axios from "axios";
 import { API_BASE_URL } from "../../../config";
@@ -28,18 +36,10 @@ const handleChange = (value: string) => {
   console.log(`关键词选择Value ${value}`);
 };
 
-const dateFormat = 'YYYY-MM-DD';//  日期格式
+const dateFormat = "YYYY-MM-DD"; //  日期格式
 
-const handleDateChange = (date: Dayjs |null, dateString: string) => { // 格式化日期并打印
-  console.log("日期选择Value",dayjs(date).format(dateFormat));
-};
-
-const handleNotedChange = (value: any) => {
-    console.log('上榜笔记数量Value', value);
-  };
-
-
-const InputForm: React.FC<InputFormProps> = ({ open, onCreate, onCancel }) => { //
+const InputForm: React.FC<InputFormProps> = ({ open, onCreate, onCancel }) => {
+  //
   const [form] = Form.useForm();
   return (
     <Modal
@@ -83,7 +83,6 @@ const InputForm: React.FC<InputFormProps> = ({ open, onCreate, onCancel }) => { 
               { value: "番茄肥牛面", label: "番茄肥牛面" },
               { value: "低卡减值餐", label: "低卡减值餐" },
               { value: "一人食晚餐", label: "一人食晚餐" },
-              // { value: 'disabled', label: 'Disabled', disabled: true },
             ]}
           />
         </Form.Item>
@@ -93,8 +92,7 @@ const InputForm: React.FC<InputFormProps> = ({ open, onCreate, onCancel }) => { 
           label="日期"
           rules={[{ required: true, message: "请输入更新数据日期!" }]}
         >
-           <DatePicker style={{ width: 470 }} format={dateFormat} onChange={handleDateChange} />
-         
+          <DatePicker style={{ width: 470 }} format={dateFormat} />
         </Form.Item>
 
         <Form.Item
@@ -102,9 +100,13 @@ const InputForm: React.FC<InputFormProps> = ({ open, onCreate, onCancel }) => { 
           label="上榜笔记数量："
           rules={[{ required: true, message: "请输入上榜笔记数量!" }]}
         >
-      <InputNumber   style={{ width: 470 }} min={1} max={100000} defaultValue={3} onChange={handleNotedChange} />
+          <InputNumber
+            style={{ width: 470 }}
+            min={1}
+            max={100000}
+            defaultValue={3}
+          />
         </Form.Item>
-        
       </Form>
     </Modal>
   );
@@ -112,35 +114,24 @@ const InputForm: React.FC<InputFormProps> = ({ open, onCreate, onCancel }) => { 
 
 const App: React.FC = () => {
   const [open, setopen] = useState(false);
-  const [inputValue, setInputValue] = useState(1);
-
-  // const response = await axios.post(API_BASE_URL + ApiList.postData,params, {
-  //   headers: {
-  //     Authorization: "TestFooDigital",
-  //     "Content-Type": "application/json",
-  //   },
-  // });
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
-
-  const onCreate = async(values: any) => {
-    const params:Values ={
-      keyword:values.keyword,
-      date:dayjs(values.date).format(dateFormat),
-      noted:values.noted,
-  };
-    console.log("values", values);
-    
+  const onCreate = async (values: any) => {
+    const params: Values = {
+      keyword: values.keyword,
+      date: dayjs(values.date).format(dateFormat),
+      noted: values.noted,
+    };
     setopen(false);
     try {
-      const response = await axios.post(API_BASE_URL + ApiList.postData, params, {
-        headers: {
-          Authorization: "TestFooDigital",
-          "Content-Type": "application/json",
-        },
-      });
-      // console.log("Response:", response);
+      const response = await axios.post(
+        API_BASE_URL + ApiList.postData,
+        params,
+        {
+          headers: {
+            Authorization: "TestFooDigital",
+            "Content-Type": "application/json",
+          },
+        }
+      );
     } catch (error) {
       console.log("Error:", error);
     }
@@ -170,10 +161,9 @@ const App: React.FC = () => {
       <Divider orientation="left" plain className={style.divder}>
         好人家 详情页
       </Divider>
-
       <Card className={style.cardChart}>
         <div className="search-input-wrapper">
-     
+          <p>ddddd</p>
         </div>
       </Card>
 
