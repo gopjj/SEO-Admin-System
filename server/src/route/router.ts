@@ -4,7 +4,8 @@ import d1 from "../dao/dailyData.js"
 import uploadController from "../controller/upload.js";
 import insertController from "../controller/insertdata.js";
 import multer from "multer";
-import { login } from "../controller/login.js";
+import { login,postData } from "../controller/login.js";
+
 
 const router = express.Router();
 
@@ -22,12 +23,12 @@ router.get("/insert",insertController.insertData);
 router.get("/getRecord",dashbaordController.getRecord);
 router.get("/getKeyword",dashbaordController.getKeyword);
 router.get("/getKeywordL",dashbaordController.getKeywordL);
-<<<<<<< HEAD
-=======
 router.get("/getopAll",dashbaordController.getopAll);
 router.get("/getnoteaco",dashbaordController.getnoteaco);
->>>>>>> 065a0ae6b5c888c780618cc02bf2866affa34d23
+router.get("/getgmfData",dashbaordController.getgmfData);
 router.post('/login',login)
+router.post('/postData',postData)
+
 
 //upload
 router.post(

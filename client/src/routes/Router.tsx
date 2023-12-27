@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Upload from "../pages/upload/Upload";
-import Option2 from "../pages/NoteTrack/Option2.";
-import App from "../pages/App";
+import Upload from "../pages/upload/component/Upload";
+import Option2 from "../pages/NoteTrack/componet/noteOptm";
+import App from "../pages/home/App";
 import Dashboard from "../pages/dashboard/dashboard";
 import Brand from "../pages/brand/componet/brand";
 import Brand1 from "../pages/brand/componet/brand1";

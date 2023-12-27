@@ -1,50 +1,41 @@
-import React, { useEffect, useState,useRef } from "react";
-import { Table } from "antd";
+import React, { useEffect, useState, useRef } from "react";
 import type { ColumnsType } from "antd/lib/table";
-
-
-
-import { SearchOutlined } from '@ant-design/icons';
-import Highlighter from 'react-highlight-words';
-import type { InputRef } from 'antd';
-import { Button, Input, Space } from 'antd';
-import type { ColumnType, } from 'antd/es/table';
-import type { FilterConfirmProps } from 'antd/es/table/interface';
+import { SearchOutlined } from "@ant-design/icons";
+import Highlighter from "react-highlight-words";
+import { Button, Input, Space, InputRef, Table,Progress } from "antd";
+import type { ColumnType ,TableProps} from "antd/es/table";
+import type { FilterConfirmProps } from "antd/es/table/interface";
+// import "../../../dashboard/componet/styles/progress";
+import style from "../../../dashboard/componet/styles/daily.module.css"
 
 type DataSource = {
-  key: string | number;
-  id: number;
-  author: string;
-  title: string;
+  keyld: number;
   keyword: string;
-  date: string;
-  brand: string;
-  status: string;
-  number: number;
-  link: string;
-  TopKpi:number;
-  expectlist:number;
+  tarnotes: any;
+  noted: number;
+  // kpi_ps:any;
+  // sov: any;
+  // progress: number;
+  // compliance:string;
+  date: number;
 };
 
 type DataIndex = keyof DataSource;
-
-
 
 interface MyTableProps {
   getListFunction: () => Promise<any>;
 }
 
-const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
-
-  const [searchText, setSearchText] = useState('');
-  const [searchedColumn, setSearchedColumn] = useState('');
+export const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
+  const [searchText, setSearchText] = useState("");
+  const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
   const [dataSource, setDataSource] = useState<DataSource[]>([]);
 
   const handleSearch = (
     selectedKeys: string[],
     confirm: (param?: FilterConfirmProps) => void,
-    dataIndex: DataIndex,
+    dataIndex: DataIndex
   ) => {
     confirm();
     setSearchText(selectedKeys[0]);
@@ -64,9 +55,12 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
       selectedKeys,
       confirm,
       clearFilters,
-      close
+      close,
     }) => (
-      <div style={{ padding: 8 }} onKeyDown={(e) => e.stopPropagation()}>
+      <div
+        className={style.selectPadding}
+        onKeyDown={(e) => e.stopPropagation()}
+      >
         <Input
           ref={searchInput}
           placeholder={`Search ${dataIndex}`}
@@ -77,9 +71,9 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
           onPressEnter={() =>
             handleSearch(selectedKeys as string[], confirm, dataIndex)
           }
-          style={{ marginBottom: 8, display: "block" }}
+          className={style.selectInput}
         />
-<Space>
+        <Space>
           <Button
             type="primary"
             onClick={() =>
@@ -87,14 +81,14 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
             }
             icon={<SearchOutlined />}
             size="small"
-            style={{ width: 90 }}
+            className={style.selectButton}
           >
             Search
           </Button>
           <Button
             onClick={() => clearFilters && handleReset(clearFilters)}
             size="small"
-            style={{ width: 90 }}
+            className={style.selectButton}
           >
             Reset
           </Button>
@@ -144,147 +138,126 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
         />
       ) : (
         text
-      )
+      ),
   });
 
   const columns: ColumnsType<DataSource> = [
-    // {
-    //   title: "序号",
-    //   dataIndex: "id",
-    //   key: "id",
-    //   width: "5%",
-    //   align: "center",
-    //   ...getColumnSearchProps("id")
-    // },
+    {
+      title: "序号",
+      dataIndex: "keyld",
+      key: "keyld",
+      align: "center",
+      width: "2%",
+    },
     {
       title: "关键词",
       dataIndex: "keyword",
       key: "keyword",
-      width: "5%",
-      ...getColumnSearchProps("keyword")
-    },
-    {
-      title: "Top12         SOV KPI",
-      dataIndex: "TopKpi",
-      key: "TopKpi",
       width: "4%",
       align: "center",
+      ...getColumnSearchProps("keyword"),
+    },
+    {
+      title: "TOP12 KPI",
+      dataIndex: "tarnotes",
+      key: "tarnotes",
+      width: "2%",
+      align: "center",
+    },
+
+    {
+      title: "Top12 SOV KPI",
+      dataIndex: "kpi_ps",
+      key: "kpi_ps",
+      width: "1%",
+      align: "center",
+      
+    },
+    {
+      title: "累计SOV",
+      dataIndex: "sov",
+      key: "sov",
+      width: "1%", //6
+      align: "center",
 
     },
-    // {
-    //   title: "品牌",
-    //   dataIndex: "brand",
-    //   key: "brand",
-    //   width: "4%",
-    //   align: "center",
-    //   ...getColumnSearchProps("brand")
-    // },
     {
-      title: "达人昵称",
-      dataIndex: "author",
-      key: "author",
-      width: "8%",
-      ...getColumnSearchProps("author")
+      title: "累计SOV完成进度",
+      width: "2%", //6
+      align: "center",
+       render: (text, datacard) => (
+      <Progress
+        percent={datacard.progress}
+        status="active"
+        strokeColor={{ "0%": "#108ee9", "70": "#87d068" }}
+        className="progress-custom"
+      />
+    ),
     },
     {
-      title: "笔记标题",
-      dataIndex: "title",
-      key: "title",
-      width: "16%", //6
-      render: (text, record) => (
-        
-        <a href={`${record.link}`}>{text}</a>
-      ),
-      ...getColumnSearchProps("title")
-      
+      title: "累计compliance",
+      dataIndex: "compliance",
+      key: "compliance",
+      width: "2%", //6
+      align: "center",
     },
+
+
     {
-      title: "笔记链接",
-      dataIndex: "title",
-      key: "title",
-      width: "16%",//6
-      render: (text, record) => (
-        
-        <a href={`${record.link}`}>{text}</a>
-      ),
-      
-      
-    },
-  
-  
-    {
-      title: "发布日期",
+      title: "上传日期",
       dataIndex: "date",
       key: "date",
-      width: "5%",
+      width: "4%",
       align: "center",
-      ...getColumnSearchProps("date")
-
-    },
-    {
-      title: "预期上榜次数（当日）",//TODO:做筛选日期每天笔记的上榜次数 
-      dataIndex: "expectlist",
-      key: "expectlist",
-      width: "6%",
-      align: "center",
-
-      sorter: (a, b) => a.number- b.number,
-      sortDirections: ["descend", "ascend"]
-    },
-
-    {
-      title: "实际上榜次数（当日）",//TODO:做筛选日期每天笔记的上榜次数 
-      dataIndex: "number",
-      key: "number",
-      width: "6%",
-      align: "center",
-
-      sorter: (a, b) => a.number- b.number,
-      sortDirections: ["descend", "ascend"]
+      ...getColumnSearchProps("date"),
     },
   ];
-
-
-
+const onChange: TableProps<DataSource>["onChange"] = (
+  pagination,
+  filters,
+  sorter,
+  extra
+) => {
+  console.log("params", pagination, filters, sorter, extra);
+};
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await  getListFunction();
-        
+        const response = await getListFunction();
+
         const returnedData = response as unknown as Array<any>;
+        console.log(returnedData);
         const newData: DataSource[] = [];
         for (const data of returnedData) {
           const expectedlistDivided = data.expectedlist / 20;
+          const kpidata = Math.round((data.kpi / 12) * 100);
+          const rate =Number(Math.round((data.sov * 100)) .toFixed(2));
           newData.push({
-            key: data.ID,
-            id: data.ID,
-            author: data.author,
-            title: data.note_title,
-            link:data.note_link,
+            keyld: data.key_id,
             keyword: data.keyword,
-            date: data.publish_date,
-            brand: data.brand,
-            status: data.note_status,
-            number: data.listed,
-            expectlist:expectedlistDivided,
-            TopKpi:data.Top12_KPI
+            tarnotes: data.tarnotes,
+            kpi_ps:  kpidata + '%',
+            sov: Math.round((data.sov * 100)) +"%",
+            compliance:Math.round((data.compliance * 100)) +"%",
+            date:data.date,
+            progress:rate,
           });
-          
         }
 
         setDataSource(newData);
-       
-        console.log(returnedData.length)
+
+        console.log(returnedData.length);
       } catch (error) {
         console.error(error);
       }
     };
-    
 
     fetchData();
   }, []);
 
-  return <Table dataSource={dataSource} columns={columns} />;
+  return (
+    <Table dataSource={dataSource} columns={columns} onChange={onChange} />
+  );
 };
 
 export default MyTable;

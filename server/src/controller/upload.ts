@@ -4,6 +4,10 @@ import xlsx from "xlsx";
 import iconv from 'iconv-lite';
 import moment from 'moment';
 
+const fileNameToCollectionName: Map<string, string> = new Map<string, string>([
+  ["收录表.xlsx", "recordData"],
+  ['关键词表.xlsx', 'keywordData']
+]);
 const COLLECTION_NAME_B = "Daily_Reports";
 namespace uploadController {
   export const uploadXlsx: RequestHandler = async (
@@ -20,6 +24,7 @@ namespace uploadController {
     const fileName = iconv.decode(Buffer.from(file.originalname, 'binary'), 'utf-8');
     let COLLECTION_NAME 
     console.log(fileName);
+    const collectionName = fileNameToCollectionName.has(fileName) ? fileNameToCollectionName.get(fileName) : "";
     if(fileName === "日报表.xlsx"){
       var currentDate = new Date();
       var year = currentDate.getFullYear();

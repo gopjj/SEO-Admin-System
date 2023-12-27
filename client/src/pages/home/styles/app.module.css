@@ -9,6 +9,16 @@
 }
 .divContainer {
   position: absolute;
-  top: 0px;
-  left: 1800px;
+  top: -4px;
+  left: 1762px;
+}
+.userName{
+  position: relative;
+  left: 8px;
+  color: #A9A9A9;
+}
+
+.customPopover {
+  width: 1000px;
+  height: 200px;
 }

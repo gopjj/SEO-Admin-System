@@ -19,17 +19,10 @@ export const getRecord = async (options?: any) => {
 export const getKeyword = async (options?: any) => {
   return axios.get(ApiList.getKeyword, options);
 };
-<<<<<<< HEAD
-export const getListed= async (options?: any) => {
-  return axios.get(ApiList.getListed, options);
-};
-export const getLnum= async (options?: any) => {
-=======
 export const getListed = async (options?: any) => {
   return axios.get(ApiList.getListed, options);
 };
 export const getLnum = async (options?: any) => {
->>>>>>> 065a0ae6b5c888c780618cc02bf2866affa34d23
   return axios.get(ApiList.getListed, options);
 };
 export const getopAll = async (options?: any) => {
@@ -38,6 +31,9 @@ export const getopAll = async (options?: any) => {
 
 export const getnoteaco = async (options?: any) => {
   return axios.get(ApiList.getnoteaco, options);
+};
+export const getgmfData = async (options?: any) => {
+  return axios.get(ApiList.getgmfData,options);
 };
 
 export const login = async (username: string, password: string) => {

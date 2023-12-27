@@ -1,12 +1,12 @@
 import { InboxOutlined } from "@ant-design/icons";
 import { Card, Divider, Upload, message, UploadProps } from "antd";
 import React from "react";
-import Down from "./download/download1";
-import Down2 from "./download/download2";
-import Down3 from "./download/download3";
-import { API_BASE_URL } from "../../config";
-import ApiList from "../../config/apiList";
-import style from "./upload.module.css";
+import Down from "../component/Download1";
+import Down2 from "../component/Download2";
+import Down3 from "../component/Download3";
+import { API_BASE_URL } from "../../../config";
+import ApiList from "../../../config/apiList";
+import style from "../upload.module.css";
 
 const { Dragger } = Upload;
 
