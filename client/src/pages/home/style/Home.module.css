@@ -1,0 +1,31 @@
+.headerStyle {
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+
+.logoStyle {
+  height: 32px;
+  margin: -20px;
+}
+
+.accountPopover {
+  position: absolute;
+  right: 20px;
+}
+
+.accountPopoverContent {
+  font-size: 12px;
+}
+
+.sider {
+min-height: 100vh;
+}
+
+.content {
+  margin: 0px 16px;
+}
+
+.footer {
+  text-align: center;
+}

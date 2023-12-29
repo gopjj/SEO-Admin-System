@@ -4,11 +4,11 @@ import { createContext } from 'react';
 
 export interface AppContextType {
     state: AppState;
-    setState: React.Dispatch<React.SetStateAction<object>>;
+    setState: React.Dispatch<React.SetStateAction<AppState>>;
 }
 
 export interface AppState {
-    userName?: string;
+    userName: string;
 }
 
 export const AppContext = createContext<AppContextType>({

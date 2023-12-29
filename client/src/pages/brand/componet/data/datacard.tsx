@@ -2,36 +2,22 @@ import React, { useEffect, useState, useRef } from "react";
 import type { ColumnsType } from "antd/lib/table";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
-import { Button, Input, Space, InputRef, Table,Progress } from "antd";
-import type { ColumnType ,TableProps} from "antd/es/table";
+import { Button, Input, Space, InputRef, Table, Progress } from "antd";
+import type { ColumnType, TableProps } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
-// import "../../../dashboard/componet/styles/progress";
-import style from "../../../dashboard/componet/styles/daily.module.css"
+import style from "../../../dashboard/style/daily.module.css"
 import dayjs from "dayjs";
-
 
 type DataSource = {
   keyId: number;
   keyword: string;
   tarnotes: any;
- 
-  kpi_ps:any;
-  // sov: any;
+  kpi_ps: any;
   progress: number;
-  compliance:string;
+  compliance: string;
   date: any;
   averagesov: String;
-
 };
-
-interface KeywordData{
-  keyword: string;
-  notedvalues: number[];
-}
-
-
-
-
 
 type DataIndex = keyof DataSource;
 
@@ -39,7 +25,7 @@ interface MyTableProps {
   getListFunction: () => Promise<any>;
 }
 
-export const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
+export const Datacard: React.FC<MyTableProps> = ({ getListFunction }) => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
@@ -184,7 +170,6 @@ export const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
       key: "kpi_ps",
       width: "1%",
       align: "center",
-      
     },
     {
       title: "累计SOV",
@@ -192,20 +177,19 @@ export const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
       key: "averagesov",
       width: "1%", //6
       align: "center",
-
     },
     {
       title: "累计SOV完成进度",
       width: "2%", //6
       align: "center",
-       render: (text, datacard) => (
-      <Progress
-        percent={datacard.progress}
-        status="active"
-        strokeColor={{ "0%": "#108ee9", "70": "#87d068" }}
-        className="progress-custom"
-      />
-    ),
+      render: (text, datacard) => (
+        <Progress
+          percent={datacard.progress}
+          status="active"
+          strokeColor={{ "0%": "#108ee9", "70": "#87d068" }}
+          className="progress-custom"
+        />
+      ),
     },
     {
       title: "累计compliance",
@@ -214,7 +198,6 @@ export const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
       width: "2%", //6
       align: "center",
     },
-
 
     {
       title: "上传日期",
@@ -225,14 +208,14 @@ export const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
       ...getColumnSearchProps("date"),
     },
   ];
-const onChange: TableProps<DataSource>["onChange"] = (
-  pagination,
-  filters,
-  sorter,
-  extra
-) => {
-  console.log("params", pagination, filters, sorter, extra);
-};
+  const onChange: TableProps<DataSource>["onChange"] = (
+    pagination,
+    filters,
+    sorter,
+    extra
+  ) => {
+    console.log("params", pagination, filters, sorter, extra);
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -244,46 +227,42 @@ const onChange: TableProps<DataSource>["onChange"] = (
         const notedValues: number[] = [];
         const KeywordData: string[] = [];
 
-       
         for (const data of returnedData) {
           KeywordData.push(data.keyword);
           const expectedlistDivided = data.expectedlist / 20;
           const kpidata = Math.round((data.tarnotes / 12) * 100);
-         
+
           const KeywordDataMap: Map<string, string[]> = new Map();
 
           let averageNoted = 0; // 在条件语句块之前声明并初始化 averageNoted 变量
           for (const keyword of KeywordData) {
             KeywordDataMap.set(keyword, []);
           }
-          
+
           if (KeywordDataMap.has(data.keyword)) {
             const notedValues = []; // 确保在每次循环开始时清空数组
             for (const report of data.reports) {
               const notedPercentage = (report.noted / 60) * 100;
-              console.log("notedPercentage: ", notedPercentage);
               notedValues.push(notedPercentage);
             }
-            console.log(notedValues); // 输出每次满足条件时的 notedValues
-            averageNoted = notedValues.reduce((sum, value) => sum + value, 0) / notedValues.length; // 给 averageNoted 赋值
+            averageNoted =
+              notedValues.reduce((sum, value) => sum + value, 0) /
+              notedValues.length; // 给 averageNoted 赋值
           }
-          const formattedDate = dayjs(data.date).format('YYYY-MM-DD');
+          const formattedDate = dayjs(data.date).format("YYYY-MM-DD");
           const rate = Number(averageNoted.toFixed(0));
           newData.push({
             keyId: data.keyId,
-            keyword: data.keyword ,
+            keyword: data.keyword,
             tarnotes: data.tarnotes,
-            kpi_ps:  kpidata + '%',
-            compliance: (averageNoted/kpidata * 100) .toFixed(2)+ "%",
+            kpi_ps: kpidata + "%",
+            compliance: ((averageNoted / kpidata) * 100).toFixed(2) + "%",
             date: formattedDate,
-            progress:rate,
-            averagesov: averageNoted.toFixed(0) + '%',
+            progress: rate,
+            averagesov: averageNoted.toFixed(0) + "%",
           });
         }
-
         setDataSource(newData);
-
-        console.log(returnedData.length);
       } catch (error) {
         console.error(error);
       }
@@ -291,10 +270,10 @@ const onChange: TableProps<DataSource>["onChange"] = (
 
     fetchData();
   }, []);
-  
+
   return (
     <Table dataSource={dataSource} columns={columns} onChange={onChange} />
   );
 };
 
-export default MyTable;
+export default Datacard;

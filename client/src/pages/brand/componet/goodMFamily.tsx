@@ -3,43 +3,41 @@ import { Card } from "antd/lib";
 import React, { useEffect, useState } from "react";
 import { getgmfData } from "../../dashboard/api/index";
 import DataTable from "./data/datacard";
-import SearchInput from "./search";
-import style from "./styles/brand.module.css";
+import style from "../style/brand.module.css";
 import {
   FloatButton,
   DatePicker,
   Select,
   Form,
   Modal,
-  Input,
   InputNumber,
 } from "antd";
 import dayjs, { Dayjs } from "dayjs";
-import { dateFormatterMap } from "@ant-design/pro-components";
 import axios from "axios";
 import { API_BASE_URL } from "../../../config";
 import ApiList from "../../../config/apiList";
+
+
 //接口定义
 interface Values {
   date: any;
   keyword: string;
   noted: number;
 }
+
 //组件定义
 interface InputFormProps {
   open: boolean;
   onCreate: (values: Values) => void;
   onCancel: () => void;
 }
+
 //组件实现
 const handleChange = (value: string) => {
   console.log(`关键词选择Value ${value}`);
 };
-
 const dateFormat = "YYYY-MM-DD"; //  日期格式
-
 const InputForm: React.FC<InputFormProps> = ({ open, onCreate, onCancel }) => {
-  //
   const [form] = Form.useForm();
   return (
     <Modal
@@ -86,7 +84,6 @@ const InputForm: React.FC<InputFormProps> = ({ open, onCreate, onCancel }) => {
             ]}
           />
         </Form.Item>
-
         <Form.Item
           name="date"
           label="日期"
@@ -112,7 +109,7 @@ const InputForm: React.FC<InputFormProps> = ({ open, onCreate, onCancel }) => {
   );
 };
 
-const App: React.FC = () => {
+const GoodMFamily: React.FC = () => {
   const [open, setopen] = useState(false);
   const onCreate = async (values: any) => {
     const params: Values = {
@@ -151,7 +148,6 @@ const App: React.FC = () => {
           document.body.clientWidth
       );
     };
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -195,4 +191,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default GoodMFamily;
