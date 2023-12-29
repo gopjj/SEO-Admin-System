@@ -2,7 +2,7 @@ import { Request, RequestHandler, Response } from "express";
 import startupLogDao from "../dao/dailyData.js";
 import recordData from "../dao/recordData.js";
 import keywordData from "../dao/keywordData.js";
-import { OperationRecord } from "../dao/OpData.js";
+import { OperationRecord } from "../dao/OperationRecord.js";
 import GoodmanFamily from "../dao/gmfamilyData.js";
 
 export class DashbaordController {
