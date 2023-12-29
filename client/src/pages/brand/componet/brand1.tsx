@@ -2,9 +2,9 @@ import { Divider } from "antd";
 import { Card } from "antd/lib";
 import React, { useEffect, useState } from "react";
 import { getBrand1 } from "../../dashboard/api/index";
-import Day from "../../dashboard/componet/daily";
+import Day from "../../dashboard/component/daily";
 import SearchInput from "./search";
-import style from "./styles/brand.module.css";
+import style from "../style/brand.module.css";
 
 const App: React.FC = () => {
   const [pageWidth, setPageWidth] = useState(

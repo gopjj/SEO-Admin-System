@@ -2,22 +2,21 @@ import React, { useEffect, useState, useRef } from "react";
 import type { ColumnsType } from "antd/lib/table";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
-import { Button, Input, Space, InputRef, Table,Progress } from "antd";
-import type { ColumnType ,TableProps} from "antd/es/table";
+import { Button, Input, Space, InputRef, Table, Progress } from "antd";
+import type { ColumnType, TableProps } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
-// import "../../../dashboard/componet/styles/progress";
-import style from "../../../dashboard/componet/styles/daily.module.css"
+import style from "../../../dashboard/style/daily.module.css";
 
 type DataSource = {
   keyld: number;
   keyword: string;
-  tarnotes: any;
-  noted: number;
-  // kpi_ps:any;
-  // sov: any;
-  // progress: number;
-  // compliance:string;
-  date: number;
+  tarnotes?: any;
+  noted?: number;
+  kpi_ps?: any;
+  sov?: any;
+  progress?: number;
+  compliance?: string;
+  date?: number;
 };
 
 type DataIndex = keyof DataSource;
@@ -171,7 +170,6 @@ export const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
       key: "kpi_ps",
       width: "1%",
       align: "center",
-      
     },
     {
       title: "累计SOV",
@@ -179,20 +177,19 @@ export const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
       key: "sov",
       width: "1%", //6
       align: "center",
-
     },
     {
       title: "累计SOV完成进度",
       width: "2%", //6
       align: "center",
-       render: (text, datacard) => (
-      <Progress
-        percent={datacard.progress}
-        status="active"
-        strokeColor={{ "0%": "#108ee9", "70": "#87d068" }}
-        className="progress-custom"
-      />
-    ),
+      render: (text, datacard) => (
+        <Progress
+          percent={datacard.progress}
+          status="active"
+          strokeColor={{ "0%": "#108ee9", "70": "#87d068" }}
+          className="progress-custom"
+        />
+      ),
     },
     {
       title: "累计compliance",
@@ -201,7 +198,6 @@ export const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
       width: "2%", //6
       align: "center",
     },
-
 
     {
       title: "上传日期",
@@ -212,14 +208,14 @@ export const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
       ...getColumnSearchProps("date"),
     },
   ];
-const onChange: TableProps<DataSource>["onChange"] = (
-  pagination,
-  filters,
-  sorter,
-  extra
-) => {
-  console.log("params", pagination, filters, sorter, extra);
-};
+  const onChange: TableProps<DataSource>["onChange"] = (
+    pagination,
+    filters,
+    sorter,
+    extra
+  ) => {
+    console.log("params", pagination, filters, sorter, extra);
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -231,16 +227,16 @@ const onChange: TableProps<DataSource>["onChange"] = (
         for (const data of returnedData) {
           const expectedlistDivided = data.expectedlist / 20;
           const kpidata = Math.round((data.kpi / 12) * 100);
-          const rate =Number(Math.round((data.sov * 100)) .toFixed(2));
+          const rate = Number(Math.round(data.sov * 100).toFixed(2));
           newData.push({
             keyld: data.key_id,
             keyword: data.keyword,
             tarnotes: data.tarnotes,
-            kpi_ps:  kpidata + '%',
-            sov: Math.round((data.sov * 100)) +"%",
-            compliance:Math.round((data.compliance * 100)) +"%",
-            date:data.date,
-            progress:rate,
+            kpi_ps: kpidata + "%",
+            sov: Math.round(data.sov * 100) + "%",
+            compliance: Math.round(data.compliance * 100) + "%",
+            date: data.date,
+            progress: rate,
           });
         }
 

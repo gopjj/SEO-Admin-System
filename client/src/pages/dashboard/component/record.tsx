@@ -2,7 +2,7 @@ import  { useEffect, useState } from "react";
 import { Table, Progress } from "antd";
 import type { ColumnsType, TableProps } from "antd/es/table";
 import { getRecord } from "../api";
-import "./styles/progress.css";
+import "../style/progress.css";
 
 
 type DataSource = {
