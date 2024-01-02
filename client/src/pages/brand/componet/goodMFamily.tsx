@@ -2,7 +2,7 @@ import { Divider } from "antd";
 import { Card } from "antd/lib";
 import React, { useEffect, useState } from "react";
 import { getgmfData } from "../../dashboard/api/index";
-import DataTable from "./data/datacard";
+import DataTable from "./Data/Datacard";
 import style from "../style/brand.module.css";
 import {
   FloatButton,
@@ -16,7 +16,6 @@ import dayjs, { Dayjs } from "dayjs";
 import axios from "axios";
 import { API_BASE_URL } from "../../../config";
 import ApiList from "../../../config/apiList";
-
 
 //接口定义
 interface Values {

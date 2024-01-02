@@ -5,7 +5,7 @@ import Highlighter from "react-highlight-words";
 import { Button, Input, Space, InputRef, Table, Progress } from "antd";
 import type { ColumnType, TableProps } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
-import style from "../../../dashboard/style/daily.module.css"
+import style from "../../../dashboard/style/daily.module.css";
 import dayjs from "dayjs";
 
 type DataSource = {

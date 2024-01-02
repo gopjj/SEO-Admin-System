@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import GoodMFamily from "../pages/brand/componet/goodMFamily";
+import GoodMFamily from "../pages/Brand/Componet/goodMFamily";
 import { Dashboard } from "../pages/dashboard/component/Dashboard";
 import { Home } from "../pages/home/component/Home";
 import Login from "../pages/login/component/login";
