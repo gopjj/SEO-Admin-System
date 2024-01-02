@@ -7,22 +7,21 @@ import NoteList from "./noteList";
 import { getopAll } from "../../dashboard/api";
 
 const getTabs = () => {
-  const tabs = new Map<string, React.ReactNode>();
-  tabs.set(
-    "笔记当日执行",
-    <div>
-      <div className={styles.tabStyle}>
-        <DemoDualAxes />
-      </div>
-
-      <div className={styles.noteStyle}>
-        <NoteList getListFunction={getopAll} />
-      </div>
-    </div>
-  );
-  tabs.set("达成总览", undefined);
-  tabs.set("操作7日未上榜", undefined);
-  return tabs;
+  return new Map<string, React.ReactNode>([
+    [
+      "笔记当日执行",
+      <div>
+        <div className={styles.tabStyle}>
+          <DemoDualAxes />
+        </div>
+        <div className={styles.noteStyle}>
+          <NoteList getListFunction={getopAll} />
+        </div>
+      </div>,
+    ],
+    ["达成总览", undefined],
+    ["操作7日未上榜", undefined],
+  ]);
 };
 export const NoteOptm: React.FC = () => {
   return (
