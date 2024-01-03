@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GoodMFamily } from "../pages/brand/component/GoodMFamily";
 import { Dashboard } from "../pages/dashboard/component/Dashboard";
 import { Home } from "../pages/home/component/Home";
-import { Login } from "../pages/login/component/Login";
+import { Login } from "../pages/login/component/component/Login";
 import { NoteOptm } from "../pages/notetrack/component/NoteOptm";
 import { Uploadcom } from "../pages/upload/component/Upload";
 
