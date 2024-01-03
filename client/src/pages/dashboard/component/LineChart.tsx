@@ -26,6 +26,8 @@ export interface LineChartProps {
 
 const fetchData = async (
   api: string,
+  startDate: string,
+  endDate: string,
   timeSpan: number,
   xField: string,
   yField: string
@@ -41,7 +43,8 @@ const fetchData = async (
     const formattedDate = date.toISOString().slice(0, 10);
     const response = await axios.get(API_BASE_URL + api, {
       params: {
-        date: formattedDate,
+        startDate: startDate,
+      endDate: endDate,
       },
     });
 
