@@ -1,7 +1,7 @@
 import db from "../db/conn.mjs";
 import cron from "cron";
 import { Request, Response, NextFunction, RequestHandler } from 'express';
-const COLLECTION_NAME = "GoodmanFamily";
+const COLLECTION_NAME = "GoodMFamily";
 
 namespace GoodmanFamily{
     export const getgmfData = async (option?:any) =>{
