@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Divider, Row, Col, Card } from "antd";
 import { getList } from "../api/Index";
 
 let targetNotes = 11;
-const Datacard = () => {
+export const Datacardall = () => {
   const [notesNum, setNotesNum] = useState<number>(0);
   const [time, setTime] = useState<number>(0);
   const fetchData = async () => {
@@ -184,4 +184,4 @@ const Datacard = () => {
   );
 };
 
-export default Datacard;
+

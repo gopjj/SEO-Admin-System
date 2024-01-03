@@ -1,13 +1,13 @@
 import { Collapse, Divider } from "antd";
 import React from "react";
 import { detailDataString } from "../../../constants/constants";
-import { Tabs } from "../../NoteTrack/component/Tabs"
+import { Tabs } from "../../notetrack/component/Tabs"
 // import { Tabs } from "../../noteTrack/component/Tabs";
 import { LineChart } from "./LineChart";
 import { DataCard } from "./Datacard";
 import { getList } from "../api/Index";
-import Daily from "./Daily";
-import Record from "./Record";
+import { Daily } from "./Daily";
+import { Record } from "./Record";
 
 const getCollapseItems = () => {
   const prefix = "dashboard-collapse";

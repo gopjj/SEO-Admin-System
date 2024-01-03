@@ -101,7 +101,7 @@ const columns: ColumnsType<DataSource> = [
 
 
 
-const MyKeyword = () => {
+export const Keyword = () => {
   const [dataSource, setDataSource] = useState<DataSource[]>([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -148,4 +148,4 @@ const MyKeyword = () => {
   );
 };
 
-export default MyKeyword;
+

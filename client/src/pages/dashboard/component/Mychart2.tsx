@@ -5,7 +5,7 @@ import { API_BASE_URL } from '../../../config';
 import ApiList from '../../../config/apiList';
 import axios from 'axios';
 
-const Mychart2 =  () => {
+export const Mychart2 =  () => {
   const currentDate = new Date();
   const [data, setData] = useState<Array<{ year: any; listedsum: number; }>>([]);
   useEffect(() => {
@@ -97,4 +97,3 @@ const Mychart2 =  () => {
     };
     return <Line {...config} />;
   };
-export default Mychart2;

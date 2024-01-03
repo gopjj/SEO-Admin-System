@@ -4,7 +4,7 @@ import axios from "axios";
 import { API_BASE_URL } from "../../../config";
 import ApiList from "../../../config/apiList";
 import homePicture from "../../../resource/pictures/Foo.jpg";
-import style from "./styles/Login.module.css";
+import style from "./style/Login.module.css";
 import { copyRightString } from "../../../constants/constants";
 import logo from "../../../resource/pictures/logo.jpg";
 import { Navigate } from "react-router-dom";
@@ -173,4 +173,3 @@ export const Login: React.FC = () => {
   );
 };
 
-export default Login;

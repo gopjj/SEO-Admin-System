@@ -267,4 +267,3 @@ export const Daily: React.FC<MyTableProps> = ({ getListFunction }) => {
   return <Table dataSource={dataSource} columns={columns} />;
 };
 
-export default Daily;

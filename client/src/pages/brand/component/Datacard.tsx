@@ -276,4 +276,3 @@ export const Datacard: React.FC<MyTableProps> = ({ getListFunction }) => {
   );
 };
 
-export default Datacard;

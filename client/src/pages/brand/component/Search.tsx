@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../config";
 import ApiList from "../../../config/apiList";
 
-const DemoColumn = () => {
+export const DemoColumn = () => {
   const currentDate = new Date();
   const [data, setData] = useState<
     Array<{ year: any; keyword: any; listedsum: number }>
@@ -79,4 +79,4 @@ const DemoColumn = () => {
   return <Column style={{ width: 1000, height: 300 }} {...config} />;
 };
 
-export default DemoColumn;
+

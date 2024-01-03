@@ -28,7 +28,7 @@ type DataIndex = keyof DataSource;
 interface MyTableProps {
   getListFunction: () => Promise<any>;
 }
-const Daily: React.FC<MyTableProps> = ({ getListFunction }) => {
+export const Dailydata: React.FC<MyTableProps> = ({ getListFunction }) => {
 
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
@@ -272,5 +272,3 @@ const Daily: React.FC<MyTableProps> = ({ getListFunction }) => {
 
   return <Table dataSource={dataSource} columns={columns} />;
 };
-
-export default Daily;

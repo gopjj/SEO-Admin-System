@@ -27,7 +27,7 @@ type DataIndex = keyof DataSource;
 interface MyTableProps {
   getListFunction: () => Promise<any>;
 }
-const NoteList: React.FC<MyTableProps> = ({ getListFunction }) => {
+export const NoteList: React.FC<MyTableProps> = ({ getListFunction }) => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
@@ -227,4 +227,4 @@ const NoteList: React.FC<MyTableProps> = ({ getListFunction }) => {
   return <Table dataSource={dataSource} columns={columns} />;
 };
 
-export default NoteList;
+

@@ -1,13 +1,13 @@
 import { DualAxes } from "@ant-design/plots";
 import { useEffect, useState } from "react";
-import style from "./styles/track.module.css";
+import style from "../style/track.module.css";
 import { Card, Typography } from "antd";
 import axios from "axios";
 import { API_BASE_URL } from "../../../config";
 import ApiList from "../../../config/apiList";
 import { optmString } from "../../../constants/constants";
 
-const DemoDualAxes = () => {
+export const DemoDualAxes = () => {
   const [data, setData] = useState<
     Array<{ year: any; 实际优化: number; 预期优化: number }>
   >([]);
@@ -99,4 +99,3 @@ const DemoDualAxes = () => {
   );
 };
 
-export default DemoDualAxes;

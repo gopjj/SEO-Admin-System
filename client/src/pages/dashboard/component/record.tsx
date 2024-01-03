@@ -93,16 +93,8 @@ const columns: ColumnsType<DataSource> = [
   },
 ];
 
-// const onChange: TableProps<DataSource>["onChange"] = (
-//   pagination,
-//   filters,
-//   sorter,
-//   extra
-// ) => {
-//   console.log("params", pagination, filters, sorter, extra);
-// };
 
-const Record = () => {
+export const Record = () => {
   const [dataSource, setDataSource] = useState<DataSource[]>([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -142,4 +134,3 @@ const Record = () => {
   );
 };
 
-export default Record;

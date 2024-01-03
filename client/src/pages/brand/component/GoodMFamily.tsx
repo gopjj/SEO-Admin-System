@@ -2,7 +2,7 @@ import { Divider } from "antd";
 import { Card } from "antd/lib";
 import React, { useEffect, useState } from "react";
 import { getgmfData } from "../../dashboard/api/Index";
-import DataTable from "./Datacard";
+import { Datacard } from "./Datacard";
 import style from "../style/Brand.module.css";
 import {
   FloatButton,
@@ -108,7 +108,7 @@ const InputForm: React.FC<InputFormProps> = ({ open, onCreate, onCancel }) => {
   );
 };
 
-const GoodMFamily: React.FC = () => {
+export const GoodMFamily: React.FC = () => {
   const [open, setopen] = useState(false);
   const onCreate = async (values: any) => {
     const params: Values = {
@@ -168,7 +168,7 @@ const GoodMFamily: React.FC = () => {
         className={style.cardSearch1}
       >
         <div>
-          <DataTable getListFunction={getgmfData} />
+          <Datacard getListFunction={getgmfData} />
         </div>
         <FloatButton
           onClick={() => {
@@ -189,5 +189,3 @@ const GoodMFamily: React.FC = () => {
     </>
   );
 };
-
-export default GoodMFamily;
