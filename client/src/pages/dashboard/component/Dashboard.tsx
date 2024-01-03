@@ -5,7 +5,7 @@ import { Tabs } from "../../NoteTrack/component/Tabs"
 // import { Tabs } from "../../noteTrack/component/Tabs";
 import { LineChart } from "./LineChart";
 import { DataCard } from "./Datacard";
-import { getList } from "../api";
+import { getList } from "../api/index";
 import Daily from "./daily";
 import Record from "./record";
 

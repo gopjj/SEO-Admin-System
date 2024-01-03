@@ -26,8 +26,6 @@ const Datacard = () => {
   fetchData(); 
  
 
- 
-
   return (
    
     <div>

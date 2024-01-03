@@ -4,7 +4,7 @@ import { Tabs } from "./Tabs";
 import styles from "./styles/track.module.css";
 import DemoDualAxes from "./demodualAxes";
 import NoteList from "./noteList";
-import { getopAll } from "../../dashboard/api";
+import { getopAll } from "../../dashboard/api/index";
 
 const getTabs = () => {
   const tabs = new Map<string, React.ReactNode>();

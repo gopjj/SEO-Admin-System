@@ -1,7 +1,7 @@
 import  { useEffect, useState } from "react";
 import { Table, Progress } from "antd";
 import type { ColumnsType, TableProps } from "antd/es/table";
-import { getRecord } from "../api";
+import { getRecord } from "../api/index";
 import "../style/progress.css";
 
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Card, Col, Divider, Row } from "antd";
-import { getList } from "../api";
+import { getList } from "../api/index";
 // Follow up:
 // Rename all the module.css imported name to classNames
 import styles from "../style/datacard.module.css";
