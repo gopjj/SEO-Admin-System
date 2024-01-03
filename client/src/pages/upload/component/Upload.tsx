@@ -6,7 +6,7 @@ import { DownloadButton1 }from "../component/Download2";
 import Down3 from "../component/Download3";
 import { API_BASE_URL } from "../../../config";
 import ApiList from "../../../config/apiList";
-import style from "../style/upload.module.css";
+import style from "../style/Upload.module.css";
 
 const { Dragger } = Upload;
 

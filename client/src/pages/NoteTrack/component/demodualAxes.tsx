@@ -1,6 +1,6 @@
 import { DualAxes } from "@ant-design/plots";
 import { useEffect, useState } from "react";
-import style from "../style/track.module.css";
+import style from "../style/Track.module.css";
 import { Card, Typography } from "antd";
 import axios from "axios";
 import { API_BASE_URL } from "../../../config";

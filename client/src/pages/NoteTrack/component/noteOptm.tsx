@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card } from "antd";
 import  {Tabs}  from "../../notetrack/component/Tabs";
-import styles from "../style/track.module.css";
+import styles from "../style/Track.module.css";
 import { DemoDualAxes } from "./DemoDualAxes";
 import { NoteList } from "./NoteList";
 import { getopAll } from "../../dashboard/api/Index";
