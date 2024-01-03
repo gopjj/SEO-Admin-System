@@ -2,7 +2,7 @@ import  { useEffect, useState } from "react";
 import "./styles/progress.css";
 import { Table, Progress } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { getKeyword } from "../api";
+import { getKeyword } from "../api/Index";
 
 
 type DataSource = {
@@ -108,7 +108,6 @@ const MyKeyword = () => {
       try {
         const response = await getKeyword();
         const returnedData = (response as unknown) as Array<any>;
-        console.log(returnedData);
         const newData: DataSource[] = [];
         for (const data of returnedData) {
           const start = new Date(data.startTime);
@@ -134,7 +133,6 @@ const MyKeyword = () => {
           });
         }
         setDataSource(newData);
-        console.log(returnedData.length);
       } catch (error) {
         console.error(error);
       }

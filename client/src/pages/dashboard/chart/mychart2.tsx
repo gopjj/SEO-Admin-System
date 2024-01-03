@@ -1,16 +1,13 @@
 
-import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import  { useState, useEffect } from 'react';
 import { Line } from '@ant-design/plots';
 import { API_BASE_URL } from '../../../config';
 import ApiList from '../../../config/apiList';
 import axios from 'axios';
 
-const DemoLine =  () => {
+const Mychart2 =  () => {
   const currentDate = new Date();
   const [data, setData] = useState<Array<{ year: any; listedsum: number; }>>([]);
-
-
   useEffect(() => {
     const fetchData = async () => {
       const newData = [];
@@ -18,7 +15,6 @@ const DemoLine =  () => {
       for (let i = 0; i < 5; i++) {
         const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - i);
         const formattedDate = date.toISOString().slice(0, 10);
-        console.log(formattedDate);
         try {
           const response = await axios.get(API_BASE_URL + ApiList.getLnum, {
             params: {
@@ -28,7 +24,6 @@ const DemoLine =  () => {
           const jsondata = response.data[0];
           if (jsondata && jsondata.listed && jsondata.expectedlist) {
             const expectedList = parseInt(jsondata.expectedlist);
-            console.log(expectedList);
             expectedListSum += expectedList;
             
           newData.push({
@@ -58,9 +53,6 @@ const DemoLine =  () => {
 
     fetchData();
   }, []);
-
-console.log(data)
-
   const config = {
 
       data,
@@ -105,4 +97,4 @@ console.log(data)
     };
     return <Line {...config} />;
   };
-export default DemoLine;
+export default Mychart2;

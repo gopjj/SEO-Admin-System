@@ -1,8 +1,4 @@
 import { Tabs as AntdTabs, type TabsProps as AntdTabsProps } from "antd";
-import NoteList from "./noteList";
-import DemoDualAxes from "./demodualAxes";
-import classNames from "./styles/track.module.css";
-import { getopAll } from "../../dashboard/api/index";
 type TabItem = Required<AntdTabsProps>["items"][number];
 
 const getTabItem = (prefix: string, label: string, children: React.ReactNode): TabItem => {

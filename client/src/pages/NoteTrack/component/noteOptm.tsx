@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Card } from "antd";
 import { Tabs } from "./Tabs";
 import styles from "./styles/track.module.css";
-import DemoDualAxes from "./demodualAxes";
-import NoteList from "./noteList";
-import { getopAll } from "../../dashboard/api/index";
+import DemoDualAxes from "./DemoDualAxes";
+import NoteList from "./NoteList";
+import { getopAll } from "../../dashboard/api/Index";
 
 const getTabs = () => {
   return new Map<string, React.ReactNode>([

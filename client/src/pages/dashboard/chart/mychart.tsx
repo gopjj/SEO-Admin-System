@@ -1,12 +1,11 @@
 
-import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import { useState, useEffect } from 'react';
 import { Line } from '@ant-design/plots';
 import { API_BASE_URL } from '../../../config';
 import ApiList from '../../../config/apiList';
 import axios from 'axios';
 
-const DemoLine =  () => {
+const Mychart =  () => {
   const currentDate = new Date();
   const [data, setData] = useState<Array<{ year: any; notelisted: number; }>>([]);
 
@@ -17,7 +16,6 @@ const DemoLine =  () => {
       for (let i = 0; i < 5; i++) {
         const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - i);
         const formattedDate = date.toISOString().slice(0, 10);
-        console.log(formattedDate);
         try {
           const response = await axios.get(API_BASE_URL + ApiList.getListed, {
             params: {
@@ -45,14 +43,11 @@ const DemoLine =  () => {
         }
       }
       setData(newData);
-      
       newData.sort((a, b) => a.year.localeCompare(b.year));
     };
 
     fetchData();
   }, []);
-console.log(data)
-
   const config = {
 
       data,
@@ -98,4 +93,4 @@ console.log(data)
     };
     return <Line {...config} />;
   };
-export default DemoLine;
+export default Mychart;

@@ -1,9 +1,9 @@
 import { Divider } from "antd";
 import { Card } from "antd/lib";
 import React, { useEffect, useState } from "react";
-import { getgmfData } from "../../dashboard/api/index";
-import DataTable from "./Data/Datacard";
-import style from "../style/brand.module.css";
+import { getgmfData } from "../../dashboard/api/Index";
+import DataTable from "./Datacard";
+import style from "../style/Brand.module.css";
 import {
   FloatButton,
   DatePicker,

@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import GoodMFamily from "../pages/Brand/Componet/goodMFamily";
+import GoodMFamily from "../pages/brand/component/GoodMFamily";
 import { Dashboard } from "../pages/dashboard/component/Dashboard";
 import { Home } from "../pages/home/component/Home";
-import Login from "../pages/login/component/login";
-import { NoteOptm } from "../pages/NoteTrack/component/noteOptm";
+import Login from "../pages/login/component/Login";
+import { NoteOptm } from "../pages/NoteTrack/component/NoteOptm";
 import Upload from "../pages/upload/component/Upload";
 
 const Router: React.FC = () => {

@@ -4,12 +4,12 @@ import axios from "axios";
 import { API_BASE_URL } from "../../../config";
 import ApiList from "../../../config/apiList";
 import homePicture from "../../../resource/pictures/Foo.jpg";
-import style from "./styles/login.module.css";
+import style from "./styles/Login.module.css";
 import { copyRightString } from "../../../constants/constants";
 import logo from "../../../resource/pictures/logo.jpg";
-import { Navigate } from 'react-router-dom';
-import React, {  useContext, useState,useEffect,createContext} from 'react';
-import { AppContext } from "./appContext";
+import { Navigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { AppContext } from "./Appcontext";
 // import {LoginContext} from './LoginContext'
 // import {appContext} from '../component/appContext'
 
@@ -17,63 +17,46 @@ const { Header, Footer, Content } = Layout;
 interface loginUserParams {
   username: string;
   password: string;
-}            
+}
 
-export const Login: React.FC = () => { 
-
-  useEffect(() => {
-    console.log("更新");
-  }, );
-
+export const Login: React.FC = () => {
   const appContext = useContext(AppContext);
 
   const [redirectToDashboard, setRedirectToDashboard] = React.useState(false);
-  // const [username, setUsername] = useState("");
-
 
   const onFinish = async (values: any) => {
     try {
-      console.log("Success:", values
-      );
+      console.log("Success:", values);
 
       const params: loginUserParams = {
         username: values.Username,
-        password: values.password
-        
+        password: values.password,
       };
-      console.log("Login response:",params.username);
+      console.log("Login response:", params.username);
       const response = await axios.post(API_BASE_URL + ApiList.login, params, {
         headers: {
           Authorization: "TestFooDigital",
           "Content-Type": "application/json",
         },
       });
-      
-      if(response){
 
-        console.log("重定向");
-        
+      if (response) {
         setRedirectToDashboard(true);
-        
         const appState = appContext.state;
         appState.userName = params.username;
         appContext.setState(appState);
       }
-       
-      
     } catch (error) {
       console.log("Login error:", error);
     }
   };
-  
+
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
 
   return (
-
     <Layout>
-     
       {redirectToDashboard && <Navigate to="/dashboard" />}
       <Header className={style.header}>
         {/* <div className={style.headerStyle}> */}
@@ -166,7 +149,6 @@ export const Login: React.FC = () => {
                         登录
                       </Button>
                     </Form.Item>
-
                   </div>
                 </Form>
               </div>
@@ -187,10 +169,7 @@ export const Login: React.FC = () => {
       <Footer className={style.footer}>
         <p style={{ margin: "0", color: "gray" }}>&copy;{copyRightString}</p>
       </Footer>
-
     </Layout>
-
-
   );
 };
 

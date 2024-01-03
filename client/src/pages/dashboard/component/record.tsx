@@ -1,8 +1,8 @@
 import  { useEffect, useState } from "react";
 import { Table, Progress } from "antd";
 import type { ColumnsType, TableProps } from "antd/es/table";
-import { getRecord } from "../api/index";
-import "../style/progress.css";
+import { getRecord } from "../api/Index";
+import "../style/Progress.css";
 
 
 type DataSource = {
@@ -93,23 +93,22 @@ const columns: ColumnsType<DataSource> = [
   },
 ];
 
-const onChange: TableProps<DataSource>["onChange"] = (
-  pagination,
-  filters,
-  sorter,
-  extra
-) => {
-  console.log("params", pagination, filters, sorter, extra);
-};
+// const onChange: TableProps<DataSource>["onChange"] = (
+//   pagination,
+//   filters,
+//   sorter,
+//   extra
+// ) => {
+//   console.log("params", pagination, filters, sorter, extra);
+// };
 
-const MyRecord = () => {
+const Record = () => {
   const [dataSource, setDataSource] = useState<DataSource[]>([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await getRecord();
         const returnedData = (response as unknown) as Array<any>;
-        console.log(returnedData);
         const newData: DataSource[] = [];
         for (const data of returnedData) {
           const kpirate = Number(
@@ -131,7 +130,6 @@ const MyRecord = () => {
           });
         }
         setDataSource(newData);
-        console.log(returnedData.length);
       } catch (error) {
         console.error(error);
       }
@@ -140,8 +138,8 @@ const MyRecord = () => {
   }, []);
 
   return (
-    <Table columns={columns} dataSource={dataSource} onChange={onChange} />
+    <Table columns={columns} dataSource={dataSource}  />
   );
 };
 
-export default MyRecord;
+export default Record;

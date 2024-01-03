@@ -1,14 +1,13 @@
 import { DualAxes } from "@ant-design/plots";
 import { useEffect, useState } from "react";
-import style from "./styles/track.module.css"
+import style from "./styles/track.module.css";
 import { Card, Typography } from "antd";
 import axios from "axios";
 import { API_BASE_URL } from "../../../config";
 import ApiList from "../../../config/apiList";
-import {optmString} from "../../../constants/constants"
+import { optmString } from "../../../constants/constants";
 
 const DemoDualAxes = () => {
-  // const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]; // 一周的日期
   const [data, setData] = useState<
     Array<{ year: any; 实际优化: number; 预期优化: number }>
   >([]);
@@ -17,7 +16,6 @@ const DemoDualAxes = () => {
   useEffect(() => {
     const fetchData = async () => {
       const newData = [];
-      // let expectedListSum = 0;
       for (let i = 0; i < 8; i++) {
         const date = new Date(
           currentDate.getFullYear(),
@@ -25,7 +23,6 @@ const DemoDualAxes = () => {
           currentDate.getDate() - 2 - i
         );
         const formattedDate = date.toISOString().slice(0, 10);
-        console.log(formattedDate);
         try {
           const response = await axios.get(API_BASE_URL + ApiList.getnoteaco, {
             params: {
@@ -33,7 +30,6 @@ const DemoDualAxes = () => {
             },
           });
           const jsondata = response.data[0];
-          console.log(jsondata);
           if (
             jsondata &&
             jsondata.totalNoteaco &&
@@ -46,9 +42,6 @@ const DemoDualAxes = () => {
             const exnoteexo = Math.round(
               parseInt(jsondata.exNoteexo) / parseInt(jsondata.countNoteaco)
             );
-
-            console.log(totalNoteaco);
-
             newData.push({
               year: formattedDate,
               实际优化: totalNoteaco, // 将 expectedlist 替换为 expectedList

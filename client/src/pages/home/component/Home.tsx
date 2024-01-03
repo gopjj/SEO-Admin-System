@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { Outlet } from "react-router-dom";
 import FooHeadImg from "../../../resource/pictures/FOOHEAD.jpg";
 import logo from "../../../resource/pictures/logo.jpg";
-import { AppContext } from "../../login/component/appContext";
+import { AppContext } from "../../login/component/Appcontext";
 import { Menu } from "../../menu/component/Menu";
 import classNames from "../style/Home.module.css";
 

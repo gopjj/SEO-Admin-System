@@ -27,13 +27,11 @@ type DataIndex = keyof DataSource;
 interface MyTableProps {
   getListFunction: () => Promise<any>;
 }
-
-const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
+const NoteList: React.FC<MyTableProps> = ({ getListFunction }) => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
   const [dataSource, setDataSource] = useState<DataSource[]>([]);
-
   const handleSearch = (
     selectedKeys: string[],
     confirm: (param?: FilterConfirmProps) => void,
@@ -43,12 +41,10 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
     setSearchText(selectedKeys[0]);
     setSearchedColumn(dataIndex);
   };
-
   const handleReset = (clearFilters: () => void) => {
     clearFilters();
     setSearchText("");
   };
-
   const getColumnSearchProps = (
     dataIndex: DataIndex
   ): ColumnType<DataSource> => ({
@@ -179,16 +175,6 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
       width: "24%",
       render: (text, record) => <a href={`${record.notelink}`}>{text}</a>,
     },
-    // {
-    //     title: '笔记链接',
-    //     dataIndex: 'notelink',
-    //     width: '12%',
-    //     render: (text, record) => (
-
-    //         <a href={`${record.notelink}`}>{text}</a>
-    //       ),
-
-    // },
     {
       title: "预期优化次数",
       dataIndex: "noteexo",
@@ -214,7 +200,6 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
         const response = await getListFunction();
 
         const returnedData = (response as unknown) as Array<any>;
-        console.log(returnedData);
         const newData: DataSource[] = [];
         for (const data of returnedData) {
           // const expectedlistDivided = data.expectedlist / 20;
@@ -232,19 +217,14 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
             fdate: data.fdate,
           });
         }
-
         setDataSource(newData);
-
-        console.log(returnedData.length);
       } catch (error) {
         console.error(error);
       }
     };
-
     fetchData();
   }, []);
-
   return <Table dataSource={dataSource} columns={columns} />;
 };
 
-export default MyTable;
+export default NoteList;

@@ -9,7 +9,7 @@ type MyComponentProps = {
   // 其他属性...
 };
 
-const App: React.FC<MyComponentProps> = ({ children }) => (
+const Content: React.FC<MyComponentProps> = ({ children }) => (
   <div>
     <div className={cardStyles.customDiv}>
       <Card
@@ -28,4 +28,4 @@ const App: React.FC<MyComponentProps> = ({ children }) => (
     </div>
   </div>
 );
-export default App;
+export default Content;

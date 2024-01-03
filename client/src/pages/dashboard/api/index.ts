@@ -7,12 +7,6 @@ export const getList = async (options?: any) => {
 export const getBrand = async (options?: any) => {
   return axios.get(ApiList.getBrand, options);
 };
-export const getBrand1 = async (options?: any) => {
-  return axios.get(ApiList.getBrand1, options);
-};
-export const getBrand2 = async (options?: any) => {
-  return axios.get(ApiList.getBrand2, options);
-};
 export const getRecord = async (options?: any) => {
   return axios.get(ApiList.getRecord, options);
 };
@@ -33,7 +27,7 @@ export const getnoteaco = async (options?: any) => {
   return axios.get(ApiList.getnoteaco, options);
 };
 export const getgmfData = async (options?: any) => {
-  return axios.get(ApiList.getgmfData,options);
+  return axios.get(ApiList.getgmfData, options);
 };
 
 export const login = async (username: string, password: string) => {

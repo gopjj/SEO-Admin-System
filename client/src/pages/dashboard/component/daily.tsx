@@ -5,8 +5,7 @@ import Highlighter from "react-highlight-words";
 import { Button, Input, Space, InputRef, Table } from "antd";
 import type { ColumnType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
-import style from "../style/daily.module.css";
-
+import style from "../style/Daily.module.css";
 
 
 type DataSource = {
@@ -31,7 +30,7 @@ interface MyTableProps {
   getListFunction: () => Promise<any>;
 }
 
-export const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
+export const Daily: React.FC<MyTableProps> = ({ getListFunction }) => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
@@ -46,7 +45,6 @@ export const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
     setSearchText(selectedKeys[0]);
     setSearchedColumn(dataIndex);
   };
-
   const handleReset = (clearFilters: () => void) => {
     clearFilters();
     setSearchText("");
@@ -236,9 +234,7 @@ export const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
     const fetchData = async () => {
       try {
         const response = await getListFunction();
-
         const returnedData = response as unknown as Array<any>;
-        console.log(returnedData);
         const newData: DataSource[] = [];
         for (const data of returnedData) {
           const expectedlistDivided = data.expectedlist / 20;
@@ -260,8 +256,6 @@ export const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
         }
 
         setDataSource(newData);
-
-        console.log(returnedData.length);
       } catch (error) {
         console.error(error);
       }
@@ -273,4 +267,4 @@ export const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
   return <Table dataSource={dataSource} columns={columns} />;
 };
 
-export default MyTable;
+export default Daily;

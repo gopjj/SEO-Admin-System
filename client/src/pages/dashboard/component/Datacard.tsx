@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card, Col, Divider, Row } from "antd";
-import { getList } from "../api/index";
-// Follow up:
-// Rename all the module.css imported name to classNames
-import styles from "../style/datacard.module.css";
+import { getList } from "../api/Index";
+import styles from "../style/Datacard.module.css";
 import {
   allDataString,
   sumDataString,
@@ -30,11 +28,13 @@ const fetchData = async () => {
 };
 
 interface SingleDataCardProps {
-  time: number,
-  title: string,
-  value: number
+  time: number;
+  title: string;
+  value: number;
 }
-const SingleDataCard: React.FC<SingleDataCardProps> = (props: SingleDataCardProps) => {
+const SingleDataCard: React.FC<SingleDataCardProps> = (
+  props: SingleDataCardProps
+) => {
   const { time, title, value } = props;
   return (
     <Col span={4}>
@@ -63,9 +63,6 @@ export const DataCard = () => {
       setNotesNum(res.length);
     });
   }, []);
-
-  // Follow up:
-  // Populate the cards with the data from the backend
   return (
     <div>
       <p className={styles.cardText}>
@@ -74,12 +71,12 @@ export const DataCard = () => {
         </Divider>
       </p>
       <Row gutter={30}>
-        <SingleDataCard time={time} title={sumDataString} value={notesNum}/>
-        <SingleDataCard time={time} title={kolDataString} value={notesNum}/>
-        <SingleDataCard time={time} title={achDataString} value={notesNum}/>
-        <SingleDataCard time={time} title={recordString} value={notesNum}/>
-        <SingleDataCard time={time} title={kocString} value={notesNum}/>
-        <SingleDataCard time={time} title={noteSumString} value={notesNum}/>
+        <SingleDataCard time={time} title={sumDataString} value={notesNum} />
+        <SingleDataCard time={time} title={kolDataString} value={notesNum} />
+        <SingleDataCard time={time} title={achDataString} value={notesNum} />
+        <SingleDataCard time={time} title={recordString} value={notesNum} />
+        <SingleDataCard time={time} title={kocString} value={notesNum} />
+        <SingleDataCard time={time} title={noteSumString} value={notesNum} />
       </Row>
     </div>
   );

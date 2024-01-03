@@ -5,9 +5,9 @@ import { Tabs } from "../../NoteTrack/component/Tabs"
 // import { Tabs } from "../../noteTrack/component/Tabs";
 import { LineChart } from "./LineChart";
 import { DataCard } from "./Datacard";
-import { getList } from "../api/index";
-import Daily from "./daily";
-import Record from "./record";
+import { getList } from "../api/Index";
+import Daily from "./Daily";
+import Record from "./Record";
 
 const getCollapseItems = () => {
   const prefix = "dashboard-collapse";
@@ -33,8 +33,6 @@ const getTabs = () => {
   ]);
 }
 
-// Follow up:
-// For consistency, use the pattern "export const Dashboard: React.FC = () => {}" instead of "export default Dashboard"
 export const Dashboard: React.FC = () => {
   return (
     <div>

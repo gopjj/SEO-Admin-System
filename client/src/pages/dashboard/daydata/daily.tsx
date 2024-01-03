@@ -1,15 +1,13 @@
 import React, { useEffect, useState,useRef } from "react";
 import { Table } from "antd";
 import type { ColumnsType } from "antd/lib/table";
-
-
-
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 import type { InputRef } from 'antd';
 import { Button, Input, Space } from 'antd';
 import type { ColumnType, } from 'antd/es/table';
 import type { FilterConfirmProps } from 'antd/es/table/interface';
+
 
 type DataSource = {
   key: string | number;
@@ -27,14 +25,10 @@ type DataSource = {
 };
 
 type DataIndex = keyof DataSource;
-
-
-
 interface MyTableProps {
   getListFunction: () => Promise<any>;
 }
-
-const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
+const Daily: React.FC<MyTableProps> = ({ getListFunction }) => {
 
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
@@ -207,11 +201,7 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
         
         <a href={`${record.link}`}>{text}</a>
       ),
-      
-      
     },
-  
-  
     {
       title: "发布日期",
       dataIndex: "date",
@@ -273,18 +263,14 @@ const MyTable: React.FC<MyTableProps> = ({ getListFunction }) => {
         }
 
         setDataSource(newData);
-       
-        console.log(returnedData.length)
       } catch (error) {
         console.error(error);
       }
     };
-    
-
     fetchData();
   }, []);
 
   return <Table dataSource={dataSource} columns={columns} />;
 };
 
-export default MyTable;
+export default Daily;
