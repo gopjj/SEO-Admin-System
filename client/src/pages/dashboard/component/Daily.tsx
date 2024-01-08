@@ -146,6 +146,14 @@ export const Daily: React.FC<MyTableProps> = ({ getListFunction }) => {
 
   const columns: ColumnsType<DataSource> = [
     {
+      title: "序号",
+      dataIndex: "id",
+      key: "id",
+      width: "4%",
+      align: "center",
+      sorter: (a, b) => a.id - b.id,
+    },
+    {
       title: "关键词",
       dataIndex: "keyword",
       key: "keyword",
@@ -153,27 +161,14 @@ export const Daily: React.FC<MyTableProps> = ({ getListFunction }) => {
       ...getColumnSearchProps("keyword"),
     },
     {
-      title: "Top12         SOV KPI",
-      dataIndex: "TopKpi",
-      key: "TopKpi",
-      width: "4%",
+      title: "更新时间",
+      dataIndex: "date",
+      key: "date",
+      width: "6%",
       align: "center",
+      ...getColumnSearchProps("date"),
     },
-    {
-      title: "品牌",
-      dataIndex: "brand",
-      key: "brand",
-      width: "4%",
-      align: "center",
-      ...getColumnSearchProps("brand"),
-    },
-    {
-      title: "达人昵称",
-      dataIndex: "author",
-      key: "author",
-      width: "8%",
-      ...getColumnSearchProps("author"),
-    },
+
     {
       title: "笔记标题",
       dataIndex: "title",
@@ -189,7 +184,6 @@ export const Daily: React.FC<MyTableProps> = ({ getListFunction }) => {
       width: "14%", //6
       render: (text, record) => <a href={`${record.link}`}>{text}</a>,
     },
-
     {
       title: "发布日期",
       dataIndex: "Pdate",
@@ -198,8 +192,16 @@ export const Daily: React.FC<MyTableProps> = ({ getListFunction }) => {
       align: "center",
       ...getColumnSearchProps("Pdate"),
     },
+   
     {
-      title: "预期上榜次数（当日）", //TODO:做筛选日期每天笔记的上榜次数
+      title: "达人昵称",
+      dataIndex: "author",
+      key: "author",
+      width: "8%",
+      ...getColumnSearchProps("author"),
+    },
+    {
+      title: "预期上榜（当日）", //TODO:做筛选日期每天笔记的上榜次数
       dataIndex: "expectlist",
       key: "expectlist",
       width: "7%",
@@ -208,9 +210,8 @@ export const Daily: React.FC<MyTableProps> = ({ getListFunction }) => {
       sorter: (a, b) => a.number - b.number,
       sortDirections: ["descend", "ascend"],
     },
-
     {
-      title: "实际上榜次数（当日）", //TODO:做筛选日期每天笔记的上榜次数
+      title: "上榜笔记（当日）", //TODO:做筛选日期每天笔记的上榜次数
       dataIndex: "number",
       key: "number",
       width: "7%",
@@ -219,15 +220,21 @@ export const Daily: React.FC<MyTableProps> = ({ getListFunction }) => {
       sorter: (a, b) => a.number - b.number,
       sortDirections: ["descend", "ascend"],
     },
-
     {
-      title: "上传日期",
-      dataIndex: "date",
-      key: "date",
-      width: "6%",
+      title: "互动数",
+      width: "4%",
       align: "center",
-      ...getColumnSearchProps("date"),
     },
+    {
+      title: "KOL/KOC",
+      width: "4%",
+      align: "center",
+    },
+
+
+
+    
+
   ];
 
   useEffect(() => {

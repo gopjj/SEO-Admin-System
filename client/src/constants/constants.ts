@@ -1,4 +1,4 @@
-export const copyRightString = " 2014-2023 Foo Digital 上海宸居有限公司.";
+export const copyRightString = " 2024 Foo Digital 上海居宸企业管理有限公司.";
 export const detailDataString = "详细数据";
 export const allDataString = "全部采集笔记汇总：";
 export const sumDataString = "总关键词数量：";
@@ -9,3 +9,4 @@ export const kocString = "总KOC发布:";
 export const noteSumString = "总笔记数量:";
 export const optmString = "最近一周的优化数据";
 export const companyName = '上海居宸企业管理有限公司';
+export const cardString = '品牌笔记数据概览';
