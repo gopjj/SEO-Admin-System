@@ -38,3 +38,6 @@ export const login = async (username: string, password: string) => {
 
   return axios.post(ApiList.login, data);
 };
+export const getGdb = async (options?: any) => {
+  return axios.get(ApiList.getGdb, options);
+};

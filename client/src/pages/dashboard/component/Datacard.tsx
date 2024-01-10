@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card, Col, Divider, Row } from "antd";
 import { getList } from "../api/Index";
+import {Select} from "antd";
 import styles from "../style/Datacard.module.css";
 import {
   allDataString,
@@ -66,18 +67,34 @@ export const DataCard = () => {
   return (
     <div>
       <p className={styles.cardText}>
-        <Divider orientation="left" plain>
+        {/* <Divider orientation="left" plain>
           {allDataString}
-        </Divider>
+        </Divider> */}
       </p>
-      <Row gutter={30}>
-        <SingleDataCard time={time} title={sumDataString} value={notesNum} />
-        <SingleDataCard time={time} title={kolDataString} value={notesNum} />
-        <SingleDataCard time={time} title={achDataString} value={notesNum} />
-        <SingleDataCard time={time} title={recordString} value={notesNum} />
-        <SingleDataCard time={time} title={kocString} value={notesNum} />
-        <SingleDataCard time={time} title={noteSumString} value={notesNum} />
-      </Row>
+    
+   
+  <div style={{ marginTop: '16px' }}>
+    <Select
+      defaultValue="关键词"
+      style={{ width: 120, marginLeft: '10px' }}
+      allowClear
+      options={[
+        { value: '依泉', label: '依泉' },
+        { value: '好人家', label: '好人家' },
+        { value: 'replenix', label: 'replenix' },
+      ]}
+    />
+  </div>
+  <Row gutter={30} style={{ marginTop: '20px' }}>
+    <SingleDataCard time={time} title={sumDataString} value={notesNum} />
+    <SingleDataCard time={time} title={kolDataString} value={notesNum} />
+    <SingleDataCard time={time} title={achDataString} value={notesNum} />
+    <SingleDataCard time={time} title={recordString} value={notesNum} />
+    <SingleDataCard time={time} title={kocString} value={notesNum} />
+    <SingleDataCard time={time} title={noteSumString} value={notesNum} />
+  </Row>
+
     </div>
+
   );
 };

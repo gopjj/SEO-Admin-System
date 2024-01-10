@@ -13,8 +13,8 @@ namespace ApiList {
   export const getopAll = "/getopAll";
   export const getnoteaco = "/getnoteaco";
   export const login = "/login";
-  export const postData = "/postData";
-
+  export const postData = "/postData"; 
+  export const getGdb = "./getGmfDB";
 
 }
 

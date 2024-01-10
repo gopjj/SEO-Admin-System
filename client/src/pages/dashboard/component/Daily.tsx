@@ -9,17 +9,18 @@ import style from "../style/Daily.module.css";
 
 
 type DataSource = {
-  key: string | number;
   id: number;
   author: string;
   title: string;
   keyword: string;
   Pdate: string;
   brand: string;
-  status: string;
+  noteType: string;
   number: number;
   link: string;
-  TopKpi: number;
+  count: number;
+  // TopKpi: number;
+  interNum: any;
   date: Date;
   expectlist: number;
 };
@@ -27,10 +28,10 @@ type DataSource = {
 type DataIndex = keyof DataSource;
 
 interface MyTableProps {
-  getListFunction: () => Promise<any>;
+  getData: () => Promise<any>;
 }
 
-export const Daily: React.FC<MyTableProps> = ({ getListFunction }) => {
+export const Daily: React.FC<MyTableProps> = ({ getData }) => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
@@ -149,7 +150,7 @@ export const Daily: React.FC<MyTableProps> = ({ getListFunction }) => {
       title: "序号",
       dataIndex: "id",
       key: "id",
-      width: "4%",
+      width: "5%",
       align: "center",
       sorter: (a, b) => a.id - b.id,
     },
@@ -157,14 +158,15 @@ export const Daily: React.FC<MyTableProps> = ({ getListFunction }) => {
       title: "关键词",
       dataIndex: "keyword",
       key: "keyword",
-      width: "5%",
+      width: "8%",
+      align: "center",
       ...getColumnSearchProps("keyword"),
     },
     {
       title: "更新时间",
       dataIndex: "date",
       key: "date",
-      width: "6%",
+      width: "8%",
       align: "center",
       ...getColumnSearchProps("date"),
     },
@@ -173,7 +175,7 @@ export const Daily: React.FC<MyTableProps> = ({ getListFunction }) => {
       title: "笔记标题",
       dataIndex: "title",
       key: "title",
-      width: "16%", //6
+      width: "18%", //6
       render: (text, record) => <a href={`${record.link}`}>{text}</a>,
       ...getColumnSearchProps("title"),
     },
@@ -181,14 +183,14 @@ export const Daily: React.FC<MyTableProps> = ({ getListFunction }) => {
       title: "笔记链接",
       dataIndex: "title",
       key: "title",
-      width: "14%", //6
+      width: "18%", //6
       render: (text, record) => <a href={`${record.link}`}>{text}</a>,
     },
     {
       title: "发布日期",
       dataIndex: "Pdate",
       key: "Pdate",
-      width: "5%",
+      width: "8%",
       align: "center",
       ...getColumnSearchProps("Pdate"),
     },
@@ -201,20 +203,20 @@ export const Daily: React.FC<MyTableProps> = ({ getListFunction }) => {
       ...getColumnSearchProps("author"),
     },
     {
-      title: "预期上榜（当日）", //TODO:做筛选日期每天笔记的上榜次数
+      title: "预期上榜", //TODO:做筛选日期每天笔记的上榜次数
       dataIndex: "expectlist",
       key: "expectlist",
-      width: "7%",
+      width: "8%",
       align: "center",
 
       sorter: (a, b) => a.number - b.number,
       sortDirections: ["descend", "ascend"],
     },
     {
-      title: "上榜笔记（当日）", //TODO:做筛选日期每天笔记的上榜次数
-      dataIndex: "number",
-      key: "number",
-      width: "7%",
+      title: "上榜笔记", //TODO:做筛选日期每天笔记的上榜次数
+      dataIndex: "count",
+      key: "count",
+      width: "8%",
       align: "center",
 
       sorter: (a, b) => a.number - b.number,
@@ -222,45 +224,114 @@ export const Daily: React.FC<MyTableProps> = ({ getListFunction }) => {
     },
     {
       title: "互动数",
-      width: "4%",
+      width: "6%",
+      dataIndex: "interNum",
+      key: "interNum",
       align: "center",
     },
     {
       title: "KOL/KOC",
+      dataIndex: "noteType",
+      key: "noteType",
       width: "4%",
       align: "center",
     },
-
-
-
-    
 
   ];
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getListFunction();
+        const KeywordDataMap: Map<string, string[]> = new Map();
+        const response = await getData();
         const returnedData = response as unknown as Array<any>;
         const newData: DataSource[] = [];
-        for (const data of returnedData) {
-          const expectedlistDivided = data.expectedlist / 20;
-          newData.push({
-            key: data.ID,
-            id: data.ID,
-            author: data.author,
-            title: data.note_title,
-            link: data.note_link,
-            keyword: data.keyword,
-            Pdate: data.publish_date,
-            brand: data.brand,
-            status: data.note_status,
-            number: data.listed,
-            expectlist: expectedlistDivided,
-            TopKpi: data.Top12_KPI,
-            date: data.date,
-          });
+        const KeywordData: string[] = [];
+        console.log(returnedData);
+        let counter = 0; // 自增计数器
+
+
+        const titleLinkCombinations: string[] = []; // 保存已经出现过的标题加链接的组合
+      // 初始化用于存储标题链接组合计数的 Map
+// 初始化用于存储标题链接组合计数的 Map
+let countMap: Map<string, number> = new Map();
+
+returnedData.forEach((data, index) => {
+  data.keySum.forEach((keySumItem: any) => {
+    const keyword = keySumItem.keyword;
+    const listed = keySumItem.listed;
+    const titleLinkCombinations: string[] = []; // 每个关键词范围内的标题加链接组合
+
+    keySumItem["note-detail"].forEach((noteDetail: any) => {
+      const expectedlistDivided = 2;
+      const titleLinkCombination = `${noteDetail["note-title"]}_${noteDetail["note-link"]}`; // 标题加链接的组合
+
+      let count = countMap.get(titleLinkCombination); // 获取当前标题加链接的计数值
+      if (!count) {
+        count = 0; // 如果不存在，则初始计数值为0
+      }
+
+      // 判断当前标题加链接的组合是否已经存在于当前关键词范围内的标题加链接组合数组中
+      if (!titleLinkCombinations.includes(titleLinkCombination)) {
+        const id = parseInt(`${index}${newData.length}`); // 自动生成的ID格式为 "索引值_数组长度"
+
+        count++; // 将计数值加1
+
+        newData.push({
+          id: id,
+          keyword: keyword,
+          author: noteDetail.author,
+          title: noteDetail["note-title"],
+          link: noteDetail["note-link"],
+          Pdate: noteDetail.date,
+          brand: noteDetail.brander,
+          interNum: noteDetail["in-count"],
+          noteType: noteDetail["kol-c"],
+          number: listed,
+          expectlist: expectedlistDivided,
+          count: count, // 加入计数值
+          date: data.date,
+        });
+
+        titleLinkCombinations.push(titleLinkCombination);
+
+        countMap.set(titleLinkCombination, count); // 更新计数器
+      } else {
+        count++; // 已存在，则累加计数值
+        countMap.set(titleLinkCombination, count); // 更新计数器
+
+        // 更新重复笔记的计数值
+        const existingNote = newData.find(
+          (note) =>
+            note.title === noteDetail["note-title"] &&
+            note.link === noteDetail["note-link"]
+        );
+        if (existingNote) {
+          existingNote.count = count;
         }
+      }
+    });
+  });
+});
+
+          
+        // for (const data of returnedData) {
+        //   const expectedlistDivided = data.expectedlist / 20;
+        //   newData.push({
+        //     id: data.keyId,
+        //     keyword: data.keyword,
+        //     author: data.author,
+        //     title: data.note_title,
+        //     link: data.note_link,            
+        //     Pdate: data.publish_date,
+        //     brand: data.brand,
+        //     status: data.note_status,
+        //     number: data.listed,
+        //     expectlist: expectedlistDivided,
+        //     TopKpi: data.Top12_KPI,
+        //     date: data.date,
+        //   });
+        // }
 
         setDataSource(newData);
       } catch (error) {

@@ -9,14 +9,12 @@ import classNames from "../style/Home.module.css";
 
 const { Header, Content, Footer, Sider } = Layout;
 
+
 export const Home: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const appConetxt = useContext(AppContext);
-  const [state, setState] = useState(appConetxt.state);
-
+  const state = useContext(AppContext).state;
   return (
     <Layout>
-      <AppContext.Provider value={{ state, setState }}>
         <Header className={classNames.headerStyle}>
           <img src={logo} alt="Logo" className={classNames.logoStyle} />
           <Popover
@@ -49,7 +47,7 @@ export const Home: React.FC = () => {
             <Footer className={classNames.footer}></Footer>
           </Layout>
         </Layout>
-      </AppContext.Provider>
+      {/* </AppContext.Provider> */}
     </Layout>
   );
 };

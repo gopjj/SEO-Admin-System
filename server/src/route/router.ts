@@ -28,7 +28,9 @@ router.get("/getnoteaco", dashbaordController.getnoteaco);
 router.get("/getgmfData", dashbaordController.getgmfData);
 router.post("/login", login);
 router.post("/postData", postData);
-
+//拿取GoodMaNFamilyDB 
+router.get("/getGmfDB", dashbaordController.getGmfDB);
+router.get("/getGmfDataByDate",dashbaordController.getGmfDataByDate)
 //upload
 router.post("/upload", multer().single("file"), uploadController.uploadXlsx);
 

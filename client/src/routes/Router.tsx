@@ -5,9 +5,15 @@ import { Home } from "../pages/home/component/Home";
 import { Login } from "../pages/login/component/Login";
 import { NoteOptm } from "../pages/notetrack/component/NoteOptm";
 import { Uploadcom } from "../pages/upload/component/Upload";
+import { AppContext } from "../pages/login/component/Appcontext";
+import { useContext, useState } from "react";
 
 export const Router: React.FC = () => {
+  
+  const appConetxt = useContext(AppContext);
+  const [state, setState] = useState(appConetxt.state);
   return (
+    <AppContext.Provider value={{ state, setState }}>
     <BrowserRouter>
       <Routes>
         <Route path="" element={<Login />}></Route> <Route />
@@ -20,6 +26,7 @@ export const Router: React.FC = () => {
         <Route path="/404" element={<div>404 Not Found</div>}></Route>
       </Routes>
     </BrowserRouter>
+    </AppContext.Provider>
   );
 };
 

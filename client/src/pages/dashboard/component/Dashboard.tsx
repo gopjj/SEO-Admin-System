@@ -5,7 +5,8 @@ import { Tabs } from "../../notetrack/component/Tabs"
 import {Select} from "antd";
 // import { LineChart } from "./LineChart";
 import { DataCard } from "./Datacard";
-import { getList } from "../api/Index";
+import { getGdb  } from "../api/Index";
+
 import { Daily } from "./Daily";
 import { Record } from "./Record";
 import styles from  "../style/Card.module.css"
@@ -35,7 +36,7 @@ const { RangePicker } = DatePicker;
 
 const getTabs = () => {
   return new Map<string, React.ReactNode>([
-    ["日报", <Daily getListFunction={getList}/>],
+    ["日报", <Daily getData={getGdb}/>],
     ["收录", <Record />],
   ]);
 }
@@ -53,46 +54,54 @@ export const Dashboard: React.FC = () => {
   };
   return (
     <div>
-      <DataCard />
+      {/* <DataCard /> */}
       {/* <Divider orientation="left" plain></Divider> */}
       {/* <Collapse items={getCollapseItems()}></Collapse> */}
       <Divider orientation="left" plain style={{ color: "lightgrey" }}>
         {detailDataString}
       </Divider>
-      <Card>
+      
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-      <span className={styles.fontsize}>{cardString}</span>
+      {/* <Card style={{ width: '100%', padding: '2px' }}> */}
+        {/* <span className={styles.fontsize}>{cardString}</span> */}
         <Select
-      defaultValue="好人家"
-      style={{ width: 120, marginLeft: 'auto' }}
-      allowClear
-      options={[
-        { value: '依泉', label: '依泉' },
-        { value: '好人家', label: '好人家' },
-        { value: 'replenix', label: 'replenix' },
-      ]}
-    />
-       <RangePicker
-        style={{ marginLeft: '16px', marginRight: '0' }}
-        value={dates || value}
-        onCalendarChange={(val) => {
-          setDates(val);
-        }}
-        onChange={(val) => {
-          setValue(val);
-          if (val) {
-            setSelectedTime(`Selected time range: ${val[0]?.format("YYYY-MM-DD")} to ${val[1]?.format("YYYY-MM-DD")}`);
-          } else {
-            setSelectedTime("");
-          }
-        }}
-        onOpenChange={onOpenChange}
-        changeOnBlur
-      />
+          defaultValue="好人家"
+          style={{ width: 120, marginLeft: '1200px', marginTop: '16px' }}
+          allowClear
+          options={[
+             { value: '依泉', label: '依泉' },
+             { value: '好人家', label: '好人家' },
+             { value: 'replenix', label: 'replenix' },
+          ]}
+         />
+        <RangePicker
+            style={{ marginTop: '16px' ,marginLeft:'10px'}}
+            value={dates || value}
+            onCalendarChange={val => {
+            setDates(val);
+          }}
+         onChange={val => {
+         setValue(val);
+        if (val) {
+        setSelectedTime(
+          `Selected time range: ${val[0]?.format('YYYY-MM-DD')} to ${val[1]?.format(
+            'YYYY-MM-DD'
+          )}`
+        );
+      } else {
+        setSelectedTime('');
+      }
+    }}
+    onOpenChange={onOpenChange}
+    changeOnBlur
+  />
+{/* </Card> */}
        </div>
          <Divider orientation="left" plain></Divider>
+         <DataCard />
+         <Divider orientation="left" plain></Divider>
          <Tabs prefix='dashboard' tabs={getTabs()}/>
-      </Card>
+    
     
       {/* <div>{selectedTime}</div> 显示选中的时间 */}
      

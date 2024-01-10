@@ -4,11 +4,15 @@ import recordData from "../dao/recordData.js";
 import keywordData from "../dao/keywordData.js";
 import { OperationRecord } from "../dao/OperationRecord.js";
 import GoodmanFamily from "../dao/gmfamilyData.js";
+import { GmfDataDB } from "../dao/GmfDataDB.js";
+import { parse as parseQueryString } from 'querystring';
 
 export class DashbaordController {
   private operationRecord: OperationRecord;
+  private gmfdataDB: GmfDataDB;
   constructor() {
     this.operationRecord = new OperationRecord();
+    this.gmfdataDB = new GmfDataDB();
   }
   getList: RequestHandler = async (req: Request, res: Response) => {
     const results = await startupLogDao.getList();
@@ -128,4 +132,18 @@ export class DashbaordController {
     // 假设你已经将数据存储到数据库中，现在返回一个成功的响应
     res.send("Data received and stored successfully.").status(200);
   };
+  getGmfDB: RequestHandler = async (req: Request, res: Response) => {
+    const results = await this.gmfdataDB.getGmfData();
+    res.send(results).status(200);
+  };
+  getGmfDataByDate: RequestHandler = async (req: Request, res: Response) => {
+    // const results = await startupLogDao.getTitle();
+
+    const date = (req.query.date as any) as string;
+    const results = await this.gmfdataDB.getGmfDataByDate(date);
+    res.send(results).status(200);
+  };
+
+
+
 }
