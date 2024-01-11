@@ -1,45 +1,44 @@
 import { Card, Collapse, Divider } from "antd";
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { cardString, detailDataString } from "../../../constants/constants";
-import { Tabs } from "../../notetrack/component/Tabs"
-import {Select} from "antd";
-// import { LineChart } from "./LineChart";
+import { Tabs } from "../../notetrack/component/Tabs";
+import { Select } from "antd";
+import { LineChart } from "./LineChart";
 import { DataCard } from "./Datacard";
-import { getGdb  } from "../api/Index";
-
+import { getBrandhrj } from "../api/Index";
 import { Daily } from "./Daily";
 import { Record } from "./Record";
-import styles from  "../style/Card.module.css"
+import styles from "../style/Card.module.css";
 import { DatePicker } from "antd";
+import type { Dayjs } from "dayjs";
+import { Selectkeyword } from "./Select";
 
-
-import type { Dayjs } from 'dayjs';
 type RangeValue = [Dayjs | null, Dayjs | null] | null;
 const { RangePicker } = DatePicker;
 
-// const getCollapseItems = () => {
-//   const prefix = "dashboard-collapse";
-//   const label = "点击展开周报图标";
-//   return [
-//     {
-//       key: prefix + "-" + label,
-//       label: label,
-//       children: (
-//         <div>
-//           <LineChart type="noteListed" timeSpan={7} />
-//           <LineChart type="expectedList" timeSpan={30} />
-//         </div>
-//       ),
-//     },
-//   ];
-// };
+const getCollapseItems = () => {
+  const prefix = "dashboard-collapse";
+  const label = "展开图表";
+  return [
+    {
+      key: prefix + "-" + label,
+      label: label,
+      children: (
+        <div>
+          <LineChart type="noteListed" timeSpan={7} />
+          <LineChart type="expectedList" timeSpan={30} />
+        </div>
+      ),
+    },
+  ];
+};
 
 const getTabs = () => {
   return new Map<string, React.ReactNode>([
-    ["日报", <Daily getData={getGdb}/>],
+    ["笔记", <Daily getData={getBrandhrj} />],
     ["收录", <Record />],
   ]);
-}
+};
 
 export const Dashboard: React.FC = () => {
   const [dates, setDates] = useState<RangeValue>(null);
@@ -53,58 +52,67 @@ export const Dashboard: React.FC = () => {
     }
   };
   return (
-    <div>
-      {/* <DataCard /> */}
-      {/* <Divider orientation="left" plain></Divider> */}
-      {/* <Collapse items={getCollapseItems()}></Collapse> */}
-      <Divider orientation="left" plain style={{ color: "lightgrey" }}>
-        {detailDataString}
-      </Divider>
-      
-      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-      {/* <Card style={{ width: '100%', padding: '2px' }}> */}
-        {/* <span className={styles.fontsize}>{cardString}</span> */}
-        <Select
-          defaultValue="好人家"
-          style={{ width: 120, marginLeft: '1200px', marginTop: '16px' }}
-          allowClear
-          options={[
-             { value: '依泉', label: '依泉' },
-             { value: '好人家', label: '好人家' },
-             { value: 'replenix', label: 'replenix' },
-          ]}
-         />
-        <RangePicker
-            style={{ marginTop: '16px' ,marginLeft:'10px'}}
-            value={dates || value}
-            onCalendarChange={val => {
-            setDates(val);
-          }}
-         onChange={val => {
-         setValue(val);
-        if (val) {
-        setSelectedTime(
-          `Selected time range: ${val[0]?.format('YYYY-MM-DD')} to ${val[1]?.format(
-            'YYYY-MM-DD'
-          )}`
-        );
-      } else {
-        setSelectedTime('');
-      }
-    }}
-    onOpenChange={onOpenChange}
-    changeOnBlur
-  />
-{/* </Card> */}
-       </div>
-         <Divider orientation="left" plain></Divider>
-         <DataCard />
-         <Divider orientation="left" plain></Divider>
-         <Tabs prefix='dashboard' tabs={getTabs()}/>
-    
-    
-      {/* <div>{selectedTime}</div> 显示选中的时间 */}
-     
-    </div>
+    <>
+      <div className={styles.container}>
+        <div>
+          <Card className={styles.customCard}>
+            <div>
+              <p style={{ fontSize: "18px" }}>筛选数据</p>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <RangePicker
+                style={{
+                  marginTop: "10px",
+                  marginLeft: "0px",
+                  marginRight: "20px",
+                }}
+                value={dates || value}
+                onCalendarChange={(val) => {
+                  setDates(val);
+                }}
+                onChange={(val) => {
+                  setValue(val);
+                  if (val) {
+                    setSelectedTime(
+                      `Selected time range: ${val[0]?.format(
+                        "YYYY-MM-DD"
+                      )} to ${val[1]?.format("YYYY-MM-DD")}`
+                    );
+                  } else {
+                    setSelectedTime("");
+                  }
+                }}
+                onOpenChange={onOpenChange}
+                changeOnBlur
+              />
+
+              <Selectkeyword></Selectkeyword>
+            </div>
+          </Card>
+          <Card className={styles.customCard}>
+            <div>
+              <p style={{ fontSize: "18px" }}>图表数据</p>
+            </div>
+            <DataCard />
+            <div style={{ marginTop: "28px" }}>
+              <Collapse items={getCollapseItems()} bordered={false}></Collapse>
+            </div>
+          </Card>
+
+          <Card className={styles.customCard}>
+            <div>
+              <p style={{ fontSize: "20px" }}>详细数据</p>
+            </div>
+            <Tabs prefix="dashboard" tabs={getTabs()} />
+          </Card>
+        </div>
+      </div>
+    </>
   );
 };

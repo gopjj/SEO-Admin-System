@@ -1,5 +1,5 @@
 export const copyRightString = " 2024 Foo Digital 上海居宸企业管理有限公司.";
-export const detailDataString = "详细数据";
+export const detailDataString = "品牌笔记数据";
 export const allDataString = "全部采集笔记汇总：";
 export const sumDataString = "总关键词数量：";
 export const kolDataString = "品牌预计上榜笔记数量: ";

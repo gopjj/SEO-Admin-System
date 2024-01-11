@@ -9,7 +9,7 @@ import style from "../style/Daily.module.css";
 
 
 type DataSource = {
-  id: number;
+
   author: string;
   title: string;
   keyword: string;
@@ -147,23 +147,7 @@ export const Daily: React.FC<MyTableProps> = ({ getData }) => {
 
   const columns: ColumnsType<DataSource> = [
     {
-      title: "序号",
-      dataIndex: "id",
-      key: "id",
-      width: "5%",
-      align: "center",
-      sorter: (a, b) => a.id - b.id,
-    },
-    {
-      title: "关键词",
-      dataIndex: "keyword",
-      key: "keyword",
-      width: "8%",
-      align: "center",
-      ...getColumnSearchProps("keyword"),
-    },
-    {
-      title: "更新时间",
+      title: "日期",
       dataIndex: "date",
       key: "date",
       width: "8%",
@@ -172,7 +156,17 @@ export const Daily: React.FC<MyTableProps> = ({ getData }) => {
     },
 
     {
-      title: "笔记标题",
+      title: "关键词",
+      dataIndex: "keyword",
+      key: "keyword",
+      width: "8%",
+      align: "center",
+      ...getColumnSearchProps("keyword"),
+    },
+
+
+    {
+      title: "笔记",
       dataIndex: "title",
       key: "title",
       width: "18%", //6
@@ -257,12 +251,12 @@ export const Daily: React.FC<MyTableProps> = ({ getData }) => {
 let countMap: Map<string, number> = new Map();
 
 returnedData.forEach((data, index) => {
-  data.keySum.forEach((keySumItem: any) => {
-    const keyword = keySumItem.keyword;
-    const listed = keySumItem.listed;
+  data.keySum.forEach((keywordList: any) => {
+    const keyword =keywordList.keyword;
+    const listed =keywordList.listed;
     const titleLinkCombinations: string[] = []; // 每个关键词范围内的标题加链接组合
 
-    keySumItem["note-detail"].forEach((noteDetail: any) => {
+    keywordList["note-detail"].forEach((noteDetail: any) => {
       const expectedlistDivided = 2;
       const titleLinkCombination = `${noteDetail["note-title"]}_${noteDetail["note-link"]}`; // 标题加链接的组合
 
@@ -278,7 +272,6 @@ returnedData.forEach((data, index) => {
         count++; // 将计数值加1
 
         newData.push({
-          id: id,
           keyword: keyword,
           author: noteDetail.author,
           title: noteDetail["note-title"],

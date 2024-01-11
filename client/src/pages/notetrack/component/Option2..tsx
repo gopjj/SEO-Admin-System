@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Tabs } from 'antd';
 import { Card } from 'antd/lib';
-import '../dashboard/css/card.css';
+// import '../dashboard/css/card.css';
 import DemoDualAxes from './NoteChart';
 const { TabPane } = Tabs;
 

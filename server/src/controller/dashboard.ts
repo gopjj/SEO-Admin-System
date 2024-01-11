@@ -4,15 +4,15 @@ import recordData from "../dao/recordData.js";
 import keywordData from "../dao/keywordData.js";
 import { OperationRecord } from "../dao/OperationRecord.js";
 import GoodmanFamily from "../dao/gmfamilyData.js";
-import { GmfDataDB } from "../dao/GmfDataDB.js";
+import { hrjDataDB } from "../dao/hrjDataDB.js";
 import { parse as parseQueryString } from 'querystring';
 
 export class DashbaordController {
   private operationRecord: OperationRecord;
-  private gmfdataDB: GmfDataDB;
+  private hrjdataDB: hrjDataDB;
   constructor() {
     this.operationRecord = new OperationRecord();
-    this.gmfdataDB = new GmfDataDB();
+    this.hrjdataDB = new hrjDataDB();
   }
   getList: RequestHandler = async (req: Request, res: Response) => {
     const results = await startupLogDao.getList();
@@ -133,14 +133,14 @@ export class DashbaordController {
     res.send("Data received and stored successfully.").status(200);
   };
   getGmfDB: RequestHandler = async (req: Request, res: Response) => {
-    const results = await this.gmfdataDB.getGmfData();
+    const results = await this.hrjdataDB.gethrjData();
     res.send(results).status(200);
   };
   getGmfDataByDate: RequestHandler = async (req: Request, res: Response) => {
     // const results = await startupLogDao.getTitle();
 
     const date = (req.query.date as any) as string;
-    const results = await this.gmfdataDB.getGmfDataByDate(date);
+    const results = await this.hrjdataDB.gethrjDataByDate(date);
     res.send(results).status(200);
   };
 

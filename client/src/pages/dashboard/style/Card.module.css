@@ -3,7 +3,7 @@
   flex-direction: column;
 }
 
-.container > div {
+.container {
   margin-bottom: 20px;
 }
 
@@ -19,4 +19,8 @@
 .fontsize {
   font-size: 18px;
   font-family: "微软雅黑", sans-serif;
+}
+.customCard {
+  margin-bottom: 20px;
+  margin-top: 20px;
 }

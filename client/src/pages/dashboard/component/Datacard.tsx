@@ -67,24 +67,9 @@ export const DataCard = () => {
   return (
     <div>
       <p className={styles.cardText}>
-        {/* <Divider orientation="left" plain>
-          {allDataString}
-        </Divider> */}
+
       </p>
-    
-   
-  <div style={{ marginTop: '16px' }}>
-    <Select
-      defaultValue="关键词"
-      style={{ width: 120, marginLeft: '10px' }}
-      allowClear
-      options={[
-        { value: '依泉', label: '依泉' },
-        { value: '好人家', label: '好人家' },
-        { value: 'replenix', label: 'replenix' },
-      ]}
-    />
-  </div>
+
   <Row gutter={30} style={{ marginTop: '20px' }}>
     <SingleDataCard time={time} title={sumDataString} value={notesNum} />
     <SingleDataCard time={time} title={kolDataString} value={notesNum} />

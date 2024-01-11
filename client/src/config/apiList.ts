@@ -14,7 +14,7 @@ namespace ApiList {
   export const getnoteaco = "/getnoteaco";
   export const login = "/login";
   export const postData = "/postData"; 
-  export const getGdb = "./getGmfDB";
+  export const getBrandhrj = "./getGmfDB";
 
 }
 
