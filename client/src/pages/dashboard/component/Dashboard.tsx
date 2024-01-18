@@ -1,8 +1,6 @@
 import { Card, Collapse, Divider } from "antd";
 import React, { useState } from "react";
-import { cardString, detailDataString } from "../../../constants/constants";
 import { Tabs } from "../../notetrack/component/Tabs";
-import { Select } from "antd";
 import { LineChart } from "./LineChart";
 import { DataCard } from "./Datacard";
 import { getBrandhrj } from "../api/Index";
@@ -13,9 +11,9 @@ import { DatePicker } from "antd";
 import type { Dayjs } from "dayjs";
 import { Selectkeyword } from "./Select";
 
+
 type RangeValue = [Dayjs | null, Dayjs | null] | null;
 const { RangePicker } = DatePicker;
-
 const getCollapseItems = () => {
   const prefix = "dashboard-collapse";
   const label = "展开图表";
@@ -33,19 +31,34 @@ const getCollapseItems = () => {
   ];
 };
 
-const getTabs = () => {
+const getTabs = (startdate: any, enddate: any,key :any) => {
   return new Map<string, React.ReactNode>([
-    ["笔记", <Daily getData={getBrandhrj} />],
+    [
+      "笔记",
+      <Daily getData={getBrandhrj} startdate={startdate} enddate={enddate} key = {key}/>,
+    ],
     ["收录", <Record />],
   ]);
 };
+
 
 export const Dashboard: React.FC = () => {
   const [dates, setDates] = useState<RangeValue>(null);
   const [value, setValue] = useState<RangeValue>(null);
   const [selectedTime, setSelectedTime] = useState<string>(""); // 新增 state 用于存储选中的时间
+  const [startdate, setstartdate] = useState<any>("");
+  const [enddate, setenddate] = useState<any>("");
+  const [brand,setbrand] = useState<any>("");
+  const [key,setkey] =  useState<any>("");
+  const hanleselect = (brand:string,key:string) => {
+    setbrand(brand);
+    setkey(key);
+  };
+  console.log("当前品牌值:"+brand);
+  console.log("当前关键词:"+key);
   const onOpenChange = (open: boolean) => {
     if (open) {
+      console.log();
       setDates([null, null]);
     } else {
       setDates(null);
@@ -78,21 +91,27 @@ export const Dashboard: React.FC = () => {
                 }}
                 onChange={(val) => {
                   setValue(val);
+
                   if (val) {
                     setSelectedTime(
                       `Selected time range: ${val[0]?.format(
                         "YYYY-MM-DD"
                       )} to ${val[1]?.format("YYYY-MM-DD")}`
                     );
+                    setstartdate(val[0]?.format("YYYY-MM-DD"));
+                    setenddate(val[1]?.format("YYYY-MM-DD"));
                   } else {
                     setSelectedTime("");
                   }
+                  console.log("开始时间" + startdate);
+                  console.log("dd" + dates);
                 }}
                 onOpenChange={onOpenChange}
                 changeOnBlur
               />
 
-              <Selectkeyword></Selectkeyword>
+              <Selectkeyword onSelect={hanleselect} />
+              <p></p>
             </div>
           </Card>
           <Card className={styles.customCard}>
@@ -109,9 +128,10 @@ export const Dashboard: React.FC = () => {
             <div>
               <p style={{ fontSize: "20px" }}>详细数据</p>
             </div>
-            <Tabs prefix="dashboard" tabs={getTabs()} />
+            <Tabs prefix="dashboard" tabs={getTabs(startdate, enddate,key)} />
           </Card>
         </div>
+        <div></div>
       </div>
     </>
   );

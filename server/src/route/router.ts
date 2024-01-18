@@ -31,6 +31,8 @@ router.post("/postData", postData);
 //拿取GoodMaNFamilyDB 
 router.get("/getGmfDB", dashbaordController.getGmfDB);
 router.get("/getGmfDataByDate",dashbaordController.getGmfDataByDate)
+router.get("/gethrjdate",dashbaordController.gethrjdate)
+router.get("/getByKeyword",dashbaordController.getByKeyword)
 //upload
 router.post("/upload", multer().single("file"), uploadController.uploadXlsx);
 

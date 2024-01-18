@@ -1,10 +1,10 @@
-import { Request, RequestHandler, Response } from "express";
+import { Request, RequestHandler, Response ,NextFunction} from "express";
 import startupLogDao from "../dao/dailyData.js";
 import recordData from "../dao/recordData.js";
 import keywordData from "../dao/keywordData.js";
 import { OperationRecord } from "../dao/OperationRecord.js";
 import GoodmanFamily from "../dao/gmfamilyData.js";
-import { hrjDataDB } from "../dao/hrjDataDB.js";
+import { hrjDataDB } from "../dao/HrjDataDB.js";
 import { parse as parseQueryString } from 'querystring';
 
 export class DashbaordController {
@@ -143,7 +143,25 @@ export class DashbaordController {
     const results = await this.hrjdataDB.gethrjDataByDate(date);
     res.send(results).status(200);
   };
-
+  gethrjdate:RequestHandler = async(req:Request,res:Response) =>{
+    const { startDate, endDate } = req.query; // 假设日期范围通过查询参数传递
+  try {
+    // 调用你之前编写的数据获取函数
+    const data = await this.hrjdataDB.gethrjDataByDateRange(startDate, endDate);
+    res.status(200).json(data); // 返回获取的数据
+  } catch (error) {
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+  }
+  
+  getByKeyword:RequestHandler = async(req:Request,res:Response) => {
+    const keyword = (req.query.keyword as any) as string;
+    console.log(keyword)
+    const results = await this.hrjdataDB.getByKeyword(keyword)
+    res.send(results).status(200);
+  }
+  getCombinedData: RequestHandler = async (req: Request, res: Response) => {
+    
 
 
 }

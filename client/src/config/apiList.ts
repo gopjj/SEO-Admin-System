@@ -1,4 +1,5 @@
 namespace ApiList {
+
   export const upload = "/upload";
   export const getgmfData = "/getgmfData"
   export const getList = "/getList";
@@ -15,7 +16,8 @@ namespace ApiList {
   export const login = "/login";
   export const postData = "/postData"; 
   export const getBrandhrj = "./getGmfDB";
-
+  export const getByDatehrj = "./gethrjDataByDateRange"
+  export const getByKeyword = "./getByKeyword"
 }
 
 export default ApiList;
