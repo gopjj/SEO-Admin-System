@@ -160,8 +160,12 @@ export class DashbaordController {
     const results = await this.hrjdataDB.getByKeyword(keyword)
     res.send(results).status(200);
   }
+
   getCombinedData: RequestHandler = async (req: Request, res: Response) => {
-    
-
-
+    const startdate = (req.query.startdate as any) as string;
+    const enddate = (req.query.enddate as any) as string;
+    const keyword = (req.query.keyword as any) as string;
+    const results = await this.hrjdataDB.getCombinedData(startdate, enddate, keyword);
+    res.send(results).status(200);
+  }
 }

@@ -91,7 +91,6 @@ export const Dashboard: React.FC = () => {
                 }}
                 onChange={(val) => {
                   setValue(val);
-
                   if (val) {
                     setSelectedTime(
                       `Selected time range: ${val[0]?.format(
@@ -109,7 +108,6 @@ export const Dashboard: React.FC = () => {
                 onOpenChange={onOpenChange}
                 changeOnBlur
               />
-
               <Selectkeyword onSelect={hanleselect} />
               <p></p>
             </div>
@@ -123,7 +121,6 @@ export const Dashboard: React.FC = () => {
               <Collapse items={getCollapseItems()} bordered={false}></Collapse>
             </div>
           </Card>
-
           <Card className={styles.customCard}>
             <div>
               <p style={{ fontSize: "20px" }}>详细数据</p>

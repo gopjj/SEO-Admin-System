@@ -18,6 +18,7 @@ namespace ApiList {
   export const getBrandhrj = "./getGmfDB";
   export const getByDatehrj = "./gethrjDataByDateRange"
   export const getByKeyword = "./getByKeyword"
+  export  const getCombinedData = "./getCombinedData"
 }
 
 export default ApiList;

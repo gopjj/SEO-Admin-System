@@ -12,6 +12,9 @@ import {
   noteSumString,
 } from "../../../constants/constants";
 
+// import { fetchData } from "./Daily";
+import {getCombinedData} from "../api/Index";
+
 interface DataCardProps {
   data: any; // 定义一个名为 data 的prop
 }
@@ -31,7 +34,6 @@ const fetchData = async () => {
     return null;
   }
 };
-
 interface SingleDataCardProps {
   time: number;
   title: string;
@@ -56,7 +58,6 @@ const SingleDataCard: React.FC<SingleDataCardProps> = (
 export const DataCard = () => {
   const [notesNum, setNotesNum] = useState<number>(0);
   const [time, setTime] = useState<number>(0);
-
   useEffect(() => {
     fetchData().then((res) => {
       if (!res) {
@@ -64,7 +65,6 @@ export const DataCard = () => {
         setNotesNum(0);
         return;
       }
-
       setTime(res[0].time);
       setNotesNum(res.length);
     });
@@ -72,18 +72,14 @@ export const DataCard = () => {
   return (
     <div>
       <p className={styles.cardText}>
-
       </p>
-
   <Row gutter={372} style={{ marginTop: '20px' }}>
+  <SingleDataCard time={time} title={noteSumString} value={notesNum} />
+  <SingleDataCard time={time} title={recordString} value={notesNum} />
     <SingleDataCard time={time} title={sumListedString} value={notesNum} />
     <SingleDataCard time={time} title={listDataString} value={notesNum} />
     <SingleDataCard time={time} title={achDataString} value={notesNum} />
-    <SingleDataCard time={time} title={recordString} value={notesNum} />
-    {/* <SingleDataCard time={time} title={kocString} value={notesNum} /> */}
-    <SingleDataCard time={time} title={noteSumString} value={notesNum} />
   </Row>
-
     </div>
 
   );

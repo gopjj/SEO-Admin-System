@@ -140,7 +140,6 @@ export const Dailydata: React.FC<MyTableProps> = ({ getListFunction }) => {
         text
       )
   });
-
   const columns: ColumnsType<DataSource> = [
     // {
     //   title: "序号",
@@ -165,14 +164,7 @@ export const Dailydata: React.FC<MyTableProps> = ({ getListFunction }) => {
       align: "center",
 
     },
-    // {
-    //   title: "品牌",
-    //   dataIndex: "brand",
-    //   key: "brand",
-    //   width: "4%",
-    //   align: "center",
-    //   ...getColumnSearchProps("brand")
-    // },
+
     {
       title: "达人昵称",
       dataIndex: "author",
@@ -228,14 +220,10 @@ export const Dailydata: React.FC<MyTableProps> = ({ getListFunction }) => {
       key: "number",
       width: "6%",
       align: "center",
-
       sorter: (a, b) => a.number- b.number,
       sortDirections: ["descend", "ascend"]
     },
   ];
-
-
-
   useEffect(() => {
     const fetchData = async () => {
       try {

@@ -8,9 +8,7 @@ import type { FilterConfirmProps } from "antd/es/table/interface";
 import style from "../style/Daily.module.css";
 import Item from "antd/es/list/Item";
 
-
 type DataSource = {
-
   author: string;
   title: string;
   keyword: string;
@@ -35,8 +33,13 @@ interface MyTableProps {
   key: any;
 }
 
-export const Daily: React.FC<MyTableProps> = ({ getData,startdate,enddate,key }) => {
-  console.log("here"+startdate+enddate);
+export const Daily: React.FC<MyTableProps> = ({
+  getData,
+  startdate,
+  enddate,
+  key,
+}) => {
+  console.log("here" + startdate + enddate);
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
@@ -168,7 +171,6 @@ export const Daily: React.FC<MyTableProps> = ({ getData,startdate,enddate,key })
       ...getColumnSearchProps("keyword"),
     },
 
-
     {
       title: "笔记",
       dataIndex: "title",
@@ -192,7 +194,7 @@ export const Daily: React.FC<MyTableProps> = ({ getData,startdate,enddate,key })
       align: "center",
       ...getColumnSearchProps("Pdate"),
     },
-   
+
     {
       title: "达人昵称",
       dataIndex: "author",
@@ -234,104 +236,71 @@ export const Daily: React.FC<MyTableProps> = ({ getData,startdate,enddate,key })
       width: "4%",
       align: "center",
     },
-
   ];
+  const fetchData = async (startdate: Date, enddate: Date) => {
+    try {
+      const KeywordDataMap: Map<string, string[]> = new Map();
+      const response = await getData();
+      const returnedData = response as unknown as Array<any>;
+      
+      console.log("返回数据为：" + response);
+      const newData: DataSource[] = [];
+      const KeywordData: string[] = [];
+      let counter = 0; // 自增计数器
+      const titleLinkCombinations: string[] = []; // 保存已经出现过的标题加链接的组合
+      const filtereData = returnedData.filter((item) => {
+        const itemDate = item.date;
+        return itemDate >= startdate && itemDate <= enddate;
+      });
+      setDataSource(filtereData);
+      filtereData.forEach((data, index) => {
+        data.keywords.forEach((keywordList: any) => {
+          const keyword = keywordList.keyword;
+          const listed = keywordList.listed;
+          const titleLinkCombinations: string[] = []; // 每个关键词范围内的标题加链接组合
+          const idToRecordMap: Map<string, object> = new Map(); // 每个关键词范围内的标题加链接组合
+  
+          keywordList["note-detail"].forEach((noteDetail: any) => {
+            const expectedlistDivided = 2;
+            const titleLinkCombination = `${noteDetail["note-title"]}_${noteDetail["note-link"]}`; // 标题加链接的组合
+            if (!titleLinkCombinations.includes(titleLinkCombination)) {
+              const id = parseInt(`${index}${newData.length}`); // 自动生成的ID格式为 "索引值_数组长度"
+              const record = {
+                keyword: keyword,
+                author: noteDetail.author,
+                title: noteDetail["note-title"],
+                link: noteDetail["note-link"],
+                Pdate: noteDetail.date,
+                brand: noteDetail.brander,
+                interNum: noteDetail["in-count"],
+                noteType: noteDetail["kol-c"],
+                number: listed,
+                expectlist: expectedlistDivided,
+                count: 1,
+                date: data.date,
+              };
+              newData.push(record);
+              idToRecordMap.set(titleLinkCombination, record);
+            } else {
+              const existingRecord = idToRecordMap.get(titleLinkCombination);
+              if (existingRecord) {
+                // @ts-ignore
+                existingRecord.count = existingRcord.count++;
+              }
+            }
+          });
+        });
+      });
+      setDataSource(newData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const KeywordDataMap: Map<string, string[]> = new Map();
-        const response = await getData();
-        const returnedData = response as unknown as Array<any>;
-        console.log("返回数据为：" + response);
-        const newData: DataSource[] = [];
-        const KeywordData: string[] = [];
-        let counter = 0; // 自增计数器
-        const titleLinkCombinations: string[] = []; // 保存已经出现过的标题加链接的组合
-        const filtereData = returnedData.filter(item =>{
-          const itemDate = item.date;
-          return itemDate >= startdate && itemDate <= enddate;
-        });
-          setDataSource(filtereData);
-
-// let countMap: Map<string, number> = new Map();
-
-filtereData.forEach((data, index) => {
-  data.keywords.forEach((keywordList: any) => {
-    const keyword =keywordList.keyword;
-    const listed =keywordList.listed;
-    const titleLinkCombinations: string[] = []; // 每个关键词范围内的标题加链接组合
-    const idToRecordMap: Map<string, object> = new Map(); // 每个关键词范围内的标题加链接组合
-
-    keywordList["note-detail"].forEach((noteDetail: any) => {
-      const expectedlistDivided = 2;
-      const titleLinkCombination = `${noteDetail["note-title"]}_${noteDetail["note-link"]}`; // 标题加链接的组合
-
-      // let count = countMap.get(titleLinkCombination); // 获取当前标题加链接的计数值
-      // if (!count) {
-      //   count = 0; // 如果不存在，则初始计数值为0
-      // }
-
-      // 判断当前标题加链接的组合是否已经存在于当前关键词范围内的标题加链接组合数组中
-      // if (!idToRecordMap.has(titleLinkCombination)) {
-      if (!titleLinkCombinations.includes(titleLinkCombination)) {
-        const id = parseInt(`${index}${newData.length}`); // 自动生成的ID格式为 "索引值_数组长度"
-
-        // count++; // 将计数值加1
-        const record = {
-          keyword: keyword,
-          author: noteDetail.author,
-          title: noteDetail["note-title"],
-          link: noteDetail["note-link"],
-          Pdate: noteDetail.date,
-          brand: noteDetail.brander,
-          interNum: noteDetail["in-count"],
-          noteType: noteDetail["kol-c"],
-          number: listed,
-          expectlist: expectedlistDivided,
-          // count: count, // 加入计数值
-          count: 1,
-          date: data.date,
-        };
-        newData.push(record);
-        
-        idToRecordMap.set(titleLinkCombination, record);
-
-        // titleLinkCombinations.push(titleLinkCombination);
-
-        // countMap.set(titleLinkCombination, count); // 更新计数器
-      } else {
-        // count++; // 已存在，则累加计数值
-        // countMap.set(titleLinkCombination, count); // 更新计数器
-        const existingRecord = idToRecordMap.get(titleLinkCombination);
-        if (existingRecord) {
-          // @ts-ignore
-          existingRecord.count = existingRcord.count++;
-        }
+    fetchData(startdate, enddate);
     
-        // 更新重复笔记的计数值
-        // const existingNote = newData.find(
-        //   (note) =>
-        //     note.title === noteDetail["note-title"] &&
-        //     note.link === noteDetail["note-link"]
-        // );
-        // if (existingNote) {
-        //   existingNote.count = count;
-        // }
-      }
-    });
-  });
-});
-
-        setDataSource(newData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
   }, [startdate, enddate]);
-
-  return <Table dataSource={dataSource} columns={columns} /> ;
+  
+  return <Table dataSource={dataSource} columns={columns} />;
 };
-

@@ -41,3 +41,7 @@ export const login = async (username: string, password: string) => {
 export const getBrandhrj = async (options?: any) => {
   return axios.get(ApiList.getBrandhrj, options);
 };
+
+export const getCombinedData = async (options?: any) => {
+  return axios.get(ApiList.getCombinedData, options);
+};
