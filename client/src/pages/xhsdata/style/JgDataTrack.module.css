@@ -1,0 +1,50 @@
+.customCard {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn {
+    margin-left: 20px;
+}
+
+.input {
+    width: 200px;
+    margin-right: 10px;
+}
+
+.rightFloat {
+    float: right;
+}
+
+.dateCell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.dateCellScraped {
+    background-color: #e6f7ff;
+    border-radius: 50%;
+    color: #1890ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.floatButtonGroup {
+    right: 124px;
+    bottom: 270px;
+}
+.floatButton {
+    right: 124px;
+    bottom: 220px;
+}
+
+

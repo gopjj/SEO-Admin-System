@@ -14,6 +14,7 @@ import {
 
 // import { fetchData } from "./Daily";
 import {getCombinedData} from "../api/Index";
+import { number } from "echarts";
 
 interface DataCardProps {
   data: any; // 定义一个名为 data 的prop
@@ -37,7 +38,7 @@ const fetchData = async () => {
 interface SingleDataCardProps {
   time: number;
   title: string;
-  value: number;
+  value: any;
   
 }
 const SingleDataCard: React.FC<SingleDataCardProps> = (
@@ -58,27 +59,27 @@ const SingleDataCard: React.FC<SingleDataCardProps> = (
 export const DataCard = () => {
   const [notesNum, setNotesNum] = useState<number>(0);
   const [time, setTime] = useState<number>(0);
-  useEffect(() => {
-    fetchData().then((res) => {
-      if (!res) {
-        setTime(0);
-        setNotesNum(0);
-        return;
-      }
-      setTime(res[0].time);
-      setNotesNum(res.length);
-    });
-  }, []);
+  // useEffect(() => {
+  //   fetchData().then((res) => {
+  //     if (!res) {
+  //       setTime(0);
+  //       setNotesNum(0);
+  //       return;
+  //     }
+  //     setTime(res[0].time);
+  //     setNotesNum(res.length);
+  //   });
+  // }, []);
   return (
     <div>
       <p className={styles.cardText}>
       </p>
   <Row gutter={372} style={{ marginTop: '20px' }}>
-  <SingleDataCard time={time} title={noteSumString} value={notesNum} />
-  <SingleDataCard time={time} title={recordString} value={notesNum} />
-    <SingleDataCard time={time} title={sumListedString} value={notesNum} />
-    <SingleDataCard time={time} title={listDataString} value={notesNum} />
-    <SingleDataCard time={time} title={achDataString} value={notesNum} />
+  <SingleDataCard time={1} title={noteSumString} value={1111} />
+  <SingleDataCard time={time} title={recordString} value={111} />
+    <SingleDataCard time={time} title={sumListedString} value={111} />
+    <SingleDataCard time={time} title={listDataString} value={111} />
+    <SingleDataCard time={time} title={achDataString} value={111} />
   </Row>
     </div>
 

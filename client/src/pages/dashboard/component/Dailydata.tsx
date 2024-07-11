@@ -8,7 +8,6 @@ import { Button, Input, Space } from 'antd';
 import type { ColumnType, } from 'antd/es/table';
 import type { FilterConfirmProps } from 'antd/es/table/interface';
 
-
 type DataSource = {
   key: string | number;
   id: number;
@@ -141,14 +140,6 @@ export const Dailydata: React.FC<MyTableProps> = ({ getListFunction }) => {
       )
   });
   const columns: ColumnsType<DataSource> = [
-    // {
-    //   title: "序号",
-    //   dataIndex: "id",
-    //   key: "id",
-    //   width: "5%",
-    //   align: "center",
-    //   ...getColumnSearchProps("id")
-    // },
     {
       title: "关键词",
       dataIndex: "keyword",

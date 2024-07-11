@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Tabs } from "../../notetrack/component/Tabs";
 import { LineChart } from "./LineChart";
 import { DataCard } from "./Datacard";
-import { getBrandhrj } from "../api/Index";
+import { getDailyList } from "../api/Index";
 import { Daily } from "./Daily";
 import { Record } from "./Record";
 import styles from "../style/Card.module.css";
@@ -34,8 +34,8 @@ const getCollapseItems = () => {
 const getTabs = (startdate: any, enddate: any,key :any) => {
   return new Map<string, React.ReactNode>([
     [
-      "笔记",
-      <Daily getData={getBrandhrj} startdate={startdate} enddate={enddate} key = {key}/>,
+      "日报笔记",
+      <Daily getList={getDailyList}/>,
     ],
     ["收录", <Record />],
   ]);

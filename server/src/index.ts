@@ -1,49 +1,33 @@
-
 import cors from "cors";
-import express, { Express, Request, Response } from "express";
-import bodyParser from 'body-parser'
-import mongoose from 'mongoose'
-
-
-
+import express, {Express, Request, Response} from "express";
 import "source-map-support/register.js";
 import "./config/loadEnv.js";
-import multer from "multer";
 import router from "./route/router.js";
-import { log } from "console";
-
-// const app = express()
-
-// app.use(cors());
-
-// const CONNECTION_URL = "mongodb+srv://junjie:<Foo2023>@cluster0.jglhiis.mongodb.net/?retryWrites=true&w=majority";
-// const PORT = process.env.PORT || 5000;
-
-// mongoose.connect(CONNECTION_URL)
-//   .then(() => app.listen(PORT,() => console.log('Server running on port: ${PORT'))) 
-//   .catch((error) => console.log(error.message));
-
-
-
+import {setupScheduledTasks} from "./utils/Scheduler.js";
 
 
 const app: Express = express();
 
 app.use(cors());
-
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-
 app.use("/", router);
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello, this is Express + TypeScript");
+    res.send("Hello, this is Express + TypeScript");
 });
 
 const server = app.listen(process.env.PORT, () => {
-  console.log(
-    `[Server]: I am running at https://192.168.31.168:${process.env.PORT}`
-  );
+    console.log(
+        `[Server]: I am running on port:${process.env.PORT}`
+    );
+});
+setupScheduledTasks();
+
+server.setTimeout(60000);
+
+app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    console.error(err.stack);
+    res.status(500).json({message: '异常：', error: err.message});
 });
 
-server.setTimeout(10000);

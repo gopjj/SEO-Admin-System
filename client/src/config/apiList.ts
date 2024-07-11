@@ -1,6 +1,7 @@
 namespace ApiList {
 
   export const upload = "/upload";
+  export const uploadTb = "/uploadTb";
   export const getgmfData = "/getgmfData"
   export const getList = "/getList";
   export const getBrand = "/getBrand";
@@ -18,7 +19,23 @@ namespace ApiList {
   export const getBrandhrj = "./getGmfDB";
   export const getByDatehrj = "./gethrjDataByDateRange"
   export const getByKeyword = "./getByKeyword"
-  export  const getCombinedData = "./getCombinedData"
+  export const getCombinedData = "./getCombinedData"
+  export const getDailyList = "/getDailyList"
+
+  export const getPgyData = "./getPgyData";
+  export const getJgYiCiTuiCiData = "./getJgYiCiTuiCiData";
+  export const getJgShangXiaYouData = "./getJgShangXiaYouData";
+  export const getDailyBrandData = "./getDailyBrandData";
+  export const calculatePccsData = "./calculatePccsData";
+  export const scrapePgyData = "./scrapePgyData";
+  export const scrapeJgIndustryWordData = "./scrapeJgIndustryWordData";
+  export const scrapeJgShangXiaYouData = "./scrapeJgShangXiaYouData";
+  export const scrapeJgYiCiTuiCiData = "./scrapeJgYiCiTuiCiData";
+  export const getJgYiCiTuiCiWords = "./getJgYiCiTuiCiWords";
+  export const setJgYiCiTuiCiWords = "./setJgYiCiTuiCiWords";
+  export const setJgShangXiaYouWords = "./setJgShangXiaYouWords";
+  export const getJgShangXiaYouWords = "./getJgShangXiaYouWords";
+  export const uploadDaily = "/uploadDaily";
 }
 
 export default ApiList;

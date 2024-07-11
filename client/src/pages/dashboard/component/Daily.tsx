@@ -6,44 +6,39 @@ import { Button, Input, Space, InputRef, Table } from "antd";
 import type { ColumnType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
 import style from "../style/Daily.module.css";
-import Item from "antd/es/list/Item";
+import type { TableColumnsType } from 'antd';
 
 type DataSource = {
   author: string;
-  title: string;
+  note_title: string;
   keyword: string;
-  Pdate: string;
+  publish_date: string;
   brand: string;
-  noteType: string;
-  number: number;
-  link: string;
-  count: number;
-  // TopKpi: number;
-  interNum: any;
-  date: Date;
-  expectlist: number;
+  note_type: string;
+  note_link: string;
+  brand_emo: string;
+  collect_date: Date;
+  usertype: string;
+  fan: any;
+  like: any;
+  favourite: any;
+  comment: any;
+  interaction: any;
 };
 
 type DataIndex = keyof DataSource;
 
 interface MyTableProps {
-  getData: () => Promise<any>;
-  startdate: any;
-  enddate: any;
-  key: any;
+  getList: () => Promise<any>;
 }
 
-export const Daily: React.FC<MyTableProps> = ({
-  getData,
-  startdate,
-  enddate,
-  key,
-}) => {
-  console.log("here" + startdate + enddate);
+export const Daily: React.FC<MyTableProps> = ({ getList }) => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
   const [dataSource, setDataSource] = useState<DataSource[]>([]);
+  const [pageIndex, setPageIndex] = useState(0);
+
   const handleSearch = (
     selectedKeys: string[],
     confirm: (param?: FilterConfirmProps) => void,
@@ -53,53 +48,37 @@ export const Daily: React.FC<MyTableProps> = ({
     setSearchText(selectedKeys[0]);
     setSearchedColumn(dataIndex);
   };
+
   const handleReset = (clearFilters: () => void) => {
     clearFilters();
     setSearchText("");
   };
 
-  const getColumnSearchProps = (
-    dataIndex: DataIndex
-  ): ColumnType<DataSource> => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters,
-      close,
-    }) => (
-      <div
-        className={style.selectPadding}
-        onKeyDown={(e) => e.stopPropagation()}
-      >
+  const getColumnSearchProps = (dataIndex: DataIndex): ColumnType<DataSource> => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
+      <div className={style.selectPadding} onKeyDown={(e) => e.stopPropagation()}>
         <Input
           ref={searchInput}
           placeholder={`Search ${dataIndex}`}
           value={selectedKeys[0]}
-          onChange={(e) =>
-            setSelectedKeys(e.target.value ? [e.target.value] : [])
-          }
-          onPressEnter={() =>
-            handleSearch(selectedKeys as string[], confirm, dataIndex)
-          }
-          className={style.selectInput}
+          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => handleSearch(selectedKeys as string[], confirm, dataIndex)}
+          className={style.searchInput}
         />
         <Space>
           <Button
             type="primary"
-            onClick={() =>
-              handleSearch(selectedKeys as string[], confirm, dataIndex)
-            }
+            onClick={() => handleSearch(selectedKeys as string[], confirm, dataIndex)}
             icon={<SearchOutlined />}
             size="small"
-            className={style.selectButton}
+            className={style.searchButton}
           >
             Search
           </Button>
           <Button
             onClick={() => clearFilters && handleReset(clearFilters)}
             size="small"
-            className={style.selectButton}
+            className={style.searchButton}
           >
             Reset
           </Button>
@@ -114,14 +93,8 @@ export const Daily: React.FC<MyTableProps> = ({
           >
             Filter
           </Button>
-          <Button
-            type="link"
-            size="small"
-            onClick={() => {
-              close();
-            }}
-          >
-            close
+          <Button type="link" size="small" onClick={() => close()}>
+            Close
           </Button>
         </Space>
       </div>
@@ -130,10 +103,7 @@ export const Daily: React.FC<MyTableProps> = ({
       <SearchOutlined style={{ color: filtered ? "#1677ff" : undefined }} />
     ),
     onFilter: (value, record) =>
-      record[dataIndex]
-        .toString()
-        .toLowerCase()
-        .includes((value as string).toLowerCase()),
+      record[dataIndex].toString().toLowerCase().includes((value as string).toLowerCase()),
     onFilterDropdownOpenChange: (visible) => {
       if (visible) {
         setTimeout(() => searchInput.current?.select(), 100);
@@ -152,155 +122,169 @@ export const Daily: React.FC<MyTableProps> = ({
       ),
   });
 
-  const columns: ColumnsType<DataSource> = [
+  const columns: TableColumnsType<DataSource> = [
     {
-      title: "日期",
-      dataIndex: "date",
-      key: "date",
-      width: "8%",
+      title: "采集日期",
+      dataIndex: "collect_date",
+      key: "collect_date",
+      width: "12%",
       align: "center",
-      ...getColumnSearchProps("date"),
+     
+      // ...getColumnSearchProps("collect_date"),
     },
-
     {
-      title: "关键词",
+      title: "品牌",
+      dataIndex: "brand",
+      key: "brand",
+      width: "10%",
+      align: "center",
+     
+   
+      // ...getColumnSearchProps("brand"),
+    },
+    {
+      title: "搜索关键词",
       dataIndex: "keyword",
       key: "keyword",
-      width: "8%",
+      width: "10%",
+      // width: 150,
       align: "center",
       ...getColumnSearchProps("keyword"),
     },
-
     {
-      title: "笔记",
-      dataIndex: "title",
-      key: "title",
-      width: "18%", //6
-      render: (text, record) => <a href={`${record.link}`}>{text}</a>,
-      ...getColumnSearchProps("title"),
+      title: "笔记标题",
+      dataIndex: "note_title",
+      key: "note_title",
+      width: "16%",
+      align: "left",
+     
+      ...getColumnSearchProps("note_title"),
+      render: (text, record) => <a href={`${record.note_link}`}>{text}</a>,
     },
+    // {
+    //   title: "链接",
+    //   dataIndex: "note_link",
+    //   key: "note_link",
+    //   width: "8%",
+    //   // width: 150,
+    
+    // },
     {
-      title: "笔记链接",
-      dataIndex: "title",
-      key: "title",
-      width: "18%", //6
-      render: (text, record) => <a href={`${record.link}`}>{text}</a>,
+      title: "类型",
+      dataIndex: "note_type",
+      key: "note_type",
+      width: "6%",
+      align: "center",
+      ...getColumnSearchProps("note_type"),
     },
     {
       title: "发布日期",
-      dataIndex: "Pdate",
-      key: "Pdate",
+      dataIndex: "publish_date",
+      key: "publish_date",
       width: "8%",
       align: "center",
-      ...getColumnSearchProps("Pdate"),
+      // ...getColumnSearchProps("publish_date"),
     },
-
     {
-      title: "达人昵称",
+      title: "达人",
       dataIndex: "author",
       key: "author",
-      width: "8%",
+      width: "6%",
       ...getColumnSearchProps("author"),
     },
     {
-      title: "预期上榜", //TODO:做筛选日期每天笔记的上榜次数
-      dataIndex: "expectlist",
-      key: "expectlist",
-      width: "8%",
+      title: "点赞",
+      dataIndex: "like",
+      key: "like",
+      
       align: "center",
-
-      sorter: (a, b) => a.number - b.number,
       sortDirections: ["descend", "ascend"],
     },
     {
-      title: "上榜笔记", //TODO:做筛选日期每天笔记的上榜次数
-      dataIndex: "count",
-      key: "count",
-      width: "8%",
+      title: "收藏",
+      dataIndex: "favourite",
+      key: "favourite",
+    
       align: "center",
-
-      sorter: (a, b) => a.number - b.number,
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "评论",
+      dataIndex: "comment",
+      key: "comment",
+     
+      align: "center",
       sortDirections: ["descend", "ascend"],
     },
     {
       title: "互动数",
-      width: "6%",
-      dataIndex: "interNum",
-      key: "interNum",
+      dataIndex: "interaction",
+      key: "interaction",
+      
+      align: "center",
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "用户类型",
+      dataIndex: "usertype",
+      key: "usertype",
+    
       align: "center",
     },
     {
-      title: "KOL/KOC",
-      dataIndex: "noteType",
-      key: "noteType",
-      width: "4%",
+      title: "粉丝数",
+      dataIndex: "fan",
+      key: "fan",
+    
       align: "center",
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "情感",
+      dataIndex: "brand_emo",
+      key: "brand_emo",
+      
+
+      ...getColumnSearchProps("brand_emo"),
     },
   ];
-  const fetchData = async (startdate: Date, enddate: Date) => {
+
+  const fetchData = async () => {
     try {
-      const KeywordDataMap: Map<string, string[]> = new Map();
-      const response = await getData();
-      const returnedData = response as unknown as Array<any>;
-      
-      console.log("返回数据为：" + response);
-      const newData: DataSource[] = [];
-      const KeywordData: string[] = [];
-      let counter = 0; // 自增计数器
-      const titleLinkCombinations: string[] = []; // 保存已经出现过的标题加链接的组合
-      const filtereData = returnedData.filter((item) => {
-        const itemDate = item.date;
-        return itemDate >= startdate && itemDate <= enddate;
-      });
-      setDataSource(filtereData);
-      filtereData.forEach((data, index) => {
-        data.keywords.forEach((keywordList: any) => {
-          const keyword = keywordList.keyword;
-          const listed = keywordList.listed;
-          const titleLinkCombinations: string[] = []; // 每个关键词范围内的标题加链接组合
-          const idToRecordMap: Map<string, object> = new Map(); // 每个关键词范围内的标题加链接组合
-  
-          keywordList["note-detail"].forEach((noteDetail: any) => {
-            const expectedlistDivided = 2;
-            const titleLinkCombination = `${noteDetail["note-title"]}_${noteDetail["note-link"]}`; // 标题加链接的组合
-            if (!titleLinkCombinations.includes(titleLinkCombination)) {
-              const id = parseInt(`${index}${newData.length}`); // 自动生成的ID格式为 "索引值_数组长度"
-              const record = {
-                keyword: keyword,
-                author: noteDetail.author,
-                title: noteDetail["note-title"],
-                link: noteDetail["note-link"],
-                Pdate: noteDetail.date,
-                brand: noteDetail.brander,
-                interNum: noteDetail["in-count"],
-                noteType: noteDetail["kol-c"],
-                number: listed,
-                expectlist: expectedlistDivided,
-                count: 1,
-                date: data.date,
-              };
-              newData.push(record);
-              idToRecordMap.set(titleLinkCombination, record);
-            } else {
-              const existingRecord = idToRecordMap.get(titleLinkCombination);
-              if (existingRecord) {
-                // @ts-ignore
-                existingRecord.count = existingRcord.count++;
-              }
-            }
-          });
-        });
-      });
-      setDataSource(newData);
+      const response = await getList();
+      console.log("Response from getList:", response); // 调试信息
+      if (!Array.isArray(response.data)) {
+        throw new Error("Response data is not an array");
+      }
+      const newData: DataSource[] = response.data.map((data:any) => ({
+        collect_date: data.collect_date,
+        author: data.author,
+        note_title: data.note_title,
+        note_link: data.note_link,
+        keyword: data.keyword,
+        brand: data.brand,
+        publish_date: data.publish_date,
+        brand_emo: data.brand_emo,
+        note_type: data.note_type,
+        fan: data.fan,
+        like: data.like,
+        favourite: data.favourite,
+        comment: data.comment,
+        usertype: data.usertype,
+        interaction: data.interaction,
+      }));
+      setDataSource((prevData) => [...prevData, ...newData]);
+      setPageIndex((prevPageIndex) => prevPageIndex + 1);
     } catch (error) {
-      console.error(error);
+      console.error("Error in fetchData:", error);
     }
   };
 
   useEffect(() => {
-    fetchData(startdate, enddate);
-    
-  }, [startdate, enddate]);
-  
+    fetchData();
+    const interval = setInterval(fetchData, 30000); // 每30秒更新一次数据
+    return () => clearInterval(interval); // 清除定时器
+  }, []);
+
   return <Table dataSource={dataSource} columns={columns} />;
 };

@@ -1,0 +1,416 @@
+[
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "萃乐活vc",
+        "monthpv": 730,
+        "competitionScore": "28.63",
+        "competitionLevel": "低",
+        "recommendReason": "['高点击']",
+        "bid": 2.0
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "萃乐活vc精华",
+        "monthpv": 12708,
+        "competitionScore": "90.0",
+        "competitionLevel": "高",
+        "recommendReason": "['同行买词', '高点击']",
+        "bid": 2.99
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "trilogy维c",
+        "monthpv": 664,
+        "competitionScore": "39.28",
+        "competitionLevel": "低",
+        "recommendReason": "['高点击']",
+        "bid": 1.39
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "萃乐活追光面膜",
+        "monthpv": 1079,
+        "competitionScore": "59.94",
+        "competitionLevel": "中",
+        "recommendReason": "[]",
+        "bid": 1.43
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "萃乐活vc面膜",
+        "monthpv": 237,
+        "competitionScore": "无数据",
+        "competitionLevel": "低",
+        "recommendReason": "[]",
+        "bid": 1.98
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "欧邦琪VC精华",
+        "monthpv": 26415,
+        "competitionScore": "71.92",
+        "competitionLevel": "高",
+        "recommendReason": "[]",
+        "bid": 3.2
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "科兰黎VC精华",
+        "monthpv": 124172,
+        "competitionScore": "82.49",
+        "competitionLevel": "高",
+        "recommendReason": "[]",
+        "bid": 4.41
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "奈菲丽vc精华",
+        "monthpv": 10694,
+        "competitionScore": "89.62",
+        "competitionLevel": "高",
+        "recommendReason": "[]",
+        "bid": 6.2
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "果达儿vc精华",
+        "monthpv": 20562,
+        "competitionScore": "86.29",
+        "competitionLevel": "高",
+        "recommendReason": "['同行买词']",
+        "bid": 3.08
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "薇姿vc精华",
+        "monthpv": 8922,
+        "competitionScore": "91.42",
+        "competitionLevel": "高",
+        "recommendReason": "['同行买词', '黑马词']",
+        "bid": 4.43
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "仙丽施vc精华",
+        "monthpv": 4459,
+        "competitionScore": "86.46",
+        "competitionLevel": "高",
+        "recommendReason": "['同行买词', '高点击']",
+        "bid": 4.04
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "春日来信vc精华",
+        "monthpv": 52741,
+        "competitionScore": "91.84",
+        "competitionLevel": "高",
+        "recommendReason": "['同行买词']",
+        "bid": 3.58
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "欧莱雅vc精华",
+        "monthpv": 3752,
+        "competitionScore": "79.9",
+        "competitionLevel": "高",
+        "recommendReason": "['同行买词']",
+        "bid": 2.73
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "春日来信vc面膜",
+        "monthpv": 24837,
+        "competitionScore": "90.72",
+        "competitionLevel": "高",
+        "recommendReason": "['同行买词', '高点击']",
+        "bid": 2.43
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "VC100面膜升级EX版",
+        "monthpv": 3640,
+        "competitionScore": "38.02",
+        "competitionLevel": "低",
+        "recommendReason": "[]",
+        "bid": 1.0
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "欧莱雅vc面膜",
+        "monthpv": 76072,
+        "competitionScore": "93.81",
+        "competitionLevel": "高",
+        "recommendReason": "['同行买词', '黑马词']",
+        "bid": 2.29
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "倍顿",
+        "monthpv": 2571,
+        "competitionScore": "95.59",
+        "competitionLevel": "高",
+        "recommendReason": "[]",
+        "bid": 2.65
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "倍顿dha",
+        "monthpv": 6841,
+        "competitionScore": "95.82",
+        "competitionLevel": "高",
+        "recommendReason": "['同行买词']",
+        "bid": 0.82
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "alobaby",
+        "monthpv": 2919,
+        "competitionScore": "77.56",
+        "competitionLevel": "高",
+        "recommendReason": "['同行买词']",
+        "bid": 1.66
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "alobaby洗护二合一",
+        "monthpv": 759,
+        "competitionScore": "96.95",
+        "competitionLevel": "高",
+        "recommendReason": "['黑马词']",
+        "bid": 1.23
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "alobaby护臀膏",
+        "monthpv": 420,
+        "competitionScore": "无数据",
+        "competitionLevel": "低",
+        "recommendReason": "[]",
+        "bid": 1.0
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "alobaby防晒",
+        "monthpv": 3167,
+        "competitionScore": "90.36",
+        "competitionLevel": "高",
+        "recommendReason": "[]",
+        "bid": 1.0
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "alobaby驱蚊",
+        "monthpv": 591,
+        "competitionScore": "30.43",
+        "competitionLevel": "低",
+        "recommendReason": "[]",
+        "bid": 0.5
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "alobaby全能乳",
+        "monthpv": 111,
+        "competitionScore": "无数据",
+        "competitionLevel": "低",
+        "recommendReason": "[]",
+        "bid": 1.0
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "hs2024春夏",
+        "monthpv": 1521,
+        "competitionScore": "无数据",
+        "competitionLevel": "低",
+        "recommendReason": "[]",
+        "bid": 0.77
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "livingproof洗发水",
+        "monthpv": 17190,
+        "competitionScore": "88.36",
+        "competitionLevel": "高",
+        "recommendReason": "['同行买词']",
+        "bid": 1.36
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "livingproof护发素",
+        "monthpv": 535,
+        "competitionScore": "无数据",
+        "competitionLevel": "低",
+        "recommendReason": "[]",
+        "bid": 3.0
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "缕灵",
+        "monthpv": 3082,
+        "competitionScore": "54.96",
+        "competitionLevel": "中",
+        "recommendReason": "['高点击']",
+        "bid": 2.05
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "缕灵洗发水",
+        "monthpv": 2883,
+        "competitionScore": "77.77",
+        "competitionLevel": "高",
+        "recommendReason": "['同行买词']",
+        "bid": 1.36
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "HS",
+        "monthpv": 39861,
+        "competitionScore": "70.6",
+        "competitionLevel": "高",
+        "recommendReason": "[]",
+        "bid": 0.3
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "hs女装",
+        "monthpv": 12219,
+        "competitionScore": "90.39",
+        "competitionLevel": "高",
+        "recommendReason": "['同行买词']",
+        "bid": 0.63
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "hs2024春",
+        "monthpv": 126,
+        "competitionScore": "无数据",
+        "competitionLevel": "低",
+        "recommendReason": "[]",
+        "bid": 0.3
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "丰添",
+        "monthpv": 7069,
+        "competitionScore": "94.85",
+        "competitionLevel": "高",
+        "recommendReason": "['同行买词', '黑马词']",
+        "bid": 2.35
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "丰添防脱洗发水",
+        "monthpv": 39936,
+        "competitionScore": "94.85",
+        "competitionLevel": "高",
+        "recommendReason": "['同行买词', '黑马词']",
+        "bid": 1.88
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "丰添防脱精华",
+        "monthpv": 6352,
+        "competitionScore": "78.62",
+        "competitionLevel": "高",
+        "recommendReason": "['同行买词', '高点击']",
+        "bid": 3.23
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "丰添修护发膜",
+        "monthpv": 121,
+        "competitionScore": "无数据",
+        "competitionLevel": "低",
+        "recommendReason": "[]",
+        "bid": 1.0
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "丰添控油洗发水",
+        "monthpv": 338,
+        "competitionScore": "无数据",
+        "competitionLevel": "低",
+        "recommendReason": "[]",
+        "bid": 4.1
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "丰添发膜",
+        "monthpv": 2438,
+        "competitionScore": "70.15",
+        "competitionLevel": "高",
+        "recommendReason": "['同行买词', '高点击']",
+        "bid": 3.5
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "依泉",
+        "monthpv": 16054,
+        "competitionScore": "86.85",
+        "competitionLevel": "高",
+        "recommendReason": "['同行买词']",
+        "bid": 2.71
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "依泉干皮霜",
+        "monthpv": 3992,
+        "competitionScore": "36.25",
+        "competitionLevel": "低",
+        "recommendReason": "['蓝海词']",
+        "bid": 2.1
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "依泉唇膏",
+        "monthpv": 55757,
+        "competitionScore": "82.47",
+        "competitionLevel": "高",
+        "recommendReason": "['蓝海词', '同行买词']",
+        "bid": 1.94
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "依泉蓝安瓶",
+        "monthpv": 1515,
+        "competitionScore": "48.29",
+        "competitionLevel": "中",
+        "recommendReason": "[]",
+        "bid": 1.95
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "依泉喷雾",
+        "monthpv": 13801,
+        "competitionScore": "86.49",
+        "competitionLevel": "高",
+        "recommendReason": "['同行买词']",
+        "bid": 2.1
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "TATCHA",
+        "monthpv": 24106,
+        "competitionScore": "30.69",
+        "competitionLevel": "低",
+        "recommendReason": "[]",
+        "bid": 3.85
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "TATCHA面霜",
+        "monthpv": 13218,
+        "competitionScore": "无数据",
+        "competitionLevel": "低",
+        "recommendReason": "[]",
+        "bid": 0.3
+    },
+    {
+        "collectedDate": "2024-05-23",
+        "keyword": "德慕肤",
+        "monthpv": 4071,
+        "competitionScore": "50.32",
+        "competitionLevel": "中",
+        "recommendReason": "['蓝海词']",
+        "bid": 2.27
+    }
+]
