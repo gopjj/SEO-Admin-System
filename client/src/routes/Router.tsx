@@ -10,6 +10,7 @@ import { useContext, useState } from "react";
 import { JgDataTrack  } from "../pages/xhsdata/component/JgDataTrack"
 import { PgyDataTrack  } from "../pages/xhsdata/component/PgyDataTrack"
 import { PccsDataTrack  } from "../pages/xhsdata/component/PccsDataTrack"
+import { TTL } from "../pages/dataV/component/ttl"
 export const Router: React.FC = () => {
   
   const appConetxt = useContext(AppContext);
@@ -26,6 +27,7 @@ export const Router: React.FC = () => {
           <Route path="auroradata" element={<JgDataTrack />}></Route>
           <Route path="solardata" element={<PgyDataTrack />}></Route>
           <Route path="pccsdata" element={<PccsDataTrack />}></Route>
+          <Route path="ttl" element={<TTL />}></Route>
         </Route>
         <Route path="/404" element={<div>404 Not Found</div>}></Route>
       </Routes>

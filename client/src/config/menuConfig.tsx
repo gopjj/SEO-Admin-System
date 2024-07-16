@@ -31,16 +31,26 @@ export interface MenuItemConfig {
 export const MenuConfig: Record<string, MenuItemConfig[]> = {
   default: [
     { label: "首页", path: "/dashboard", icon: PieChartTwoTone, rank: 1 },
-    { label: "笔记优化", path: "/option2", icon: ContainerTwoTone, rank: 2 },
+    {
+      label: "数据可视化",
+      icon:FundTwoTone ,
+      rank: 2,
+      children: [
+        { label: "TTL 分析", path: "/ttl", rank: 1 },
+        { label: "达成总览", path: "/reachtracking",rank: 2},
+        { label: "舆情分析", path: "/yq", rank: 3 },
+      ],
+    },
+    { label: "笔记优化", path: "/option2", icon: ContainerTwoTone, rank: 3 },
     { label: "上传文件", path: "/upload", icon: DiffTwoTone, rank: 999 },
     {
-      label: "数据",
+      label: "数据追踪",
       icon:    AppstoreTwoTone ,
       rank: 3,
       children: [
-        { label: "小红书-蒲公英", path: "/solardata",icon:FundTwoTone ,rank: 1 },
-        { label: "小红书-聚光", path: "/auroradata", icon:FundTwoTone ,rank: 2},
-        { label: "皮尔森系数", path: "/pccsdata", icon:FundTwoTone ,rank: 3 },
+        { label: "小红书-蒲公英", path: "/solardata", rank: 1 },
+        { label: "小红书-聚光", path: "/auroradata", rank: 2},
+        { label: "皮尔森系数", path: "/pccsdata", rank: 3 },
       ],
     },
   ],

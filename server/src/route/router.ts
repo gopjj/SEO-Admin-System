@@ -71,6 +71,7 @@ const uploadDaily = multer({storage: storageDaily});
 router.post("/uploadTb", uploadTb.single("file"), uploadController.uploadTbData);
 router.post("/uploadDaily", uploadDaily.single("file"), uploadController.uploadDailyData);
 router.get('/getDailyList',dataController.getDailyList)
+router.get('/getttldata',dataController.getttldata)
 router.get("/getPgyData", dataTrackController.getPgyData);
 router.get("/getJgYiCiTuiCiWords", dataTrackController.getJgYiCiTuiCiWords);
 router.get("/getJgShangXiaYouWords", dataTrackController.getJgShangXiaYouWords);

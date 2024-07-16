@@ -22,7 +22,6 @@ def is_valid_cookie_file(path, max_age_seconds):
         return True
     return False
 
-
 def get_valid_cookie_file(directory, max_age_seconds=432000):
     if not os.path.exists(directory):
         os.makedirs(directory)

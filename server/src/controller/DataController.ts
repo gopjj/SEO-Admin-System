@@ -1,5 +1,6 @@
 import { Request, Response, RequestHandler } from 'express';
 import { getDailyList } from '../dao/BrandDailyDAO.js'; // 确保路径正确
+import { getttldata } from '../dao/ttlDao.js'; // 确保路径正确
 
 class DataController {
   getDailyList: RequestHandler = async (req, res) => {
@@ -45,6 +46,30 @@ class DataController {
     } catch (error) {
       console.error('Error fetching daily list:', error);
       res.status(500).json({ code: 500, data: [], msg: 'An error occurred while fetching the daily list.' });
+    }
+  };
+  getttldata:RequestHandler = async(req,res) =>{
+    try{
+      const { keyword } = req.query;
+      const query: any = {};
+      if (keyword) query.keyword = keyword as string;
+      const results = await getttldata(query); // 将整个查询对象传递给 DAO 方法
+      const response = {
+        code:200,
+        total:results.length,
+        data:results.map((result: { [x: string]: any; keyword: any; kpi: any; sovkpi: any; totalsov: any; toalcom: any; }) => ({
+          keyword: result.keyword,
+          kpi: result.kpi,
+          sovkpi: result.sovkpi,
+          totalsov: result.totalsov,
+          totalcom: result.totalcom,
+        })),
+        msg:`Fetched ${results.length} records.`  
+      };
+      res.status(200).json(response); // 返回 JSON 格式的响应
+    } catch (error) {
+      console.error('Error fetching TT data:', error);
+      res.status(500).json({ code: 500, data: [], msg: 'An error occurred while fetching the TT data.' });
     }
   };
 }
