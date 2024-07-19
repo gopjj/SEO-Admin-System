@@ -1,76 +1,163 @@
 import { Request, RequestHandler, Response } from "express";
 import db from "../db/conn.mjs";
 import xlsx from "xlsx";
-import iconv from 'iconv-lite';
-import moment from 'moment';
+import iconv from "iconv-lite";
+import moment from "moment";
 
-const COLLECTION_NAME_B = "Daily_Reports";
-namespace uploadController {
+const fileNameToCollectionName: Map<string, string> = new Map<string, string>([
+  ["收录表.xlsx", "recordData"],
+  ["关键词表.xlsx", "keywordData"],
+]);
+
+namespace upload {
   export const uploadXlsx: RequestHandler = async (
     req: Request,
     res: Response
-    
   ) => {
-    req.setEncoding('utf8');
+    req.setEncoding("utf8");
     const file = req.file;
     if (!file) {
-      res.send("Please upload a file").status(400);
+      res.status(400).send("Please upload a file");
       return;
     }
-    const fileName = iconv.decode(Buffer.from(file.originalname, 'binary'), 'utf-8');
-    let COLLECTION_NAME 
-    console.log(fileName);
-    if(fileName === "日报表.xlsx"){
-      var currentDate = new Date();
-      var year = currentDate.getFullYear();
-      var month = currentDate.getMonth() + 1; // 获取的月份是基于 0 的索引，所以需要加 1
-      var day = currentDate.getDate();
-      console.log(year+"." + month+"."+day)
-      var dailyDate = year + '_' + month + '_' + day;
-      COLLECTION_NAME = "Daily_Reports";
-    }else if(fileName === '收录表.xlsx'){
-      COLLECTION_NAME = 'recordData'
-    }else if(fileName === '关键词表.xlsx'){
-      COLLECTION_NAME = 'keywordData'
-    }else if(fileName === '笔记优化.xlsx'){
-      COLLECTION_NAME = 'OperationsRecord'
-    }else {
-      COLLECTION_NAME = 'otherData'
+
+    let fileName = iconv.decode(Buffer.from(file.originalname, "binary"), "utf-8");
+    let match = fileName.match(/【(.*?)】/);
+    let brandName = match?.[1];
+    console.log(brandName);
+    fileName = fileName.replace(/\【.*?\】/g, "");
+    let collectionName: string;
+
+    switch (fileName) {
+      case "日报表.xlsx":
+        const currentDate = new Date();
+        const dailyDate = `${currentDate.getFullYear()}_${currentDate.getMonth() + 1}_${currentDate.getDate()}`;
+        collectionName = `Daily_Reports`;
+        console.log(collectionName);
+        break;
+      case "收录表.xlsx":
+        collectionName = "recordData";
+        break;
+      case "关键词表.xlsx":
+        collectionName = "keywordData";
+        break;
+      case "笔记优选.xlsx":
+        collectionName = "OperationsRecord";
+        break;
+      default:
+        collectionName = "otherData";
+        break;
     }
-    
-    const collection = await db.createCollection(COLLECTION_NAME, {
-      validator: { 
-        $jsonSchema: { 
-          bsonType: "object", 
-          required: ["ID"], 
-          properties: { 
-            ID: { bsonType: "number" } 
-          } 
-        } 
-      },
-      validationLevel: "strict",
-      validationAction: "error",
-    });
+
+    const existingCollection = await db.listCollections({ name: collectionName }).toArray();
+    if (existingCollection.length === 0) {
+      await db.createCollection(collectionName, {
+        validator: {
+          $jsonSchema: {
+            bsonType: "object",
+            required: [
+              "id",
+              "update_date",
+              "brand",
+              "note_id",
+              "collect_date",
+              "note_title",
+              "note_link",
+              "note_type",
+              "publish_date",
+              "author",
+              "like",
+              "favourite",
+              "comment",
+              "interaction",
+              "usertype",
+              "fan",
+              "brand_emo",
+            ],
+            properties: {
+              id: { bsonType: "int" },
+              update_date: { bsonType: "string" },
+              brand: { bsonType: "string" },
+              note_id: { bsonType: "int" },
+              collect_date: { bsonType: "string" },
+              note_title: { bsonType: "string" },
+              note_link: { bsonType: "string" },
+              note_type: { bsonType: "string" },
+              publish_date: { bsonType: "string" },
+              author: { bsonType: "string" },
+              like: { bsonType: "int" },
+              favourite: { bsonType: "int" },
+              comment: { bsonType: "int" },
+              interaction: { bsonType: "int" },
+              "usertype": { bsonType: "string" },
+              fan: { bsonType: "int" },
+              brand_emo: { bsonType: "string" },
+            },
+          },
+        },
+        validationLevel: "strict",
+        validationAction: "error",
+      });
+    }
+
     const worksheetData = xlsx.read(file.buffer);
-    const jsonData: { ID?: number, date?: any}[] = xlsx.utils.sheet_to_json(
+    const jsonData: {
+      id?: number;
+      update_date?: string;
+      brand?: string;
+      note_id?: number;
+      collect_date?: string;
+      note_title?: string;
+      note_link?: string;
+      note_type?: string;
+      publish_date?: string;
+      author?: string;
+      like?: number;
+      favourite?: number;
+      comment?: number;
+      interaction?: number;
+      "usertype"?: string;
+      fan?: number;
+      brand_emo?: string;
+    }[] = xlsx.utils.sheet_to_json(
       worksheetData.Sheets[worksheetData.SheetNames[0]],
-      { raw: false } // 添加 raw: false 选项，以确保日期被解析为 Date 对象
-    ) as { ID?: number }[];
-    
-    const maxIdResult = await collection.findOne({}, { sort: { ID: -1 }, projection: { ID: 1 } });
-    let currentId = maxIdResult ? maxIdResult.ID + 1 : 1;
+      { raw: false }
+    );
 
+    const maxIdResult = await db.collection(collectionName).findOne(
+      {},
+      { sort: { id: -1 }, projection: { id: 1 } }
+    );
+    let currentId = maxIdResult ? maxIdResult.id + 1 : 1;
+
+    // Format data and assign IDs
     jsonData.forEach((item) => {
-      item["ID"] = currentId++;
-      const formattedDate = moment(item["date"]).format('YYYY-MM-DD'); // 将日期格式化为 "YYYY-MM-DD" 形式
-      item["date"] = formattedDate.toString(); // 将格式化后的日期字符串赋值给属性
-      console.log(formattedDate);
+      item["id"] = currentId++;
+      item["update_date"] = moment().format("YYYY-MM-DD");
+      if (!item["brand"]) {
+        item["brand"] = brandName;
+      }
+      currentId --;
+      item["note_id"] = currentId++;
+      item["collect_date"] = item["collect_date"] ? moment(item["collect_date"]).format("YYYY-MM-DD") : "";
+      item["publish_date"] = item["publish_date"] ? moment(item["publish_date"]).format("YYYY-MM-DD") : "";
+      item["like"] = item["like"] ? Number(item["like"]) : 0;                                                                                                              
+      item["favourite"] = item["favourite"] ? Number(item["favourite"]) : 0;
+      item["comment"] = item["comment"] ? Number(item["comment"]) : 0;
+      item["interaction"] = item["interaction"] ? Number(item["interaction"]) : 0;
+      item["fan"] = item["fan"] ? Number(item["fan"]) : 0;
     });
 
-    const results = await collection.insertMany(jsonData);
-    const ret = res.send(results).status(200);
-   
+    try {
+      const results = await db.collection(collectionName).insertMany(jsonData);
+      console.log("Inserted data:", results);
+      console.log("data:", jsonData);
+      res.status(200).send(results);
+    } catch (error) {
+      console.error("Error inserting data:", error);
+      res.status(500).send("Error inserting data");
+    }
   };
-};
+}
 
-export default uploadController;
+export default upload;

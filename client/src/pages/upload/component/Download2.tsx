@@ -9,7 +9,7 @@ const handleDownload = () => {
   link.click();
 };
 
-const DownloadButton: React.FC = () => (
+export const DownloadButton1: React.FC = () => (
   <Button
     type="primary"
     onClick={handleDownload}
@@ -19,4 +19,4 @@ const DownloadButton: React.FC = () => (
     收录表.xlsx
   </Button>
 );
-export default DownloadButton;
+

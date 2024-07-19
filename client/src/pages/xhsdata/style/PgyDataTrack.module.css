@@ -1,0 +1,32 @@
+.customCard {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn {
+    margin-left: 20px;
+}
+
+.input {
+    width: 200px;
+    margin-right: 10px;
+}
+
+.rightFloat {
+    float: right;
+}
+
+.dateCell {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+.dateCellScraped {
+    background-color: #d99e0b;
+}

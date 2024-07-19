@@ -1,0 +1,20 @@
+[
+    {
+        "collectedDate": "2024-07-07",
+        "keyword": "萃乐活vc",
+        "monthpv": 432,
+        "competitionScore": "无数据",
+        "competitionLevel": "低",
+        "recommendReason": "[]",
+        "bid": 1.0
+    },
+    {
+        "collectedDate": "2024-07-07",
+        "keyword": "萃乐活vc精华",
+        "monthpv": 6759,
+        "competitionScore": "84.47",
+        "competitionLevel": "高",
+        "recommendReason": "['高点击']",
+        "bid": 2.46
+    }
+]

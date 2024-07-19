@@ -1,0 +1,28 @@
+.customCard {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+.btn {
+    margin-left: 20px;
+}
+
+.datePicker {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+.inputNumber {
+    width: 150px;
+    margin-right: 20px;
+}
+.select {
+    width: 150px;
+}
+.floatBtn {
+    right: 124px;
+    bottom: 270px;
+}
